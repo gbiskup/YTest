@@ -1,6 +1,8 @@
 package animations 
 {
+	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.GTweenTimeline;
+	import flash.display.DisplayObject;
 	/**
 	 * ...
 	 * @author gbiskup
@@ -13,9 +15,19 @@ package animations
 			
 		}
 		
-		public static function CreateSplashScreenTextAnimation():GTweenTimeline
+		public static function CreateShowThenHideAnimation(target:DisplayObject, fadeInTime:Number = 1.0, sustainTime:Number = 2.0, fadeOutTime:Number = 1.0):GTweenTimeline
 		{
-			var animationTimeline:GTweenTimeline = new GTweenTimeline(null, 1.0, {alpha:1.0}, null, null, []);
+			var animationTimeline:GTweenTimeline = new GTweenTimeline(target);
+			var fadeInTween:GTween =  new GTween (target, fadeInTime, {alpha:1.0});
+			
+			animationTimeline.addTween(0.0, fadeInTween);
+			
+			var fadeOutTween:GTween = new GTween(target, fadeOutTime, {alpha:0.0});
+			animationTimeline.addTween(fadeInTime + sustainTime, fadeOutTween);
+			
+			animationTimeline.calculateDuration();
+		
+			return animationTimeline;
 		}
 		
 	}

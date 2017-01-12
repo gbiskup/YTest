@@ -4,7 +4,8 @@ package startup
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.framework.api.IContext;
 	import screens.ScreenManager;
-	import screens.splash.SplashScreen;
+	import screens.splash.IntroAuthorScreen;
+	import screens.splash.IntroLogoScreen;
 	
 	/**
 	 * ...
@@ -17,7 +18,9 @@ package startup
 		
 		public function execute():void
 		{
-			screenManager.showScreen(new SplashScreen());
+			screenManager.addScreen(new IntroAuthorScreen());
+			screenManager.addScreen(new IntroLogoScreen());
+			screenManager.showNextScreen();
 		}
 	}
 }
