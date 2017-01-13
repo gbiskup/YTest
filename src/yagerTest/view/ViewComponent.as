@@ -9,7 +9,6 @@ package yagerTest.view
 	 */
 	public class ViewComponent extends Sprite 
 	{
-		
 		public function ViewComponent() 
 		{
 			super();

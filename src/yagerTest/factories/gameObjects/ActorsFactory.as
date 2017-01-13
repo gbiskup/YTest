@@ -11,7 +11,7 @@ package yagerTest.factories.gameObjects
 		{
 			var sprite:Sprite = new Sprite();
 			sprite.graphics.beginFill(color);
-			sprite.graphics.drawCircle( -radius, -radius, radius);
+			sprite.graphics.drawCircle( 0, 0, radius);
 			sprite.graphics.endFill();
 			return sprite;
 		}

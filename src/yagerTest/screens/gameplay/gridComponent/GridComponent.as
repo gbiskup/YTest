@@ -4,7 +4,7 @@ package yagerTest.screens.gameplay.gridComponent
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	import yagerTest.view.SnapPosition;
+	import yagerTest.screens.gameplay.gridComponent.GridPositionHelper;
 	import yagerTest.view.ViewComponent;
 	
 	/**
@@ -33,7 +33,6 @@ package yagerTest.screens.gameplay.gridComponent
 			initBackground();
 			initMarker();
 			addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-			mouseChildren = true;
 		}
 		
 		override protected function destroy():void
@@ -55,7 +54,7 @@ package yagerTest.screens.gameplay.gridComponent
 		{
 			marker = new Sprite();
 			marker.graphics.beginFill(0xffffff, 1.0);
-			marker.graphics.drawCircle( -20, -20, tileSize/2.0);
+			marker.graphics.drawCircle( 0, 0, tileSize/2.0);
 			marker.graphics.endFill();
 			marker.mouseEnabled = false;
 			addChild(marker);
@@ -68,10 +67,15 @@ package yagerTest.screens.gameplay.gridComponent
 		
 		private function snapMarker(localX:Number, localY:Number):void
 		{
-			var snappedPosition:Point = SnapPosition.snapPosition(localX, localY, tileSize, tileSize);
-			marker.x = snappedPosition.x + tileSize/2.0;
-			marker.y = snappedPosition.y + tileSize/2.0;
+			if (localX < width && localY < height)
+			{
+				var snappedPosition:Point = GridPositionHelper.snapPosition(new Point(localX, localY), tileSize, tileSize);
+				marker.x = snappedPosition.x;// * tileSize + tileSize / 2.0;
+				marker.y = snappedPosition.y;// * tileSize + tileSize / 2.0;
+			}
 		}
+		
+
 		
 	}
 

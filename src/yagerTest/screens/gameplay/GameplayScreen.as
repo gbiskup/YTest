@@ -1,11 +1,13 @@
 package yagerTest.screens.gameplay 
 {
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	import yagerTest.factories.gameObjects.ActorsFactory;
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GridModel;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.screens.gameplay.gridComponent.GridComponent;
+	import yagerTest.screens.gameplay.gridComponent.GridPositionHelper;
 	import yagerTest.view.AlignDisplayObject;
 	
 	/**
@@ -14,7 +16,7 @@ package yagerTest.screens.gameplay
 	 */
 	public class GameplayScreen extends BasicScreen implements IGameplayScreen
 	{
-		public static const GRID_CELL_SIZE:Number = 20.0;
+		public static const GRID_CELL_SIZE:Number = 25.0;
 		
 		private var gridContainer:GridComponent;
 		
@@ -24,7 +26,12 @@ package yagerTest.screens.gameplay
 		{
 			gridContainer = new GridComponent(width, height, GRID_CELL_SIZE);
 			addChild(gridContainer);
-			AlignDisplayObject.center(gridContainer, getBounds(this));
+		}
+		
+		override protected function init():void
+		{
+			super.init();
+			AlignDisplayObject.center(gridContainer, getBounds(this))
 		}
 		
 		public function addObstacleAtGridPosition(x:uint, y:uint, type:int):void
@@ -32,9 +39,10 @@ package yagerTest.screens.gameplay
 			if (type == GameObjectTypes.COIN)
 			{
 				var obstacle:Sprite = ActorsFactory.createAvatar(0xf4d742, GRID_CELL_SIZE / 2.0);
-				obstacle.x = x * GRID_CELL_SIZE;
-				obstacle.y = y * GRID_CELL_SIZE;
-				addChild(obstacle);
+				var position:Point = GridPositionHelper.gridToPixelPosition(new Point(x, y), GRID_CELL_SIZE, GRID_CELL_SIZE);
+				obstacle.x = position.x;
+				obstacle.y = position.y;
+				gridContainer.addChild(obstacle);
 			}
 		}
 		
