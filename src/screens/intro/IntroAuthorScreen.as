@@ -12,6 +12,7 @@ package screens.intro
 	import screens.BasicScreen;
 	import view.ViewComponent;
 	import factories.animations.AnimationFactory;
+	import flash.events.MouseEvent;
 	
 	/**
 	 * ...
@@ -31,6 +32,7 @@ package screens.intro
 		
 		override protected function init():void
 		{
+			super.init();
 			initTextFields();
 			playAnimation();
 		}
@@ -45,6 +47,11 @@ package screens.intro
 			animationTimeLine.calculateDuration();
 			animationTimeLine.delay = 0.5;
 			animationTimeLine.onComplete = onAnimationComplete;
+		}
+		
+		override protected function onClick(event:MouseEvent):void
+		{
+			exitScreen();
 		}
 		
 		private function onAnimationComplete(target:GTween):void
@@ -77,7 +84,7 @@ package screens.intro
 			format = new TextFormat();
             format.font = "Arial Bold";
             format.color = 0xaFFFFFF;
-            format.size = 34;
+            format.size = 25;
 			format.bold = true;
 			subTitle.defaultTextFormat = format;
 			subTitle.selectable = false;

@@ -1,5 +1,6 @@
 package screens.intro 
 {
+	import flash.events.MouseEvent;
 	import screens.BasicScreen;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
@@ -8,6 +9,7 @@ package screens.intro
 	import com.gskinner.motion.GTweenTimeline
 	import com.gskinner.motion.GTween;
 	import flash.filters.GlowFilter;
+	import flash.events.MouseEvent;
 	
 	/**
 	 * ...
@@ -23,10 +25,17 @@ package screens.intro
 			super();
 			
 		}
+		
 		override protected function init():void
 		{
+			super.init();
 			initTextFields();
 			playAnimation();
+		}
+		
+		override protected function onClick(event:MouseEvent):void
+		{
+			exitScreen();
 		}
 		
 		private function playAnimation():void
@@ -51,7 +60,7 @@ package screens.intro
 			var format:TextFormat = new TextFormat();
             format.font = "Arial Bold";
             format.color = 0xaFFFFFF;
-            format.size = 60;
+            format.size = 80;
 			format.bold = true;
 			gameTitle.defaultTextFormat = format;
 			gameTitle.selectable = false;

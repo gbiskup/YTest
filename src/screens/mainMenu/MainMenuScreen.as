@@ -21,6 +21,7 @@ package screens.mainMenu
 		
 		override protected function init():void
 		{
+			super.init();
 			initMenu();
 		}
 		

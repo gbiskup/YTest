@@ -21,10 +21,23 @@ package factories.uiComponents
 			button.setStyle(ButtonSkin.style_borderColors, [0xFFAAAA]);
 			button.setStyle(ButtonSkin.style_border, 2);
 			button.setStyle(ButtonSkin.style_borderAlias, 5);
+			button.setStyle(ButtonSkin.style_backgroundColors, [0xAA9999]);
+			
+			button.setStyle(Button.OVER_SKIN_NAME, [
+					ButtonSkin.style_backgroundAlpha, 0.5,
+					ButtonSkin.style_backgroundColors, 0xAA9999
+				]
+			);
+			
+			button.setStyle(Button.DOWN_SKIN_NAME, [
+					ButtonSkin.style_backgroundAlpha, 0.5,
+					ButtonSkin.style_backgroundColors, 0xFFFFFF
+				]
+			);
 
 			button.setStyle(Button.style.labelStyles, [
 				Label.style.color, 0xEEEEEE,
-				Label.style.size, 20,
+				Label.style.size, 30,
 				Label.style.font, "Arial"
 			]);
 			button.setStyle(Button.style.overLabelStyles, [
@@ -35,7 +48,7 @@ package factories.uiComponents
 			button.setStyle(Button.style.selectedLabelStyles, [
 				Label.style.color, 0xAAAAAA,
 				Label.style.font, "Arial",
-				Label.style.size, 25
+				Label.style.size, 30
 			]);
 			return button;
 		}

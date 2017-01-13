@@ -17,15 +17,26 @@ package view
 		}
 		
 		
-		private function onAddedToStage(e:Event):void
+		private function onAddedToStage(event:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 			init();
+		}
+		
+		private function onRemovedFromStage(event:Event):void
+		{
+			destroy();
 		}
 		
 		protected function init():void
 		{
 			
+		}
+		
+		protected function destroy():void
+		{
+			removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
 	}
 
