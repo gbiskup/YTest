@@ -1,5 +1,6 @@
 package yagerTest.factories.uiComponents 
 {
+	import flash.geom.Point;
 	import yagerTest.view.uiComponents.MyVerticalMenu;
 	import com.sibirjak.asdpcbeta.layout.VLayout;
 	import com.sibirjak.asdpc.core.constants.Position;
@@ -9,12 +10,13 @@ package yagerTest.factories.uiComponents
 	 */
 	public class MenuFactory 
 	{
+		public static const defaultPadding:Point = new Point(20, 20);
 		
 		public static function craeteVerticalMenu():MyVerticalMenu 
 		{
 			var menu:MyVerticalMenu = new MyVerticalMenu();
 			menu.setStyle(VLayout.style.horizontalAlign, Position.CENTER);
-			menu.setStyle(VLayout.style.itemPadding, 20.0);
+			menu.setStyle(VLayout.style.itemPadding, defaultPadding.y);
 			return menu;
 		}
 		

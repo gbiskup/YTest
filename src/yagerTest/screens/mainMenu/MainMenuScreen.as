@@ -1,9 +1,12 @@
 package yagerTest.screens.mainMenu 
 {
 	import com.sibirjak.asdpc.button.Button;
+	import com.sibirjak.asdpc.core.constants.Position;
+	import flash.geom.Point;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.factories.uiComponents.ButtonFactory;
 	import yagerTest.signals.StringSignal;
+	import yagerTest.view.AlignDisplayObject;
 	import yagerTest.view.uiComponents.MyVerticalMenu;
 	import yagerTest.factories.uiComponents.MenuFactory;
 	
@@ -34,8 +37,11 @@ package yagerTest.screens.mainMenu
 			menu.addButton(ButtonFactory.createTextButton("Play", onPlayButton));
 			menu.addButton(ButtonFactory.createTextButton("Credits", onCreditsButton));
 			addChild(menu);
-			menu.x = stage.stageWidth / 2 - menu.width / 2;
-			menu.y = stage.stageHeight / 2 - menu.height / 2;
+			AlignDisplayObject.rightBottom(
+				menu, 
+				getBounds(this), 
+				new Point(-MenuFactory.defaultPadding.x, -MenuFactory.defaultPadding.y)
+			);
 		}
 		
 		private function onPlayButton():void

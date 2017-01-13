@@ -4,8 +4,9 @@ package yagerTest.screens.mainMenu
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.framework.api.IInjector;
 	import yagerTest.commands.ShowCreditsCommand;
+	import yagerTest.commands.gameplay.StartGameMacro;
 	import yagerTest.screens.ScreenManager;
-	import yagerTest.commands.StartGameCommand;
+	import yagerTest.commands.gameplay.InitGameScreenCommand;
 	import yagerTest.screens.credits.CreditsScreen;
 	
 	/**
@@ -44,7 +45,7 @@ package yagerTest.screens.mainMenu
 			switch(actionName)
 			{
 				case MainMenuUserActions.START_GAME:
-					command = injector.instantiateUnmapped(StartGameCommand);
+					command = injector.instantiateUnmapped(StartGameMacro);
 					command.execute();
 					break;
 				

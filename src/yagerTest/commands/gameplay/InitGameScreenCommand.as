@@ -1,4 +1,4 @@
-package yagerTest.commands 
+package yagerTest.commands.gameplay 
 {
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import yagerTest.screens.ScreenManager;
@@ -8,7 +8,7 @@ package yagerTest.commands
 	 * ...
 	 * @author gbiskup
 	 */
-	public class StartGameCommand implements ICommand 
+	public class InitGameScreenCommand implements ICommand 
 	{
 		[Inject]
 		public var screenManager:ScreenManager;

@@ -1,7 +1,9 @@
 package yagerTest.screens.credits 
 {
+	import flash.geom.Point;
 	import flash.text.TextField;
 	import yagerTest.factories.uiComponents.ButtonFactory;
+	import yagerTest.factories.uiComponents.MenuFactory;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.view.AlignDisplayObject;
@@ -32,7 +34,11 @@ package yagerTest.screens.credits
 		{
 			var backButton:MyButton = ButtonFactory.createTextButton("Back", exitScreen);
 			addChild(backButton);
-			AlignDisplayObject.rightBottom(backButton, getBounds(this));
+			AlignDisplayObject.rightBottom(
+				backButton, 
+				getBounds(this),
+				new Point(-MenuFactory.defaultPadding.x, -MenuFactory.defaultPadding.y)
+			);
 		}
 		
 	}
