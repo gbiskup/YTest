@@ -11,7 +11,7 @@ package yagerTest.screens.intro
 	import com.gskinner.motion.GTween;
 	import flash.filters.GlowFilter;
 	import flash.events.MouseEvent;
-	import yagerTest.view.DisplayObjectAlign;
+	import yagerTest.view.AlignDisplayObject;
 	
 	/**
 	 * ...
@@ -58,7 +58,7 @@ package yagerTest.screens.intro
 			gameTitle.filters = [ new GlowFilter(0xFFAAAA, 1, 2, 2, 3, 3 ) ];
 			
 			addChild(gameTitle);
-			DisplayObjectAlign.center(gameTitle, stage.getBounds(stage));
+			AlignDisplayObject.center(gameTitle, stage.getBounds(stage));
 		}
 	}
 

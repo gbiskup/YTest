@@ -11,7 +11,7 @@ package yagerTest.screens.intro
 	import flash.text.AntiAliasType;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
 	import yagerTest.screens.BasicScreen;
-	import yagerTest.view.DisplayObjectAlign;
+	import yagerTest.view.AlignDisplayObject;
 	import yagerTest.view.ViewComponent;
 	import yagerTest.factories.animations.AnimationFactory;
 	import flash.events.MouseEvent;
@@ -69,7 +69,7 @@ package yagerTest.screens.intro
 			mainTitle.text = "Grzegorz Biskup";
 			mainTitle.filters = [ new GlowFilter(0xFFAAAA, 1, 2, 2, 3, 3 ) ];
 			addChild(mainTitle);
-			DisplayObjectAlign.center(mainTitle, stage.getBounds(stage));
+			AlignDisplayObject.center(mainTitle, stage.getBounds(stage));
 	
 			// Subtitle
 			subTitle = TextFieldFactory.createTextField(25);

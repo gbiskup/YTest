@@ -1,9 +1,11 @@
 package yagerTest.screens.credits 
 {
 	import flash.text.TextField;
+	import yagerTest.factories.uiComponents.ButtonFactory;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
 	import yagerTest.screens.BasicScreen;
-	import yagerTest.view.DisplayObjectAlign;
+	import yagerTest.view.AlignDisplayObject;
+	import yagerTest.view.uiComponents.MyButton;
 	
 	/**
 	 * ...
@@ -11,12 +13,6 @@ package yagerTest.screens.credits
 	 */
 	public class CreditsScreen extends BasicScreen
 	{
-		public function CreditsScreen() 
-		{
-			super();
-			
-		}
-		
 		override protected function init():void
 		{
 			super.init();
@@ -29,12 +25,14 @@ package yagerTest.screens.credits
 			var nameTextField:TextField = TextFieldFactory.createTextField(40);
 			nameTextField.text = "Programmed by Grzegorz Biskup";
 			addChild(nameTextField);
-			DisplayObjectAlign.center(nameTextField, stage.getBounds(stage));
+			AlignDisplayObject.center(nameTextField, getBounds(this));
 		}
 		
 		private function initBackButton():void
 		{
-			
+			var backButton:MyButton = ButtonFactory.createTextButton("Back", exitScreen);
+			addChild(backButton);
+			AlignDisplayObject.rightBottom(backButton, getBounds(this));
 		}
 		
 	}

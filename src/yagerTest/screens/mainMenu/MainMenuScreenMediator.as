@@ -3,6 +3,7 @@ package yagerTest.screens.mainMenu
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.framework.api.IInjector;
+	import yagerTest.commands.ShowCreditsCommand;
 	import yagerTest.screens.ScreenManager;
 	import yagerTest.commands.StartGameCommand;
 	import yagerTest.screens.credits.CreditsScreen;
@@ -15,9 +16,6 @@ package yagerTest.screens.mainMenu
 	{
 		[Inject]
 		public var view:IMainMenuScreen;
-		
-		[Inject]
-		public var screenManager:ScreenManager;
 		
 		[Inject]
 		public var injector:IInjector;
@@ -51,8 +49,8 @@ package yagerTest.screens.mainMenu
 					break;
 				
 				case MainMenuUserActions.SHOW_CREDITS:
-					screenManager.addScreen(new CreditsScreen());
-					screenManager.showNextScreen();
+					command = injector.instantiateUnmapped(ShowCreditsCommand);
+					command.execute();
 					break;
 			}
 		}
