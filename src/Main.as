@@ -6,9 +6,9 @@ package
 	import robotlegs.bender.extensions.contextView.ContextView;
 	import robotlegs.bender.framework.api.IInjector;
 	import robotlegs.bender.framework.impl.Context;
-	import screens.ScreenManager;
-	import startup.InitGameScreensCommand;
-	import startup.YagerConfig;
+	import yagerTest.screens.ScreenManager;
+	import yagerTest.commands.startup.InitGameScreensCommand;
+	import YagerConfig;
 	import com.gskinner.motion.GTween;
 	
 	/**
