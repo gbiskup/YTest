@@ -55,6 +55,8 @@
     <element path="libraries\robotlegs-framework-v2.2.1.swc" />
     <element path="libraries\robotlegs-utilities-macrobot.swc" />
     <element path="libraries\GTween_V2_01.swc" />
+    <element path="libraries\asdpc-0.4.1-snapshot.swc" />
+    <element path="libraries\as3commons-collections-1.3.2.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

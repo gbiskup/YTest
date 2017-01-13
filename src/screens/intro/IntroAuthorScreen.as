@@ -1,4 +1,4 @@
-package screens.splash 
+package screens.intro 
 {
 	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.GTweenTimeline;
@@ -11,7 +11,7 @@ package screens.splash
 	import flash.text.AntiAliasType;
 	import screens.BasicScreen;
 	import view.ViewComponent;
-	import animations.AnimationFactory;
+	import factories.animations.AnimationFactory;
 	
 	/**
 	 * ...

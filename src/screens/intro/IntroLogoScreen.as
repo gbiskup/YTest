@@ -1,10 +1,10 @@
-package screens.splash 
+package screens.intro 
 {
 	import screens.BasicScreen;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFieldAutoSize;
-	import animations.AnimationFactory;
+	import factories.animations.AnimationFactory;
 	import com.gskinner.motion.GTweenTimeline
 	import com.gskinner.motion.GTween;
 	import flash.filters.GlowFilter;

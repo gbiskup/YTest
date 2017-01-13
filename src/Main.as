@@ -7,7 +7,7 @@ package
 	import robotlegs.bender.framework.api.IInjector;
 	import robotlegs.bender.framework.impl.Context;
 	import screens.ScreenManager;
-	import startup.InitGameCommand;
+	import startup.InitGameScreensCommand;
 	import startup.YagerConfig;
 	import com.gskinner.motion.GTween;
 	
@@ -51,7 +51,7 @@ package
 		private function initGame():void
 		{
 			var injector:IInjector = context.injector;
-			var initGameCommand:InitGameCommand = injector.instantiateUnmapped(InitGameCommand);
+			var initGameCommand:InitGameScreensCommand = injector.instantiateUnmapped(InitGameScreensCommand);
 			initGameCommand.execute();
 		}
 		

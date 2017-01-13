@@ -4,14 +4,15 @@ package startup
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.framework.api.IContext;
 	import screens.ScreenManager;
-	import screens.splash.IntroAuthorScreen;
-	import screens.splash.IntroLogoScreen;
+	import screens.intro.IntroAuthorScreen;
+	import screens.intro.IntroLogoScreen;
+	import screens.mainMenu.MainMenuScreen;
 	
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
-	public class InitGameCommand implements ICommand
+	public class InitGameScreensCommand implements ICommand
 	{
 		[Inject]
 		public var screenManager:ScreenManager;
@@ -20,6 +21,7 @@ package startup
 		{
 			screenManager.addScreen(new IntroAuthorScreen());
 			screenManager.addScreen(new IntroLogoScreen());
+			screenManager.addScreen(new MainMenuScreen());
 			screenManager.showNextScreen();
 		}
 	}

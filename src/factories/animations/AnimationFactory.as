@@ -1,4 +1,4 @@
-package animations 
+package factories.animations 
 {
 	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.GTweenTimeline;
