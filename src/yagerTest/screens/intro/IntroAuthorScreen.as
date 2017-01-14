@@ -67,7 +67,6 @@ package yagerTest.screens.intro
 			// Main title
 			mainTitle = TextFieldFactory.createTextField(60);
 			mainTitle.text = "Grzegorz Biskup";
-			mainTitle.filters = [ new GlowFilter(0xFFAAAA, 1, 2, 2, 3, 3 ) ];
 			addChild(mainTitle);
 			AlignDisplayObject.center(mainTitle, stage.getBounds(stage));
 	

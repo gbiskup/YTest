@@ -54,9 +54,6 @@ package yagerTest.screens.intro
 			// Main title
 			gameTitle = TextFieldFactory.createTextField(60);
 			gameTitle.text = "YagerTest";
-			
-			gameTitle.filters = [ new GlowFilter(0xFFAAAA, 1, 2, 2, 3, 3 ) ];
-			
 			addChild(gameTitle);
 			AlignDisplayObject.center(gameTitle, stage.getBounds(stage));
 		}

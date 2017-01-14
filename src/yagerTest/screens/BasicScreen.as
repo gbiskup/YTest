@@ -53,7 +53,7 @@ package yagerTest.screens
 			mouseMask.graphics.beginFill(0x4444A0);
 			mouseMask.graphics.drawRect(0.0, 0.0, 1.0, 1.0);
 			mouseMask.graphics.endFill();
-			mouseMask.alpha = 0.25;
+			mouseMask.alpha = 0.0;
 			addChild(mouseMask);
 			mouseMask.mouseEnabled = false;
 		}

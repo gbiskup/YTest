@@ -44,8 +44,8 @@ package yagerTest.screens.gameplay.gridComponent
 		private function initBackground():void
 		{
 			var background:Sprite = new Sprite();
-			background.graphics.beginFill(0x000055);
-			background.graphics.drawRect(0, 0, rows * tileSize, cols * tileSize);
+			background.graphics.beginFill(0xffaaaa);
+			background.graphics.drawRoundRect(0, 0, rows * tileSize, cols * tileSize, 20, 20);
 			background.graphics.endFill();
 			addChild(background);
 		}

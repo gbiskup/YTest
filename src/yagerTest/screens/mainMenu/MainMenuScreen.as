@@ -20,11 +20,6 @@ package yagerTest.screens.mainMenu
 		
 		private var _userActionSignal:StringSignal = new StringSignal();
 		
-		public function MainMenuScreen() 
-		{
-			super();
-		}
-		
 		override protected function init():void
 		{
 			super.init();

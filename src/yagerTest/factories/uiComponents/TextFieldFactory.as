@@ -1,5 +1,7 @@
 package yagerTest.factories.uiComponents 
 {
+	import flash.filters.GlowFilter;
+	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -18,9 +20,11 @@ package yagerTest.factories.uiComponents
             format.color = 0xaFFFFFF;
             format.size = size;
 			format.bold = bold;
+			textField.antiAliasType = AntiAliasType.ADVANCED
 			textField.defaultTextFormat = format;
 			textField.selectable = false;
 			textField.autoSize = TextFieldAutoSize.LEFT;
+			textField.filters = [ new GlowFilter(0xFFAAAA, 1, 2, 2, 3, 3 ) ];
 			return textField;
 		}
 		

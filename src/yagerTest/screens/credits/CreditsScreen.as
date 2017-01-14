@@ -2,6 +2,7 @@ package yagerTest.screens.credits
 {
 	import flash.geom.Point;
 	import flash.text.TextField;
+	import yagerTest.factories.animations.AnimationFactory;
 	import yagerTest.factories.uiComponents.ButtonFactory;
 	import yagerTest.factories.uiComponents.MenuFactory;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
@@ -27,6 +28,7 @@ package yagerTest.screens.credits
 			var nameTextField:TextField = TextFieldFactory.createTextField(40);
 			nameTextField.text = "Programmed by Grzegorz Biskup";
 			addChild(nameTextField);
+			AnimationFactory.createShowAnimation(nameTextField);
 			AlignDisplayObject.center(nameTextField, getBounds(this));
 		}
 		
@@ -34,6 +36,7 @@ package yagerTest.screens.credits
 		{
 			var backButton:MyButton = ButtonFactory.createTextButton("Back", exitScreen);
 			addChild(backButton);
+			AnimationFactory.createShowAnimation(backButton);
 			AlignDisplayObject.rightBottom(
 				backButton, 
 				getBounds(this),

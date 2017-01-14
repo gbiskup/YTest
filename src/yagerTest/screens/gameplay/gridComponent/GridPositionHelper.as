@@ -17,8 +17,8 @@ package yagerTest.screens.gameplay.gridComponent
 		
 		public static function gridToPixelPosition(gridPosition:Point, gridCellWidth:Number, gridCellHeight:Number):Point
 		{
-			gridPosition.x = (gridPosition.x + 0.5) * gridCellWidth;
-			gridPosition.y = (gridPosition.y + 0.5) * gridCellHeight;
+			gridPosition.x = int((gridPosition.x + 0.5) * gridCellWidth);
+			gridPosition.y = int((gridPosition.y + 0.5) * gridCellHeight);
 			return gridPosition;
 		}
 		
