@@ -9,8 +9,8 @@ package yagerTest.screens.gameplay
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GridModel;
 	import yagerTest.screens.BasicScreen;
-	import yagerTest.screens.gameplay.gridComponent.GridComponent;
-	import yagerTest.screens.gameplay.gridComponent.GridPositionHelper;
+	import yagerTest.screens.gameplay.gameplayView.GameplayView;
+	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.view.AlignDisplayObject;
 	
 	/**
@@ -23,13 +23,13 @@ package yagerTest.screens.gameplay
 		
 		private var _togglePauseSignal:Signal = new Signal();
 		
-		private var gridContainer:GridComponent;
+		private var gridContainer:GameplayView;
 		
 		/* INTERFACE yagerTest.screens.gameplay.IGameplayScreen */
 
 		public function initGrid(width:int, height:int):void
 		{
-			gridContainer = new GridComponent(width, height, GRID_CELL_SIZE);
+			gridContainer = new GameplayView(width, height, GRID_CELL_SIZE);
 			addChild(gridContainer);
 		}
 		
@@ -50,7 +50,7 @@ package yagerTest.screens.gameplay
 		{
 			if (e.keyCode == Keyboard.ESCAPE)
 			{
-				
+				togglePauseSignal.dispatch();
 			}
 		}
 		

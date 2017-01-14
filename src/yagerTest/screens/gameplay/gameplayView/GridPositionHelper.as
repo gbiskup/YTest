@@ -1,4 +1,4 @@
-package yagerTest.screens.gameplay.gridComponent 
+package yagerTest.screens.gameplay.gameplayView 
 {
 	import flash.geom.Point;
 	/**
