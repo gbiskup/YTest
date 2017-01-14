@@ -73,7 +73,7 @@ package yagerTest.screens.intro
 			// Subtitle
 			subTitle = TextFieldFactory.createTextField(25);
 			subTitle.text = "(a.k.a. Bishop)";
-			subTitle.filters = [ new GlowFilter(0xFFAAAA, 1, 2, 2, 2, 2 ) ];
+			//subTitle.filters = [ new GlowFilter(0xFFAAAA, 1, 2, 2, 2, 2 ) ];
 			addChild(subTitle);
 			subTitle.x = stage.stageWidth / 2 - subTitle.width / 2;
 			subTitle.y = mainTitle.y + mainTitle.textHeight + 10;

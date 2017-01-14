@@ -26,10 +26,10 @@ package yagerTest.commands.gameplay
 			gridModel.setObjectTypeAt(15, 15, GameObjectTypes.COIN);
 			gridModel.setObjectTypeAt(31, 31, GameObjectTypes.COIN);
 			
-			gridModel.setObjectTypeAt(10, 10, GameObjectTypes.OBSTACLE);
+			/*gridModel.setObjectTypeAt(10, 10, GameObjectTypes.OBSTACLE);
 			gridModel.setObjectTypeAt(10, 11, GameObjectTypes.OBSTACLE);
 			gridModel.setObjectTypeAt(10, 12, GameObjectTypes.OBSTACLE);
-			gridModel.setObjectTypeAt(23, 15, GameObjectTypes.OBSTACLE);
+			gridModel.setObjectTypeAt(23, 15, GameObjectTypes.OBSTACLE);*/
 			
 		}
 		

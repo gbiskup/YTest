@@ -4,6 +4,9 @@ package yagerTest.screens.gameplay.gameplayView
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import org.osflash.signals.Signal;
+	import yagerTest.factories.gameObjects.ActorsFactory;
+	import yagerTest.model.GameObjectTypes;
+	import yagerTest.screens.gameplay.actors.MovementComponent;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.view.ViewComponent;
 	
@@ -17,8 +20,11 @@ package yagerTest.screens.gameplay.gameplayView
 		private var cols:int;
 		private var tileSize:Number;
 		
+		private var playerAvatar:Sprite;
 		private var marker:Sprite;
 		private var _selectDestinationSignal:Signal = new Signal(Point);
+		
+		private var moveComponent:MovementComponent;
 		
 		public function GameplayView(rows:int, cols:int, tileSize:Number) 
 		{
@@ -28,35 +34,52 @@ package yagerTest.screens.gameplay.gameplayView
 			this.tileSize = tileSize;
 		}
 		
+		public function movePlayer(path:Vector.<Point>):void 
+		{
+			moveComponent.followPath(path);
+		}
+		
 		override protected function init():void
 		{
 			super.init();
 			initBackground();
 			initMarker();
+			initPlayer();
 			initMouseListeners();
+		}
+		
+		private function initPlayer():void
+		{
+			playerAvatar = ActorsFactory.createAvatarByType(GameObjectTypes.PLAYER);
+			moveComponent = new MovementComponent(playerAvatar, tileSize, 100.0);
+			addChild(playerAvatar);
 		}
 		
 		private function initMouseListeners():void 
 		{
-			addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 		}
 		
 		private function removeMouseListeners():void
 		{
-			removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-			removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 		}
 		
 		private function onMouseDown(event:MouseEvent):void 
 		{
 			var gridPosition:Point = GridPositionHelper.pixelToGrid(new Point(event.localX, event.localY), tileSize, tileSize);
-			selectDestinationSignal.dispatch(gridPosition);
+			if (gridPosition.x < cols && gridPosition.y < rows)
+			{
+				selectDestinationSignal.dispatch(gridPosition);				
+			}
 		}
 		
 		private function onMouseMove(event:MouseEvent):void
 		{
-			snapMarker(event.localX, event.localY);
+			var gridPosition:Point = GridPositionHelper.pixelToGrid(new Point(event.localX, event.localY), tileSize, tileSize);
+			highlightCell(gridPosition);
 		}
 		
 		override protected function destroy():void
@@ -80,15 +103,14 @@ package yagerTest.screens.gameplay.gameplayView
 			marker.graphics.beginFill(0xffffff, 1.0);
 			marker.graphics.drawCircle( 0, 0, tileSize/2.0);
 			marker.graphics.endFill();
-			marker.mouseEnabled = false;
 			addChild(marker);
 		}
 		
-		private function snapMarker(localX:Number, localY:Number):void
+		private function highlightCell(gridPosition:Point):void
 		{
-			if (localX < width && localY < height)
+			if (gridPosition.x < cols && gridPosition.y < rows)
 			{
-				var snappedPosition:Point = GridPositionHelper.snapPosition(new Point(localX, localY), tileSize, tileSize);
+				var snappedPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, tileSize, tileSize);
 				marker.x = snappedPosition.x;
 				marker.y = snappedPosition.y;
 			}

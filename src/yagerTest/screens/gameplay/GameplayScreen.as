@@ -25,8 +25,6 @@ package yagerTest.screens.gameplay
 		
 		private var gridContainer:GameplayView;
 		
-		/* INTERFACE yagerTest.screens.gameplay.IGameplayScreen */
-
 		public function initGrid(width:int, height:int):void
 		{
 			gridContainer = new GameplayView(width, height, GRID_CELL_SIZE);

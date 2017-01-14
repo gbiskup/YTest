@@ -36,13 +36,19 @@ package yagerTest.factories.gameObjects
 			switch(type)
 			{
 				case GameObjectTypes.COIN:
-					avatar = createCircleAvatar(0xf4d742, GameplayScreen.GRID_CELL_SIZE / 2);
+					avatar = createCircleAvatar(0xf4d742, GameplayScreen.GRID_CELL_SIZE / 4);
 					break;
 					
+				default:
 				case GameObjectTypes.OBSTACLE:
 					avatar = createSquareAvatar(0xffffff, GameplayScreen.GRID_CELL_SIZE);
 					break;
+					
+				case GameObjectTypes.PLAYER:
+					avatar = createCircleAvatar(0x009900, GameplayScreen.GRID_CELL_SIZE / 2);
+					break;
 			}
+			avatar.mouseEnabled = false;
 			return avatar;
 		}
 		

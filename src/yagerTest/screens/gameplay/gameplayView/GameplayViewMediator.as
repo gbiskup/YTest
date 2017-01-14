@@ -21,7 +21,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function onSelectDestinationSignal(gridPosition:Point):void
 		{
-			trace("Go to ", gridPosition);
+			view.movePlayer(new <Point>[gridPosition]);
 		}
 	}
 
