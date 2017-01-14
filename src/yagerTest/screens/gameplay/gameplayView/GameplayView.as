@@ -22,9 +22,9 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private var playerAvatar:Sprite;
 		private var marker:Sprite;
-		private var _selectDestinationSignal:Signal = new Signal(Point);
+		private var _moveRequestSignal:Signal = new Signal(Point, Point);
 		
-		private var moveComponent:MovementComponent;
+		private var movementComponent:MovementComponent;
 		
 		public function GameplayView(rows:int, cols:int, tileSize:Number) 
 		{
@@ -36,7 +36,13 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		public function movePlayer(path:Vector.<Point>):void 
 		{
-			moveComponent.followPath(path);
+			movementComponent.followPath(path);
+		}
+		
+		
+		public function get moveRequestSignal():Signal 
+		{
+			return _moveRequestSignal;
 		}
 		
 		override protected function init():void
@@ -51,7 +57,10 @@ package yagerTest.screens.gameplay.gameplayView
 		private function initPlayer():void
 		{
 			playerAvatar = ActorsFactory.createAvatarByType(GameObjectTypes.PLAYER);
-			moveComponent = new MovementComponent(playerAvatar, tileSize, 100.0);
+			movementComponent = new MovementComponent(playerAvatar, tileSize, 1200.0);
+			var spawnPosition:Point = GridPositionHelper.gridToPixelPosition(new Point(10, 10), tileSize, tileSize);
+			playerAvatar.x = spawnPosition.x;
+			playerAvatar.y = spawnPosition.y;
 			addChild(playerAvatar);
 		}
 		
@@ -69,17 +78,30 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function onMouseDown(event:MouseEvent):void 
 		{
-			var gridPosition:Point = GridPositionHelper.pixelToGrid(new Point(event.localX, event.localY), tileSize, tileSize);
-			if (gridPosition.x < cols && gridPosition.y < rows)
-			{
-				selectDestinationSignal.dispatch(gridPosition);				
-			}
+			var gridPosition:Point = GridPositionHelper.pixelToGrid(
+				getInboundPosition(mouseX, mouseY), 
+				tileSize, 
+				tileSize
+			);
+				
+			var start:Point = GridPositionHelper.pixelToGrid(new Point(playerAvatar.x, playerAvatar.y), tileSize, tileSize);
+			moveRequestSignal.dispatch(start, gridPosition);
 		}
 		
 		private function onMouseMove(event:MouseEvent):void
 		{
-			var gridPosition:Point = GridPositionHelper.pixelToGrid(new Point(event.localX, event.localY), tileSize, tileSize);
+			var inBoundPosition:Point = getInboundPosition(mouseX, mouseY);
+			var gridPosition:Point = GridPositionHelper.pixelToGrid(inBoundPosition, tileSize, tileSize);
 			highlightCell(gridPosition);
+		}
+		
+		// Fix pixel position to be sure it can be converted to a valid grid point
+		private function getInboundPosition(x:Number, y:Number):Point
+		{
+			var inboundPoint:Point = new Point();
+			inboundPoint.x = Math.min(Math.max(x, 0), width - 1);
+			inboundPoint.y = Math.min(Math.max(y, 0), height - 1);
+			return inboundPoint;
 		}
 		
 		override protected function destroy():void
@@ -103,6 +125,7 @@ package yagerTest.screens.gameplay.gameplayView
 			marker.graphics.beginFill(0xffffff, 1.0);
 			marker.graphics.drawCircle( 0, 0, tileSize/2.0);
 			marker.graphics.endFill();
+			marker.mouseEnabled = false;
 			addChild(marker);
 		}
 		
@@ -115,13 +138,6 @@ package yagerTest.screens.gameplay.gameplayView
 				marker.y = snappedPosition.y;
 			}
 		}
-		
-		public function get selectDestinationSignal():Signal 
-		{
-			return _selectDestinationSignal;
-		}
-		
-
 		
 	}
 

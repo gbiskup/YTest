@@ -16,12 +16,31 @@ package yagerTest.screens.gameplay.gameplayView
 		override public function initialize():void
 		{
 			super.initialize();
-			view.selectDestinationSignal.add(onSelectDestinationSignal);
+			view.moveRequestSignal.add(onMoveRequestSignal);
 		}
 		
-		private function onSelectDestinationSignal(gridPosition:Point):void
+		private function onMoveRequestSignal(start:Point, destination:Point):void
 		{
-			view.movePlayer(new <Point>[gridPosition]);
+			var path:Vector.<Point> = new Vector.<Point>();
+			var moveVector:Point = destination.subtract(start);
+			var direction:int = moveVector.x > 0 ? 1 : -1;
+			var wayPoint:Point = start.clone();
+			
+			var lenght:int = Math.abs(moveVector.x);
+			
+			for (var x:int = 1; x <= lenght; x++)
+			{
+				wayPoint.x = start.x + x * direction;
+				path.push(wayPoint.clone());
+			}
+			lenght = Math.abs(moveVector.y);
+			direction = moveVector.y > 0 ? 1 : -1;
+			for (var y:int = 1; y <= lenght; y++)
+			{
+				wayPoint.y = start.y + direction * y;
+				path.push(wayPoint.clone());
+			}
+			view.movePlayer(path);
 		}
 	}
 

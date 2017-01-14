@@ -18,11 +18,11 @@ package yagerTest.screens.gameplay.actors
 		
 		private var moveTween:GTween;
 		
-		public function MovementComponent(target:DisplayObject, tileSize:Number, speed:Number) 
+		public function MovementComponent(target:DisplayObject, tileSize:Number, pixelsPerSecond:Number) 
 		{
 			this.target = target;
 			this.tileSize = tileSize;
-			this.speed = speed;
+			this.speed = pixelsPerSecond;
 			moveTween = new GTween(target);
 		}
 		
@@ -42,8 +42,11 @@ package yagerTest.screens.gameplay.actors
 			if (gridPosition)
 			{
 				var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, tileSize, tileSize);
-				moveTween.setValues({x:pixelPosition.x, y:pixelPosition.y});
-				moveTween.duration = 1.0;
+				moveTween.setValues({x:pixelPosition.x, y:pixelPosition.y});				
+				// Calculate transition vector
+				pixelPosition.x -= target.x;
+				pixelPosition.y -= target.y;
+				moveTween.duration = pixelPosition.length/speed;
 				moveTween.onComplete = onMoveTweenComplete;
 			}
 		}
