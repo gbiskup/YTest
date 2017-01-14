@@ -19,18 +19,11 @@ package yagerTest.screens.gameplay
 		override public function initialize():void
 		{
 			showGrid();
-			view.togglePauseSignal.add(onTogglePauseRequest);
 		}
 		
 		override public function destroy():void
 		{
-			view.togglePauseSignal.remove(onTogglePauseRequest);
 			super.destroy();
-		}
-		
-		private function onTogglePauseRequest():void 
-		{
-			
 		}
 		
 		private function showGrid():void

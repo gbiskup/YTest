@@ -2,6 +2,7 @@ package yagerTest.screens.gameplay.gameplayView
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.filters.BlurFilter;
 	import flash.geom.Point;
 	import org.osflash.signals.Signal;
 	import yagerTest.factories.gameObjects.ActorsFactory;
@@ -39,6 +40,22 @@ package yagerTest.screens.gameplay.gameplayView
 			movementComponent.followPath(path);
 		}
 		
+		
+		/* INTERFACE yagerTest.screens.gameplay.gameplayView.IGameplayView */
+		
+		public function pause():void 
+		{
+			movementComponent.pause();
+			removeMouseListeners();
+			visible = false;
+		}
+		
+		public function resume():void 
+		{
+			movementComponent.resume();
+			initMouseListeners();
+			visible = true;
+		}
 		
 		public function get moveRequestSignal():Signal 
 		{

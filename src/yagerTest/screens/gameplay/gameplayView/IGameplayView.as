@@ -11,6 +11,8 @@ package yagerTest.screens.gameplay.gameplayView
 	{
 		function get moveRequestSignal():Signal;
 		function movePlayer(path:Vector.<Point>):void;
+		function pause():void;
+		function resume():void;
 	}
 	
 }

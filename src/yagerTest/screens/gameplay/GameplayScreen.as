@@ -21,9 +21,9 @@ package yagerTest.screens.gameplay
 	{
 		public static const GRID_CELL_SIZE:Number = 25.0;
 		
-		private var _togglePauseSignal:Signal = new Signal();
-		
 		private var gridContainer:GameplayView;
+		
+		private var isPaused:Boolean;
 		
 		public function initGrid(width:int, height:int):void
 		{
@@ -48,7 +48,15 @@ package yagerTest.screens.gameplay
 		{
 			if (e.keyCode == Keyboard.ESCAPE)
 			{
-				togglePauseSignal.dispatch();
+				isPaused = !isPaused;
+				if (isPaused)
+				{
+					gridContainer.pause();
+				}
+				else
+				{
+					gridContainer.resume();
+				}
 			}
 		}
 		
@@ -63,12 +71,6 @@ package yagerTest.screens.gameplay
 				gridContainer.addChild(obstacle);
 			}
 		}
-		
-		public function get togglePauseSignal():Signal 
-		{
-			return _togglePauseSignal;
-		}
-		
 	}
 
 }

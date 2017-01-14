@@ -32,6 +32,16 @@ package yagerTest.screens.gameplay.actors
 			moveToNextPoint();
 		}
 		
+		public function pause():void 
+		{
+			moveTween.paused = true;
+		}
+		
+		public function resume():void
+		{
+			moveTween.paused = false;
+		}
+		
 		private function moveToNextPoint():void
 		{
 			moveToPoint(currentPath.shift());
