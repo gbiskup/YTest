@@ -3,6 +3,7 @@ package yagerTest.screens.gameplay
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	import robotlegs.bender.framework.api.IInjector;
 	import yagerTest.commands.gameplay.ExitGameMacro;
+	import yagerTest.commands.gameplay.StartGameMacro;
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GridModel;
 	import yagerTest.screens.mainMenu.UserActions;
@@ -45,6 +46,8 @@ package yagerTest.screens.gameplay
 					break;
 					
 				case UserActions.RESTART_GAME:
+					var startGameMacro:StartGameMacro = injector.instantiateUnmapped(StartGameMacro);
+					startGameMacro.execute();
 					break;
 			}
 		}

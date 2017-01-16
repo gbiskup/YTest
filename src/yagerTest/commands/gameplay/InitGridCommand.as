@@ -14,12 +14,18 @@ package yagerTest.commands.gameplay
 		[Inject]
 		public var injector:IInjector;
 		
-		/* INTERFACE robotlegs.bender.extensions.commandCenter.api.ICommand */
-		
 		public function execute():void 
 		{
-			var gridModel:GridModel = new GridModel();
-			injector.map(GridModel).toValue(gridModel);
+			if (injector.hasMapping(GridModel))
+			{
+				gridModel = injector.getInstance(GridModel);
+			}
+			else
+			{
+				var gridModel:GridModel = new GridModel();
+				injector.map(GridModel).toValue(gridModel);
+			}
+			
 			gridModel.setObjectTypeAt(0, 0, GameObjectTypes.COIN);
 			gridModel.setObjectTypeAt(1, 1, GameObjectTypes.COIN);
 			gridModel.setObjectTypeAt(3, 6, GameObjectTypes.COIN);
