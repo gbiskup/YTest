@@ -6,7 +6,7 @@ package yagerTest.screens.gameplay.gameplayView
 	import org.osflash.signals.Signal;
 	import yagerTest.factories.gameObjects.ActorsFactory;
 	import yagerTest.model.GameObjectTypes;
-	import yagerTest.screens.gameplay.actors.MovementComponent;
+	import yagerTest.screens.gameplay.gameplayView.actors.MovementComponent;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.view.ViewComponent;
 	

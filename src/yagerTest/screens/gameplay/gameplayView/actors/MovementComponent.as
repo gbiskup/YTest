@@ -1,4 +1,4 @@
-package yagerTest.screens.gameplay.actors 
+package yagerTest.screens.gameplay.gameplayView.actors 
 {
 	import com.gskinner.motion.GTween;
 	import flash.display.DisplayObject;
