@@ -1,21 +1,19 @@
 package yagerTest.model 
 {
+	import flash.geom.Point;
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
 	public class GridModel 
 	{
-		private var _width:uint;
-		private var _height:uint;
-		
+		private var _size:Point;
 		private var grid:Vector.<int>;
 		
-		public function GridModel(width:uint = 32, height:uint = 32) 
+		public function GridModel(size:Point)
 		{
-			_width = width;
-			_height = height;
-			grid = new Vector.<int>(_width * _height);
+			_size = size;
+			grid = new Vector.<int>(size.x * size.y);
 		}
 		
 		private function positionToIndex(x:uint, y:uint):uint
@@ -33,14 +31,19 @@ package yagerTest.model
 			return grid[positionToIndex(x, y)];
 		}
 		
+		public function get size():Point
+		{
+			return _size.clone();
+		}
+		
 		public function get width():uint 
 		{
-			return _width;
+			return size.x;
 		}
 		
 		public function get height():uint 
 		{
-			return _height;
+			return size.y;
 		}
 		
 	}

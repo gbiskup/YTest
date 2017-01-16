@@ -16,9 +16,8 @@ package yagerTest.screens.gameplay.gameplayView
 	 */
 	public class GameplayView extends ViewComponent implements IGameplayView
 	{
-		private var rows:int;
-		private var cols:int;
-		private var tileSize:Number;
+		private var cellSize:Point;
+		private var gridSize:Point;
 		
 		private var playerAvatar:Sprite;
 		private var marker:Sprite;
@@ -28,12 +27,11 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private var coins:Vector.<Sprite> = new Vector.<Sprite>();
 		
-		public function GameplayView(rows:int, cols:int, tileSize:Number) 
+		public function GameplayView(gridSize:Point, cellSize:Point) 
 		{
 			super();
-			this.rows = rows;
-			this.cols = cols;
-			this.tileSize = tileSize;
+			this.gridSize = gridSize;
+			this.cellSize = cellSize;
 		}
 		
 		public function movePlayer(path:Vector.<Point>):void 
@@ -72,8 +70,9 @@ package yagerTest.screens.gameplay.gameplayView
 		private function initPlayer():void
 		{
 			playerAvatar = ActorsFactory.createAvatarByType(GameObjectTypes.PLAYER);
-			movementComponent = new MovementComponent(playerAvatar, tileSize, 1200.0);
-			var spawnPosition:Point = GridPositionHelper.gridToPixelPosition(new Point(10, 10), tileSize, tileSize);
+			movementComponent = new MovementComponent(playerAvatar, cellSize, 1200.0);
+			
+			var spawnPosition:Point = GridPositionHelper.gridToPixelPosition(new Point(10, 10), cellSize);
 			playerAvatar.x = spawnPosition.x;
 			playerAvatar.y = spawnPosition.y;
 			addChild(playerAvatar);
@@ -94,19 +93,17 @@ package yagerTest.screens.gameplay.gameplayView
 		private function onMouseDown(event:MouseEvent):void 
 		{
 			var gridPosition:Point = GridPositionHelper.pixelToGrid(
-				getInboundPosition(mouseX, mouseY), 
-				tileSize, 
-				tileSize
+				getInboundPosition(mouseX, mouseY), cellSize
 			);
 				
-			var start:Point = GridPositionHelper.pixelToGrid(new Point(playerAvatar.x, playerAvatar.y), tileSize, tileSize);
+			var start:Point = GridPositionHelper.pixelToGrid(new Point(playerAvatar.x, playerAvatar.y), cellSize);
 			moveRequestSignal.dispatch(start, gridPosition);
 		}
 		
 		private function onMouseMove(event:MouseEvent):void
 		{
 			var inBoundPosition:Point = getInboundPosition(mouseX, mouseY);
-			var gridPosition:Point = GridPositionHelper.pixelToGrid(inBoundPosition, tileSize, tileSize);
+			var gridPosition:Point = GridPositionHelper.pixelToGrid(inBoundPosition, cellSize);
 			highlightCell(gridPosition);
 		}
 		
@@ -130,7 +127,7 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			var background:Sprite = new Sprite();
 			background.graphics.beginFill(0xffaaaa);
-			background.graphics.drawRoundRect(0, 0, rows * tileSize, cols * tileSize, 20, 20);
+			background.graphics.drawRoundRect(0, 0, gridSize.x * cellSize.x, gridSize.y * cellSize.y, 20, 20);
 			background.graphics.endFill();
 			addChild(background);
 		}
@@ -139,7 +136,7 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			marker = new Sprite();
 			marker.graphics.beginFill(0xffffff, 1.0);
-			marker.graphics.drawCircle( 0, 0, tileSize/2.0);
+			marker.graphics.drawCircle(0, 0, cellSize.x/2.0);
 			marker.graphics.endFill();
 			marker.mouseEnabled = false;
 			addChild(marker);
@@ -147,9 +144,9 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function highlightCell(gridPosition:Point):void
 		{
-			if (gridPosition.x < cols && gridPosition.y < rows)
+			if (gridPosition.x < gridSize.x && gridPosition.y < gridSize.y)
 			{
-				var snappedPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, tileSize, tileSize);
+				var snappedPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
 				marker.x = snappedPosition.x;
 				marker.y = snappedPosition.y;
 			}
@@ -159,7 +156,7 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			var coinAvatar:Sprite = ActorsFactory.createAvatarByType(GameObjectTypes.COIN);
 			coins.push(coinAvatar);
-			var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, tileSize, tileSize);
+			var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
 			coinAvatar.x = pixelPosition.x;
 			coinAvatar.y = pixelPosition.y;
 			addChild(coinAvatar);

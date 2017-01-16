@@ -8,24 +8,23 @@ package yagerTest.screens.gameplay.gameplayView
 	public class GridPositionHelper 
 	{
 		
-		public static function snapPosition(pixelPosition:Point, gridCellWidth:Number, gridCellHeight:Number):Point
+		public static function snapPosition(pixelPosition:Point, gridCellWidth:Number, gridCellSize:Point):Point
 		{
-			pixelPosition = pixelToGrid(pixelPosition, gridCellWidth, gridCellHeight);
-			return gridToPixelPosition(pixelPosition, gridCellWidth, gridCellHeight);
-			
+			pixelPosition = pixelToGrid(pixelPosition, gridCellSize);
+			return gridToPixelPosition(pixelPosition, gridCellSize);
 		}
 		
-		public static function gridToPixelPosition(gridPosition:Point, gridCellWidth:Number, gridCellHeight:Number):Point
+		public static function gridToPixelPosition(gridPosition:Point, gridCellSize:Point):Point
 		{
-			gridPosition.x = int((gridPosition.x + 0.5) * gridCellWidth);
-			gridPosition.y = int((gridPosition.y + 0.5) * gridCellHeight);
+			gridPosition.x = int((gridPosition.x + 0.5) * gridCellSize.x);
+			gridPosition.y = int((gridPosition.y + 0.5) * gridCellSize.y);
 			return gridPosition;
 		}
 		
-		public static function pixelToGrid(pixelPositon:Point, gridCellWidth:Number, gridCellHeight:Number):Point
+		public static function pixelToGrid(pixelPositon:Point, gridCellSize:Point):Point
 		{
-			pixelPositon.x = int(pixelPositon.x / gridCellWidth);
-			pixelPositon.y = int(pixelPositon.y / gridCellHeight);
+			pixelPositon.x = int(pixelPositon.x / gridCellSize.x);
+			pixelPositon.y = int(pixelPositon.y / gridCellSize.y);
 			return pixelPositon;
 		}
 		

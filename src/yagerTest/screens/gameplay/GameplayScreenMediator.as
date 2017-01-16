@@ -5,6 +5,7 @@ package yagerTest.screens.gameplay
 	import yagerTest.commands.gameplay.ExitGameMacro;
 	import yagerTest.commands.gameplay.StartGameMacro;
 	import yagerTest.model.GameObjectTypes;
+	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GridModel;
 	import yagerTest.screens.mainMenu.UserActions;
 	
@@ -54,7 +55,7 @@ package yagerTest.screens.gameplay
 		
 		private function showGrid():void
 		{
-			view.initGrid(gridModel.width, gridModel.height);
+			view.initGrid(gridModel.size, GameplayConstants.GRID_CELL_SIZE);
 		}
 	}
 

@@ -2,6 +2,7 @@ package yagerTest.commands.gameplay
 {
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.framework.api.IInjector;
+	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GridModel;
 	import yagerTest.model.GameObjectTypes;
 	
@@ -22,7 +23,7 @@ package yagerTest.commands.gameplay
 			}
 			else
 			{
-				var gridModel:GridModel = new GridModel();
+				var gridModel:GridModel = new GridModel(GameplayConstants.GRID_SIZE);
 				injector.map(GridModel).toValue(gridModel);
 			}
 			

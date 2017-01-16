@@ -13,15 +13,15 @@ package yagerTest.screens.gameplay.actors
 		private var target:DisplayObject;
 		
 		private var currentPath:Vector.<Point>;
-		private var tileSize:Number;
+		private var girdCellSize:Point;
 		private var speed:Number;
 		
 		private var moveTween:GTween;
 		
-		public function MovementComponent(target:DisplayObject, tileSize:Number, pixelsPerSecond:Number) 
+		public function MovementComponent(target:DisplayObject, gridCellSize:Point, pixelsPerSecond:Number) 
 		{
 			this.target = target;
-			this.tileSize = tileSize;
+			this.girdCellSize = gridCellSize;
 			this.speed = pixelsPerSecond;
 			moveTween = new GTween(target);
 		}
@@ -51,7 +51,7 @@ package yagerTest.screens.gameplay.actors
 		{
 			if (gridPosition)
 			{
-				var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, tileSize, tileSize);
+				var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, girdCellSize);
 				moveTween.setValues({x:pixelPosition.x, y:pixelPosition.y});				
 				// Calculate transition vector
 				pixelPosition.x -= target.x;

@@ -3,6 +3,7 @@ package yagerTest.factories.gameObjects
 	import flash.display.Sprite;
 	import flash.filters.GlowFilter;
 	import yagerTest.model.GameObjectTypes;
+	import yagerTest.model.GameplayConstants;
 	import yagerTest.screens.gameplay.GameplayScreen;
 	/**
 	 * ...
@@ -36,16 +37,16 @@ package yagerTest.factories.gameObjects
 			switch(type)
 			{
 				case GameObjectTypes.COIN:
-					avatar = createCircleAvatar(0xf4d742, GameplayScreen.GRID_CELL_SIZE / 4);
+					avatar = createCircleAvatar(0xf4d742, GameplayConstants.GRID_CELL_SIZE.x / 4);
 					break;
 					
 				default:
 				case GameObjectTypes.OBSTACLE:
-					avatar = createSquareAvatar(0xffffff, GameplayScreen.GRID_CELL_SIZE);
+					avatar = createSquareAvatar(0xffffff, GameplayConstants.GRID_CELL_SIZE.x);
 					break;
 					
 				case GameObjectTypes.PLAYER:
-					avatar = createCircleAvatar(0x009900, GameplayScreen.GRID_CELL_SIZE / 2);
+					avatar = createCircleAvatar(0x009900, GameplayConstants.GRID_CELL_SIZE.x / 2);
 					break;
 			}
 			avatar.mouseEnabled = false;

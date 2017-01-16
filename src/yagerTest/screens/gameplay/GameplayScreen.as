@@ -27,8 +27,6 @@ package yagerTest.screens.gameplay
 	 */
 	public class GameplayScreen extends BasicScreen implements IGameplayScreen
 	{
-		public static const GRID_CELL_SIZE:Number = 25.0;
-
 		private var _userActionSignal:Signal = new Signal(String);
 		
 		private var gameView:GameplayView;
@@ -41,15 +39,15 @@ package yagerTest.screens.gameplay
 		
 		private var isPaused:Boolean;
 		
-		private var timeLeft:Number;
+		private var timeLimit:Number;
 		
 		private var score:int;
 		
 		private var timeLine:GTweenTimeline = new GTweenTimeline();
 		
-		public function initGrid(width:int, height:int):void
+		public function initGrid(gridSize:Point, cellSize:Point):void
 		{
-			gameView = new GameplayView(width, height, GRID_CELL_SIZE);
+			gameView = new GameplayView(gridSize, cellSize);
 			addChild(gameView);
 		}
 		
@@ -59,7 +57,7 @@ package yagerTest.screens.gameplay
 			AlignDisplayObject.center(gameView, getBounds(this));
 			initMenu();
 			initHud();
-			if (!isNaN(timeLeft))
+			if (!isNaN(timeLimit))
 			{
 				startTime();
 			}
@@ -81,7 +79,7 @@ package yagerTest.screens.gameplay
 		
 		public function start(timeLimit:Number):void
 		{
-			timeLeft = timeLimit;
+			timeLimit = timeLimit;
 			if (isInitialized)
 			{
 				startTime();				
@@ -90,7 +88,7 @@ package yagerTest.screens.gameplay
 		
 		private function startTime():void
 		{
-			timeLine.duration = timeLeft;
+			timeLine.duration = timeLimit;
 			timeLine.onComplete = timeComplete;
 			timeLine.onChange = timeChange;
 			timeLine.gotoAndPlay(0);
@@ -103,7 +101,7 @@ package yagerTest.screens.gameplay
 		
 		private function timeChange(tween:GTween):void
 		{
-			timeLabel.setValue(timeLeft - tween.position);
+			timeLabel.setValue(timeLimit - tween.position);
 		}
 		
 		private function initMenu():void
