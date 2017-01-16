@@ -11,7 +11,6 @@ package yagerTest.screens.gameplay.gameplayView
 	 */
 	public class GridSelectorView extends ViewComponent 
 	{
-		
 		private var pointer:Sprite;
 		private var cellSize:Point;
 		private var gridSize:Point;
@@ -31,7 +30,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function initPointer():void
 		{
-			pointer = GameObjectAvatarFactory.createCircleAvatar(0xffffff, cellSize.x / 4);
+			pointer = GameObjectAvatarFactory.createCircleAvatar(0xffffff, cellSize.x / 2);
 			addChild(pointer);
 		}
 		

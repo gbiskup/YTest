@@ -26,7 +26,7 @@ package yagerTest.factories.gameObjects
 			sprite.graphics.beginFill(color);
 			sprite.graphics.drawRect( -size / 2, -size / 2, size, size);
 			sprite.graphics.endFill();
-			sprite.filters = [new GlowFilter(color, 1.0, 8, 8)];
+			//sprite.filters = [new GlowFilter(color, 1.0, 8, 8)];
 			return sprite;
 		}
 

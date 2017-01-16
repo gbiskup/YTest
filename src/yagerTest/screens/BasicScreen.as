@@ -18,11 +18,16 @@ package yagerTest.screens
 			super();
 		}
 		
+		override protected function constructChildren():void
+		{
+			super.constructChildren();
+			initMouseMask();
+			updateMouseMaskSize();
+		}
+		
 		override protected function init():void
 		{
 			super.init();
-			initMouseMask();
-			updateMouseMaskSize();
 			initListeners();
 		}
 		

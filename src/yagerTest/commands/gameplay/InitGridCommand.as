@@ -1,5 +1,6 @@
 package yagerTest.commands.gameplay 
 {
+	import flash.geom.Point;
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.framework.api.IInjector;
 	import yagerTest.model.GameplayConstants;
@@ -20,7 +21,7 @@ package yagerTest.commands.gameplay
 		{
 			if (injector.hasMapping(GameplayModel))
 			{
-				gridModel = injector.getInstance(GameplayModel);
+				gameplayModel = injector.getInstance(GameplayModel);
 			}
 			else
 			{
@@ -30,21 +31,37 @@ package yagerTest.commands.gameplay
 			
 			var gridModel:GridModel = new GridModel(GameplayConstants.GRID_SIZE);
 			
-			gridModel.setObjectTypeAt(0, 0, GameObjectTypes.COIN);
-			gridModel.setObjectTypeAt(1, 1, GameObjectTypes.COIN);
-			gridModel.setObjectTypeAt(3, 6, GameObjectTypes.COIN);
-			gridModel.setObjectTypeAt(15, 15, GameObjectTypes.COIN);
-			gridModel.setObjectTypeAt(31, 31, GameObjectTypes.COIN);
+			var objectPosition:Point = GameplayConstants.GRID_SIZE.clone();
+			objectPosition.x /= 2;
+			objectPosition.y /= 2;
+			
+			gridModel.setObjectTypeAt(objectPosition.x, objectPosition.y, GameObjectTypes.PLAYER);
+			
+			var obstaclesNumber:int = 128;
+			while(obstaclesNumber > 0)
+			{
+				gridModel.getRandomCooridnates(objectPosition);
+				if (gridModel.getObjectTypeAt(objectPosition.x, objectPosition.y) == GameObjectTypes.EMPTY)
+				{
+					gridModel.setObjectTypeAt(objectPosition.x, objectPosition.y, GameObjectTypes.OBSTACLE);
+					obstaclesNumber--;
+				}
+			}
+			
+			var coinsNumber:int = 3;
+			while (coinsNumber > 0)
+			{
+				if (gridModel.getObjectTypeAt(objectPosition.x, objectPosition.y) == GameObjectTypes.EMPTY)
+				{
+					gridModel.setObjectTypeAt(objectPosition.x, objectPosition.y, GameObjectTypes.COIN);
+					coinsNumber--;
+				}
+				gridModel.getRandomCooridnates(objectPosition);
+			}
 			
 			gameplayModel.setScore(0);
 			gameplayModel.setTimeLimit(GameplayConstants.TIME_LIMIT);
 			gameplayModel.setGrid(gridModel);
-			
-			/*gridModel.setObjectTypeAt(10, 10, GameObjectTypes.OBSTACLE);
-			gridModel.setObjectTypeAt(10, 11, GameObjectTypes.OBSTACLE);
-			gridModel.setObjectTypeAt(10, 12, GameObjectTypes.OBSTACLE);
-			gridModel.setObjectTypeAt(23, 15, GameObjectTypes.OBSTACLE);*/
-			
 		}
 		
 	}

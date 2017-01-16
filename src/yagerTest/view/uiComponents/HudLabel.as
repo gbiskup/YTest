@@ -43,10 +43,16 @@ package yagerTest.view.uiComponents
 			updateLabel();
 		}
 		
-		override protected function init():void
+		override protected function constructChildren():void
 		{
+			super.constructChildren();
 			label = TextFieldFactory.createTextField(35, true);
 			addChild(label);
+		}
+		
+		override protected function init():void
+		{
+			super.init();
 			updateLabel();
 			updatePosition();
 		}

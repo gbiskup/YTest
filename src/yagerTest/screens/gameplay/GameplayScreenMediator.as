@@ -9,6 +9,7 @@ package yagerTest.screens.gameplay
 	import yagerTest.model.GameplayModel;
 	import yagerTest.model.GridModel;
 	import yagerTest.screens.mainMenu.UserActions;
+	import yagerTest.view.IViewComponent;
 	
 	/**
 	 * ...
@@ -27,9 +28,9 @@ package yagerTest.screens.gameplay
 		
 		override public function initialize():void
 		{
+			super.initialize();
 			view.userActionSignal.add(onUserAction);
-			showGrid();
-			view.start(gameplayModel.timeLimit);
+			view.initializedSignal.add(onViewInitialized);
 		}
 		
 		override public function destroy():void
@@ -38,13 +39,13 @@ package yagerTest.screens.gameplay
 			super.destroy();
 		}
 		
-		private function onUserAction(actionType:String):void 
+		private function onUserAction(actionType:String):void
 		{
 			switch(actionType)
 			{
 				case UserActions.EXIT_GAME:
-					var exitMacro:ExitGameMacro = injector.instantiateUnmapped(ExitGameMacro);
-					exitMacro.execute();
+					var exitGameMacro:ExitGameMacro = injector.instantiateUnmapped(ExitGameMacro);
+					exitGameMacro.execute();
 					break;
 					
 				case UserActions.RESTART_GAME:
@@ -54,10 +55,12 @@ package yagerTest.screens.gameplay
 			}
 		}
 		
-		private function showGrid():void
+		private function onViewInitialized(viewComponent:IViewComponent):void
 		{
-			view.initGrid(gameplayModel.grid.size, GameplayConstants.GRID_CELL_SIZE);
+			viewComponent.initializedSignal.remove(onViewInitialized);
+			view.initGameplay(gameplayModel);
 		}
+	
 	}
 
 }

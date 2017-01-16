@@ -6,6 +6,8 @@ package yagerTest.screens.gameplay.gameplayView
 	import org.osflash.signals.Signal;
 	import yagerTest.factories.gameObjects.GameObjectAvatarFactory;
 	import yagerTest.model.GameObjectTypes;
+	import yagerTest.model.GameplayConstants;
+	import yagerTest.model.GridModel;
 	import yagerTest.screens.gameplay.gameplayView.actors.MovementComponent;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.view.ViewComponent;
@@ -64,24 +66,12 @@ package yagerTest.screens.gameplay.gameplayView
 			super.constructChildren();
 			initBackground();
 			initGridSelector();
-			initPlayer();
 		}
 		
 		override protected function init():void
 		{
 			super.init();
 			initMouseListeners();
-		}
-		
-		private function initPlayer():void
-		{
-			playerAvatar = GameObjectAvatarFactory.createAvatarByType(GameObjectTypes.PLAYER);
-			movementComponent = new MovementComponent(playerAvatar, cellSize, 1200.0);
-			
-			var spawnPosition:Point = GridPositionHelper.gridToPixelPosition(new Point(10, 10), cellSize);
-			playerAvatar.x = spawnPosition.x;
-			playerAvatar.y = spawnPosition.y;
-			addChild(playerAvatar);
 		}
 		
 		private function initGridSelector():void
@@ -129,16 +119,51 @@ package yagerTest.screens.gameplay.gameplayView
 			addChild(background);
 		}
 		
-		public function addCoin(gridPosition:Point):void
+		public function showGrid(grid:GridModel, filter:Array = null):void 
 		{
-			var coinAvatar:Sprite = GameObjectAvatarFactory.createAvatarByType(GameObjectTypes.COIN);
-			coins.push(coinAvatar);
-			var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
-			coinAvatar.x = pixelPosition.x;
-			coinAvatar.y = pixelPosition.y;
-			addChild(coinAvatar);
+			var currentPosition:Point = new Point();
+			for (var y:int = 0; y < grid.height; y++)
+			{
+				for (var x:int = 0; x < grid.width; x++)
+				{
+					currentPosition.setTo(x, y);
+					var objectTypeAtPosition:int = grid.getObjectTypeAt(x, y);
+					if (filter == null || filter.indexOf(objectTypeAtPosition) >= 0)
+					{
+						addGameObject(currentPosition, objectTypeAtPosition);
+					}
+				}
+			}
 		}
 		
+		private function addGameObject(gridPosition:Point, objectType:int):void
+		{
+			if (objectType != GameObjectTypes.EMPTY)
+			{
+				var avatar:Sprite = GameObjectAvatarFactory.createAvatarByType(objectType);
+				var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
+				avatar.x = pixelPosition.x;
+				avatar.y = pixelPosition.y;
+				addChild(avatar);
+				if (objectType == GameObjectTypes.COIN)
+				{
+					coins.push(avatar);
+				}
+				if (objectType == GameObjectTypes.PLAYER)
+				{
+					initPlayer(avatar);
+				}
+			}
+		}
+		
+		private function initPlayer(avatar:Sprite):void
+		{
+			if (!playerAvatar)
+			{
+				playerAvatar = avatar;
+				movementComponent = new MovementComponent(playerAvatar, cellSize, GameplayConstants.PLAYER_SPEED);
+			}
+		}
 	}
 
 }

@@ -2,18 +2,17 @@ package yagerTest.screens.gameplay
 {
 	import flash.geom.Point;
 	import org.osflash.signals.Signal;
+	import yagerTest.model.GameplayModel;
+	import yagerTest.view.IViewComponent;
 	
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
-	public interface IGameplayScreen 
+	public interface IGameplayScreen extends IViewComponent
 	{
 		function get userActionSignal():Signal;
-		
-		function initGrid(gridSize:Point, cellSize:Point):void;
-		
-		function start(timeLimit:Number):void;
+		function initGameplay(gameplayModel:GameplayModel):void;
 	}
 	
 }

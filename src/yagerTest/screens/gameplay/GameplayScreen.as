@@ -11,6 +11,8 @@ package yagerTest.screens.gameplay
 	import yagerTest.factories.uiComponents.ButtonFactory;
 	import yagerTest.factories.uiComponents.MenuFactory;
 	import yagerTest.model.GameObjectTypes;
+	import yagerTest.model.GameplayConstants;
+	import yagerTest.model.GameplayModel;
 	import yagerTest.model.GridModel;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.screens.gameplay.gameplayView.GameplayView;
@@ -28,8 +30,8 @@ package yagerTest.screens.gameplay
 	public class GameplayScreen extends BasicScreen implements IGameplayScreen
 	{
 		private var _userActionSignal:Signal = new Signal(String);
-		
-		private var gameView:GameplayView;
+	
+		private var gameplayView:GameplayView;
 		
 		private var pauseMenu:MyVerticalMenu;
 		
@@ -41,49 +43,57 @@ package yagerTest.screens.gameplay
 		
 		private var timeLimit:Number;
 		
-		private var score:int;
-		
 		private var timeLine:GTweenTimeline = new GTweenTimeline();
 		
-		public function initGrid(gridSize:Point, cellSize:Point):void
+		override protected function constructChildren():void
 		{
-			gameView = new GameplayView(gridSize, cellSize);
-			addChild(gameView);
+			super.constructChildren();
+			initMenu();
+			initHud();
 		}
 		
 		override protected function init():void
 		{
 			super.init();
-			AlignDisplayObject.center(gameView, getBounds(this));
-			initMenu();
-			initHud();
-			if (!isNaN(timeLimit))
-			{
-				startTime();
-			}
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		}
 
+		private function initMenu():void
+		{
+			pauseMenu = MenuFactory.craeteVerticalMenu();
+			addChild(pauseMenu);
+			pauseMenu.addButton(ButtonFactory.createTextButton("Resume", onResume));
+			pauseMenu.addButton(ButtonFactory.createTextButton("Restart", onRestart));
+			pauseMenu.addButton(ButtonFactory.createTextButton("Exit", onExit));
+			AlignDisplayObject.center(pauseMenu, getBounds(this));
+			pauseMenu.visible = isPaused;
+		}
+		
 		private function initHud():void
 		{
 			var rightPadding:Point = MenuFactory.defaultPadding.clone();
 			rightPadding.x *=-1;
 			timeLabel = new HudLabel(null, MenuFactory.defaultPadding);
 			timeLabel.setLabel("Time: ");
-			addChild(timeLabel);
+			addChildComponent(timeLabel);
 			
 			scoreLabel = new HudLabel(AlignAnchors.RIGHT_TOP, rightPadding);
 			scoreLabel.setLabel("Score: ");
-			addChild(scoreLabel);
+			addChildComponent(scoreLabel);
+		}
+	
+		public function initGameplay(gameplayModel:GameplayModel):void 
+		{
+			initGrid(gameplayModel.grid.size);
+			timeLimit = gameplayModel.timeLimit;
+			startTime();
 		}
 		
-		public function start(timeLimit:Number):void
+		private function initGrid(gridSize:Point):void
 		{
-			timeLimit = timeLimit;
-			if (isInitialized)
-			{
-				startTime();				
-			}
+			gameplayView = new GameplayView(gridSize, GameplayConstants.GRID_CELL_SIZE);
+			addChild(gameplayView);
+			AlignDisplayObject.center(gameplayView, getBounds(this));
 		}
 		
 		private function startTime():void
@@ -102,17 +112,6 @@ package yagerTest.screens.gameplay
 		private function timeChange(tween:GTween):void
 		{
 			timeLabel.setValue(timeLimit - tween.position);
-		}
-		
-		private function initMenu():void
-		{
-			pauseMenu = MenuFactory.craeteVerticalMenu();
-			addChild(pauseMenu);
-			pauseMenu.addButton(ButtonFactory.createTextButton("Resume", onResume));
-			pauseMenu.addButton(ButtonFactory.createTextButton("Restart", onRestart));
-			pauseMenu.addButton(ButtonFactory.createTextButton("Exit", onExit));
-			AlignDisplayObject.center(pauseMenu, getBounds(this));
-			pauseMenu.visible = isPaused;
 		}
 		
 		public function onExit():void 
@@ -139,7 +138,7 @@ package yagerTest.screens.gameplay
 		
 		private function pause():void
 		{
-			gameView.pause();
+			gameplayView.pause();
 			timeLine.paused = true;
 			pauseMenu.visible = true;
 			pauseMenu.showAnimation();
@@ -147,7 +146,7 @@ package yagerTest.screens.gameplay
 		
 		private function resume():void
 		{
-			gameView.resume();
+			gameplayView.resume();
 			timeLine.paused = false;
 			pauseMenu.visible = false;
 		}

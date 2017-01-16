@@ -8,12 +8,12 @@ package yagerTest.model
 	public class GridModel 
 	{
 		private var _size:Point;
-		private var grid:Vector.<int>;
+		private var objectTypes:Vector.<int>;
 		
 		public function GridModel(size:Point)
 		{
 			_size = size;
-			grid = new Vector.<int>(size.x * size.y);
+			objectTypes = new Vector.<int>(size.x * size.y);
 		}
 		
 		private function positionToIndex(x:uint, y:uint):uint
@@ -23,12 +23,12 @@ package yagerTest.model
 		
 		public function setObjectTypeAt(x:uint, y:uint, objectType:int):void
 		{
-			grid[positionToIndex(x, y)] = objectType;
+			objectTypes[positionToIndex(x, y)] = objectType;
 		}
 		
 		public function getObjectTypeAt(x:uint, y:uint):int
 		{
-			return grid[positionToIndex(x, y)];
+			return objectTypes[positionToIndex(x, y)];
 		}
 		
 		public function get size():Point
@@ -44,6 +44,28 @@ package yagerTest.model
 		public function get height():uint 
 		{
 			return size.y;
+		}
+		
+		public function getRandomCooridnates(targetPoint:Point = null):Point
+		{
+			if (!targetPoint)
+			{
+				targetPoint = new Point();
+			}
+			targetPoint.x = int(Math.random() * width);
+			targetPoint.y = int(Math.random() * height);
+			return targetPoint;
+		}
+		
+		public function replaceTypes(typeToReplace:int, replaceWith:int):void
+		{
+			for (var i:int = 0; i < objectTypes.length; i++)
+			{
+				if (objectTypes[i] == typeToReplace)
+				{
+					objectTypes[i] = replaceWith;
+				}
+			}
 		}
 		
 	}

@@ -8,10 +8,10 @@ package yagerTest.view
 	 * ...
 	 * @author gbiskup
 	 */
-	public class ViewComponent extends Sprite 
+	public class ViewComponent extends Sprite implements IViewComponent
 	{
-		private var initializedSignal:Signal = new Signal(ViewComponent);
-		private var initializationFailed:Signal = new Signal(ViewComponent);
+		private var _initializedSignal:Signal = new Signal(IViewComponent);
+		private var _initializationFailedSignal:Signal = new Signal(IViewComponent);
 		
 		private var _isInitialized:Boolean;
 		
@@ -56,7 +56,7 @@ package yagerTest.view
 			{
 				pendingChildren++;
 				viewComponent.initializedSignal.add(onChildInitialized);
-				viewComponent.initializationFailed.add(onChildInitializationFailed);
+				viewComponent.initializationFailedSignal.add(onChildInitializationFailed);
 			}
 		}
 		
@@ -74,7 +74,7 @@ package yagerTest.view
 		private function endChildInitialization(childComponent:ViewComponent):void
 		{
 			childComponent.initializedSignal.remove(onChildInitialized);
-			childComponent.initializationFailed.remove(onChildInitializationFailed);
+			childComponent.initializationFailedSignal.remove(onChildInitializationFailed);
 			if (!isInitialized && allChildrenReady())
 			{
 				init();
@@ -91,12 +91,22 @@ package yagerTest.view
 		{
 			removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 			initializedSignal.removeAll();
-			initializationFailed.removeAll();
+			initializationFailedSignal.removeAll();
 		}
 		
 		public function get isInitialized():Boolean 
 		{
 			return _isInitialized;
+		}
+		
+		public function get initializedSignal():Signal 
+		{
+			return _initializedSignal;
+		}
+		
+		public function get initializationFailedSignal():Signal 
+		{
+			return _initializationFailedSignal;
 		}
 	}
 

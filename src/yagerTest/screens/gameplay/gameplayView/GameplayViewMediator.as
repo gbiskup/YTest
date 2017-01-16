@@ -3,6 +3,8 @@ package yagerTest.screens.gameplay.gameplayView
 	import com.sibirjak.asdpc.core.constants.Position;
 	import flash.geom.Point;
 	import robotlegs.bender.bundles.mvcs.Mediator;
+	import yagerTest.model.GameplayModel;
+	import yagerTest.view.IViewComponent;
 	
 	/**
 	 * ...
@@ -13,10 +15,19 @@ package yagerTest.screens.gameplay.gameplayView
 		[Inject]
 		public var view:IGameplayView;
 		
+		[Inject]
+		public var gameplayModel:GameplayModel;
+		
 		override public function initialize():void
 		{
 			super.initialize();
+			view.initializedSignal.add(onViewInitialized);
 			view.moveRequestSignal.add(onMoveRequestSignal);
+		}
+		
+		private function onViewInitialized(viewComponent:IViewComponent):void
+		{
+			view.showGrid(gameplayModel.grid);
 		}
 		
 		private function onMoveRequestSignal(start:Point, destination:Point):void
