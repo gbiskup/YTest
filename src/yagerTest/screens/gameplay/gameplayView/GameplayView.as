@@ -2,7 +2,6 @@ package yagerTest.screens.gameplay.gameplayView
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import flash.filters.BlurFilter;
 	import flash.geom.Point;
 	import org.osflash.signals.Signal;
 	import yagerTest.factories.gameObjects.ActorsFactory;
@@ -27,6 +26,8 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private var movementComponent:MovementComponent;
 		
+		private var coins:Vector.<Sprite> = new Vector.<Sprite>();
+		
 		public function GameplayView(rows:int, cols:int, tileSize:Number) 
 		{
 			super();
@@ -39,9 +40,6 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			movementComponent.followPath(path);
 		}
-		
-		
-		/* INTERFACE yagerTest.screens.gameplay.gameplayView.IGameplayView */
 		
 		public function pause():void 
 		{
@@ -124,6 +122,7 @@ package yagerTest.screens.gameplay.gameplayView
 		override protected function destroy():void
 		{
 			removeMouseListeners();
+			pause();
 			super.destroy();
 		}
 		
@@ -154,6 +153,16 @@ package yagerTest.screens.gameplay.gameplayView
 				marker.x = snappedPosition.x;
 				marker.y = snappedPosition.y;
 			}
+		}
+		
+		public function addCoin(gridPosition:Point):void
+		{
+			var coinAvatar:Sprite = ActorsFactory.createAvatarByType(GameObjectTypes.COIN);
+			coins.push(coinAvatar);
+			var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, tileSize, tileSize);
+			coinAvatar.x = pixelPosition.x;
+			coinAvatar.y = pixelPosition.y;
+			addChild(coinAvatar);
 		}
 		
 	}

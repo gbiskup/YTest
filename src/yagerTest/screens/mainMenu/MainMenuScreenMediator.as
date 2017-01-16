@@ -6,7 +6,7 @@ package yagerTest.screens.mainMenu
 	import yagerTest.commands.ShowCreditsCommand;
 	import yagerTest.commands.gameplay.StartGameMacro;
 	import yagerTest.screens.ScreenManager;
-	import yagerTest.commands.gameplay.InitGameScreenCommand;
+	import yagerTest.commands.gameplay.ShowScreenCommand;
 	import yagerTest.screens.credits.CreditsScreen;
 	
 	/**
@@ -44,12 +44,12 @@ package yagerTest.screens.mainMenu
 			var command:ICommand;
 			switch(actionName)
 			{
-				case MainMenuUserActions.START_GAME:
+				case UserActions.START_GAME:
 					command = injector.instantiateUnmapped(StartGameMacro);
 					command.execute();
 					break;
 				
-				case MainMenuUserActions.SHOW_CREDITS:
+				case UserActions.SHOW_CREDITS:
 					command = injector.instantiateUnmapped(ShowCreditsCommand);
 					command.execute();
 					break;

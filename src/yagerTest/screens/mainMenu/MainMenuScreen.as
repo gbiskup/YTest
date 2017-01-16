@@ -37,16 +37,17 @@ package yagerTest.screens.mainMenu
 				getBounds(this), 
 				new Point(-MenuFactory.defaultPadding.x, -MenuFactory.defaultPadding.y)
 			);
+			menu.showAnimation();
 		}
 		
 		private function onPlayButton():void
 		{
-			userActionSignal.dispatch(MainMenuUserActions.START_GAME);
+			userActionSignal.dispatch(UserActions.START_GAME);
 		}
 		
 		private function onCreditsButton():void
 		{
-			userActionSignal.dispatch(MainMenuUserActions.SHOW_CREDITS);
+			userActionSignal.dispatch(UserActions.SHOW_CREDITS);
 		}
 		
 		public function get userActionSignal():StringSignal 

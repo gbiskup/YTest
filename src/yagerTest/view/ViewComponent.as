@@ -9,6 +9,8 @@ package yagerTest.view
 	 */
 	public class ViewComponent extends Sprite 
 	{
+		private var _isInitialized:Boolean;
+		
 		public function ViewComponent() 
 		{
 			super();
@@ -30,12 +32,17 @@ package yagerTest.view
 		
 		protected function init():void
 		{
-			
+			_isInitialized = true;
 		}
 		
 		protected function destroy():void
 		{
 			removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+		}
+		
+		public function get isInitialized():Boolean 
+		{
+			return _isInitialized;
 		}
 	}
 

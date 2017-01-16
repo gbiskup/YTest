@@ -19,11 +19,6 @@ package yagerTest.view
 		{
 			displayObject.x = bounds.width * boundsAnchor.x - displayObject.width * anchor.x;
 			displayObject.y = bounds.height * boundsAnchor.y - displayObject.height * anchor.y;
-		}
-		
-		static public function rightBottom(displayObject:DisplayObject, bounds:Rectangle, offset:Point = null):void 
-		{
-			align(displayObject, AlignAnchors.RIGHT_BOTTOM, bounds, AlignAnchors.RIGHT_BOTTOM);
 			if (offset)
 			{
 				displayObject.x += offset.x;
@@ -31,6 +26,15 @@ package yagerTest.view
 			}
 		}
 		
+		static public function rightBottom(displayObject:DisplayObject, bounds:Rectangle, offset:Point = null):void 
+		{
+			align(displayObject, AlignAnchors.RIGHT_BOTTOM, bounds, AlignAnchors.RIGHT_BOTTOM, offset);
+		}
+		
+		static public function rightTop(displayObject:DisplayObject, bounds:Rectangle, offset:Point = null):void 
+		{
+			align(displayObject, AlignAnchors.RIGHT_TOP, bounds, AlignAnchors.RIGHT_TOP, offset);
+		}
 	}
 
 }

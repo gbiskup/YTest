@@ -3,19 +3,19 @@ package yagerTest.commands.gameplay
 	import eu.alebianco.robotlegs.utils.impl.SequenceMacro;
 	import eu.alebianco.robotlegs.utils.impl.SubCommandPayload;
 	import yagerTest.screens.BasicScreen;
-	import yagerTest.screens.gameplay.GameplayScreen;
+	import yagerTest.screens.mainMenu.MainMenuScreen;
 	
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
-	public class StartGameMacro extends SequenceMacro 
-	{	
+	public class ExitGameMacro extends SequenceMacro 
+	{
 		override public function prepare():void
 		{
-			add(InitGridCommand);
+			add(DestroyGridCommand);
 			add(ShowScreenCommand).withPayloads(
-				new SubCommandPayload(new GameplayScreen(), BasicScreen)
+				new SubCommandPayload(new MainMenuScreen(), BasicScreen)
 			);
 		}
 	}

@@ -8,9 +8,11 @@ package yagerTest.screens.gameplay
 	 */
 	public interface IGameplayScreen 
 	{
-		function addObstacleAtGridPosition(x:uint, y:uint, objectTypeAt:int):void;
+		function get userActionSignal():Signal;
 		
 		function initGrid(width:int, height:int):void;
+		
+		function start(timeLimit:Number):void;
 	}
 	
 }

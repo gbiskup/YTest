@@ -9,15 +9,27 @@ package yagerTest.view.uiComponents
 	 */
 	public class MyVerticalMenu extends VLayout implements IMyVerticalMenu
 	{
-		private var buttonNumber:int;
+		private var buttonCollection:Vector.<MyButton> = new Vector.<MyButton>();
 		
 		public function addButton(button:MyButton):void
 		{
 			addChild(button);
-			buttonNumber++;
-			var tween:GTween = AnimationFactory.createShowAnimation(button);
-			tween.delay = buttonNumber * 0.2;
+			buttonCollection.push(button);
 			layoutChildren();
+		}
+		
+		public function showAnimation():void
+		{
+			for (var i:int = 0; i < buttonCollection.length; i++)
+			{
+				playShowButtonAnimation(buttonCollection[i], i);
+			}
+		}
+		
+		private function playShowButtonAnimation(button:MyButton, index:int):void
+		{
+			var tween:GTween = AnimationFactory.createShowAnimation(button);
+			tween.delay = (index + 1) * 0.1;
 		}
 	}
 
