@@ -6,6 +6,7 @@ package yagerTest.screens.gameplay
 	import yagerTest.commands.gameplay.StartGameMacro;
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GameplayConstants;
+	import yagerTest.model.GameplayModel;
 	import yagerTest.model.GridModel;
 	import yagerTest.screens.mainMenu.UserActions;
 	
@@ -19,7 +20,7 @@ package yagerTest.screens.gameplay
 		public var view:IGameplayScreen;
 		
 		[Inject]
-		public var gridModel:GridModel;
+		public var gameplayModel:GameplayModel;
 		
 		[Inject]
 		public var injector:IInjector;
@@ -28,7 +29,7 @@ package yagerTest.screens.gameplay
 		{
 			view.userActionSignal.add(onUserAction);
 			showGrid();
-			view.start(20.0);
+			view.start(gameplayModel.timeLimit);
 		}
 		
 		override public function destroy():void
@@ -55,7 +56,7 @@ package yagerTest.screens.gameplay
 		
 		private function showGrid():void
 		{
-			view.initGrid(gridModel.size, GameplayConstants.GRID_CELL_SIZE);
+			view.initGrid(gameplayModel.grid.size, GameplayConstants.GRID_CELL_SIZE);
 		}
 	}
 

@@ -9,7 +9,7 @@ package yagerTest.factories.gameObjects
 	 * ...
 	 * @author gbiskup
 	 */
-	public class ActorsFactory 
+	public class GameObjectAvatarFactory 
 	{
 		public static function createCircleAvatar(color:uint, radius:Number):Sprite
 		{

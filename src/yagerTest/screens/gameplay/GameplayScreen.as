@@ -7,7 +7,7 @@ package yagerTest.screens.gameplay
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import org.osflash.signals.Signal;
-	import yagerTest.factories.gameObjects.ActorsFactory;
+	import yagerTest.factories.gameObjects.GameObjectAvatarFactory;
 	import yagerTest.factories.uiComponents.ButtonFactory;
 	import yagerTest.factories.uiComponents.MenuFactory;
 	import yagerTest.model.GameObjectTypes;

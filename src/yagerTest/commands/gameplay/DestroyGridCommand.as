@@ -2,7 +2,7 @@ package yagerTest.commands.gameplay
 {
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.framework.api.IInjector;
-	import yagerTest.model.GridModel;
+	import yagerTest.model.GameplayModel;
 	
 	/**
 	 * ...
@@ -15,7 +15,7 @@ package yagerTest.commands.gameplay
 		
 		public function execute():void 
 		{
-			injector.unmap(GridModel);
+			injector.unmap(GameplayModel);
 		}
 		
 	}

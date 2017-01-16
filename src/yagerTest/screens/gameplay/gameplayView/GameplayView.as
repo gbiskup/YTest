@@ -4,7 +4,7 @@ package yagerTest.screens.gameplay.gameplayView
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import org.osflash.signals.Signal;
-	import yagerTest.factories.gameObjects.ActorsFactory;
+	import yagerTest.factories.gameObjects.GameObjectAvatarFactory;
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.screens.gameplay.gameplayView.actors.MovementComponent;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
@@ -20,14 +20,15 @@ package yagerTest.screens.gameplay.gameplayView
 		private var gridSize:Point;
 		
 		private var playerAvatar:Sprite;
-		private var marker:Sprite;
 		private var _moveRequestSignal:Signal = new Signal(Point, Point);
 		
 		private var movementComponent:MovementComponent;
 		
 		private var coins:Vector.<Sprite> = new Vector.<Sprite>();
 		
-		public function GameplayView(gridSize:Point, cellSize:Point) 
+		private var gridSelector:GridSelectorView;
+		
+		public function GameplayView(gridSize:Point, cellSize:Point)
 		{
 			super();
 			this.gridSize = gridSize;
@@ -58,24 +59,35 @@ package yagerTest.screens.gameplay.gameplayView
 			return _moveRequestSignal;
 		}
 		
+		override protected function constructChildren():void
+		{
+			super.constructChildren();
+			initBackground();
+			initGridSelector();
+			initPlayer();
+		}
+		
 		override protected function init():void
 		{
 			super.init();
-			initBackground();
-			initMarker();
-			initPlayer();
 			initMouseListeners();
 		}
 		
 		private function initPlayer():void
 		{
-			playerAvatar = ActorsFactory.createAvatarByType(GameObjectTypes.PLAYER);
+			playerAvatar = GameObjectAvatarFactory.createAvatarByType(GameObjectTypes.PLAYER);
 			movementComponent = new MovementComponent(playerAvatar, cellSize, 1200.0);
 			
 			var spawnPosition:Point = GridPositionHelper.gridToPixelPosition(new Point(10, 10), cellSize);
 			playerAvatar.x = spawnPosition.x;
 			playerAvatar.y = spawnPosition.y;
 			addChild(playerAvatar);
+		}
+		
+		private function initGridSelector():void
+		{
+			gridSelector = new GridSelectorView(gridSize, cellSize);
+			addChildComponent(gridSelector);
 		}
 		
 		private function initMouseListeners():void 
@@ -92,28 +104,13 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function onMouseDown(event:MouseEvent):void 
 		{
-			var gridPosition:Point = GridPositionHelper.pixelToGrid(
-				getInboundPosition(mouseX, mouseY), cellSize
-			);
-				
 			var start:Point = GridPositionHelper.pixelToGrid(new Point(playerAvatar.x, playerAvatar.y), cellSize);
-			moveRequestSignal.dispatch(start, gridPosition);
+			moveRequestSignal.dispatch(start, gridSelector.getSelectedPosition());
 		}
 		
 		private function onMouseMove(event:MouseEvent):void
 		{
-			var inBoundPosition:Point = getInboundPosition(mouseX, mouseY);
-			var gridPosition:Point = GridPositionHelper.pixelToGrid(inBoundPosition, cellSize);
-			highlightCell(gridPosition);
-		}
-		
-		// Fix pixel position to be sure it can be converted to a valid grid point
-		private function getInboundPosition(x:Number, y:Number):Point
-		{
-			var inboundPoint:Point = new Point();
-			inboundPoint.x = Math.min(Math.max(x, 0), width - 1);
-			inboundPoint.y = Math.min(Math.max(y, 0), height - 1);
-			return inboundPoint;
+			gridSelector.selectPixelPosition(mouseX, mouseY);
 		}
 		
 		override protected function destroy():void
@@ -132,29 +129,9 @@ package yagerTest.screens.gameplay.gameplayView
 			addChild(background);
 		}
 		
-		private function initMarker():void
-		{
-			marker = new Sprite();
-			marker.graphics.beginFill(0xffffff, 1.0);
-			marker.graphics.drawCircle(0, 0, cellSize.x/2.0);
-			marker.graphics.endFill();
-			marker.mouseEnabled = false;
-			addChild(marker);
-		}
-		
-		private function highlightCell(gridPosition:Point):void
-		{
-			if (gridPosition.x < gridSize.x && gridPosition.y < gridSize.y)
-			{
-				var snappedPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
-				marker.x = snappedPosition.x;
-				marker.y = snappedPosition.y;
-			}
-		}
-		
 		public function addCoin(gridPosition:Point):void
 		{
-			var coinAvatar:Sprite = ActorsFactory.createAvatarByType(GameObjectTypes.COIN);
+			var coinAvatar:Sprite = GameObjectAvatarFactory.createAvatarByType(GameObjectTypes.COIN);
 			coins.push(coinAvatar);
 			var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
 			coinAvatar.x = pixelPosition.x;

@@ -4,6 +4,7 @@ package
 	import robotlegs.bender.framework.api.IConfig;
 	import robotlegs.bender.framework.api.IContext;
 	import robotlegs.bender.framework.api.IInjector;
+	import yagerTest.model.GameplayModel;
 	import yagerTest.screens.gameplay.GameplayScreenMediator;
 	import yagerTest.screens.gameplay.IGameplayScreen;
 	import yagerTest.screens.gameplay.gameplayView.GameplayViewMediator;
