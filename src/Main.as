@@ -5,6 +5,7 @@ package
 	import flash.events.MouseEvent;
 	import robotlegs.bender.bundles.mvcs.MVCSBundle;
 	import robotlegs.bender.extensions.contextView.ContextView;
+	import robotlegs.bender.extensions.directCommandMap.DirectCommandMapExtension;
 	import robotlegs.bender.framework.api.IInjector;
 	import robotlegs.bender.framework.impl.Context;
 	import yagerTest.screens.ScreenManager;
@@ -39,6 +40,7 @@ package
 		{
 			context = new Context();
 			context.install(MVCSBundle);
+			context.install(DirectCommandMapExtension);
 			context.configure(new YagerConfig());
 			context.configure(new ContextView(this));
 		}

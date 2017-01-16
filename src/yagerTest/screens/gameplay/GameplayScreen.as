@@ -41,10 +41,6 @@ package yagerTest.screens.gameplay
 		
 		private var isPaused:Boolean;
 		
-		private var timeLimit:Number;
-		
-		private var timeLine:GTweenTimeline = new GTweenTimeline();
-		
 		override protected function constructChildren():void
 		{
 			super.constructChildren();
@@ -85,8 +81,8 @@ package yagerTest.screens.gameplay
 		public function initGameplay(gameplayModel:GameplayModel):void 
 		{
 			initGrid(gameplayModel.grid.size);
-			timeLimit = gameplayModel.timeLimit;
-			startTime();
+			gameplayView.startTime(gameplayModel.timeLimit);
+			gameplayView.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME);
 		}
 		
 		private function initGrid(gridSize:Point):void
@@ -94,24 +90,6 @@ package yagerTest.screens.gameplay
 			gameplayView = new GameplayView(gridSize, GameplayConstants.GRID_CELL_SIZE);
 			addChild(gameplayView);
 			AlignDisplayObject.center(gameplayView, getBounds(this));
-		}
-		
-		private function startTime():void
-		{
-			timeLine.duration = timeLimit;
-			timeLine.onComplete = timeComplete;
-			timeLine.onChange = timeChange;
-			timeLine.gotoAndPlay(0);
-		}
-		
-		private function timeComplete(tween:GTween):void
-		{
-			togglePause();
-		}
-		
-		private function timeChange(tween:GTween):void
-		{
-			timeLabel.setValue(timeLimit - tween.position);
 		}
 		
 		public function onExit():void 
@@ -131,7 +109,6 @@ package yagerTest.screens.gameplay
 		
 		override protected function destroy():void
 		{
-			timeLine.paused = true;
 			super.destroy();
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		}
@@ -139,7 +116,6 @@ package yagerTest.screens.gameplay
 		private function pause():void
 		{
 			gameplayView.pause();
-			timeLine.paused = true;
 			pauseMenu.visible = true;
 			pauseMenu.showAnimation();
 		}
@@ -147,7 +123,6 @@ package yagerTest.screens.gameplay
 		private function resume():void
 		{
 			gameplayView.resume();
-			timeLine.paused = false;
 			pauseMenu.visible = false;
 		}
 		

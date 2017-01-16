@@ -59,6 +59,8 @@ package yagerTest.screens.gameplay
 		{
 			viewComponent.initializedSignal.remove(onViewInitialized);
 			view.initGameplay(gameplayModel);
+			//gameplayModel.timeUpdatedSignal;
+			//gameplayModel.scoreUpdatedSignal;
 		}
 	
 	}

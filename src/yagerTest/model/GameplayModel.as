@@ -1,5 +1,6 @@
 package yagerTest.model 
 {
+	import org.osflash.signals.Signal;
 	/**
 	 * ...
 	 * @author gbiskup

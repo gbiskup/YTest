@@ -1,8 +1,9 @@
-package yagerTest.screens.gameplay.gameplayView 
+package yagerTest.screens.gameplay.gameplayView.gridSelection 
 {
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import yagerTest.factories.gameObjects.GameObjectAvatarFactory;
+	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.view.ViewComponent;
 	
 	/**
@@ -16,10 +17,13 @@ package yagerTest.screens.gameplay.gameplayView
 		private var gridSize:Point;
 		private var selectedCell:Point = new Point();
 		
-		public function GridSelectorView(gridSize:Point, cellSize:Point):void
+		private var checkCellAvailability:Function;
+		
+		public function GridSelectorView(gridSize:Point, cellSize:Point, cellAvailabilityFunction:Function = null):void
 		{
 			this.gridSize = gridSize;
 			this.cellSize = cellSize;
+			this.checkCellAvailability = cellAvailabilityFunction;
 		}
 		
 		override protected function init():void
@@ -38,11 +42,15 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			gridPosition.x = Math.min(Math.max(gridPosition.x, 0), gridSize.x - 1);
 			gridPosition.y = Math.min(Math.max(gridPosition.y, 0), gridSize.y - 1);
-			selectedCell.copyFrom(gridPosition);
-
-			var snappedPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
-			pointer.x = snappedPosition.x;
-			pointer.y = snappedPosition.y;
+			
+			if (checkCellAvailability == null || checkCellAvailability(gridPosition))
+			{
+				selectedCell.copyFrom(gridPosition);
+				
+				var snappedPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
+				pointer.x = snappedPosition.x;
+				pointer.y = snappedPosition.y;
+			}
 		}
 		
 		public function selectPixelPosition(mouseX:Number, mouseY:Number):void 

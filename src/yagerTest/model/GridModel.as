@@ -1,12 +1,15 @@
 package yagerTest.model 
 {
 	import flash.geom.Point;
+	import org.osflash.signals.Signal;
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
 	public class GridModel 
 	{
+		private var _gridUpdatedSignal:Signal = new Signal();
+		
 		private var _size:Point;
 		private var objectTypes:Vector.<int>;
 		
@@ -44,6 +47,11 @@ package yagerTest.model
 		public function get height():uint 
 		{
 			return size.y;
+		}
+		
+		public function get gridUpdatedSignal():Signal 
+		{
+			return _gridUpdatedSignal;
 		}
 		
 		public function getRandomCooridnates(targetPoint:Point = null):Point

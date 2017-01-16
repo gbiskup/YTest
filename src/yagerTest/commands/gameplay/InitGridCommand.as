@@ -29,39 +29,9 @@ package yagerTest.commands.gameplay
 				injector.map(GameplayModel).toValue(gameplayModel);
 			}
 			
-			var gridModel:GridModel = new GridModel(GameplayConstants.GRID_SIZE);
-			
-			var objectPosition:Point = GameplayConstants.GRID_SIZE.clone();
-			objectPosition.x /= 2;
-			objectPosition.y /= 2;
-			
-			gridModel.setObjectTypeAt(objectPosition.x, objectPosition.y, GameObjectTypes.PLAYER);
-			
-			var obstaclesNumber:int = 128;
-			while(obstaclesNumber > 0)
-			{
-				gridModel.getRandomCooridnates(objectPosition);
-				if (gridModel.getObjectTypeAt(objectPosition.x, objectPosition.y) == GameObjectTypes.EMPTY)
-				{
-					gridModel.setObjectTypeAt(objectPosition.x, objectPosition.y, GameObjectTypes.OBSTACLE);
-					obstaclesNumber--;
-				}
-			}
-			
-			var coinsNumber:int = 3;
-			while (coinsNumber > 0)
-			{
-				if (gridModel.getObjectTypeAt(objectPosition.x, objectPosition.y) == GameObjectTypes.EMPTY)
-				{
-					gridModel.setObjectTypeAt(objectPosition.x, objectPosition.y, GameObjectTypes.COIN);
-					coinsNumber--;
-				}
-				gridModel.getRandomCooridnates(objectPosition);
-			}
-			
 			gameplayModel.setScore(0);
 			gameplayModel.setTimeLimit(GameplayConstants.TIME_LIMIT);
-			gameplayModel.setGrid(gridModel);
+			gameplayModel.setGrid(new GridModel(GameplayConstants.GRID_SIZE));
 		}
 		
 	}

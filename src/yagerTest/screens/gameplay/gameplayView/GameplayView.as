@@ -1,5 +1,7 @@
 package yagerTest.screens.gameplay.gameplayView 
 {
+	import com.gskinner.motion.GTween;
+	import com.gskinner.motion.GTweenTimeline;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -10,6 +12,7 @@ package yagerTest.screens.gameplay.gameplayView
 	import yagerTest.model.GridModel;
 	import yagerTest.screens.gameplay.gameplayView.actors.MovementComponent;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
+	import yagerTest.screens.gameplay.gameplayView.gridSelection.GridSelectorView;
 	import yagerTest.view.ViewComponent;
 	
 	/**
@@ -18,17 +21,27 @@ package yagerTest.screens.gameplay.gameplayView
 	 */
 	public class GameplayView extends ViewComponent implements IGameplayView
 	{
+		private static const RESPAWN_COINS_TIMELINE_LABEL:String = "respawn_coins";
+		
+		private var _moveRequestSignal:Signal = new Signal(Point, Point);
+
+		private var _gameActionRequestSignal:Signal = new Signal(String);
+		
 		private var cellSize:Point;
+
 		private var gridSize:Point;
 		
 		private var playerAvatar:Sprite;
-		private var _moveRequestSignal:Signal = new Signal(Point, Point);
-		
+	
 		private var movementComponent:MovementComponent;
 		
 		private var coins:Vector.<Sprite> = new Vector.<Sprite>();
 		
 		private var gridSelector:GridSelectorView;
+		
+		private var timeLine:GTweenTimeline = new GTweenTimeline();
+		
+		private var gridModel:GridModel;
 		
 		public function GameplayView(gridSize:Point, cellSize:Point)
 		{
@@ -44,6 +57,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		public function pause():void 
 		{
+			timeLine.paused = true;
 			movementComponent.pause();
 			removeMouseListeners();
 			visible = false;
@@ -52,13 +66,18 @@ package yagerTest.screens.gameplay.gameplayView
 		public function resume():void 
 		{
 			movementComponent.resume();
-			initMouseListeners();
+			addMouseListeners();
 			visible = true;
 		}
 		
 		public function get moveRequestSignal():Signal 
 		{
 			return _moveRequestSignal;
+		}
+		
+		public function get gameActionRequestSignal():Signal 
+		{
+			return _gameActionRequestSignal;
 		}
 		
 		override protected function constructChildren():void
@@ -71,16 +90,21 @@ package yagerTest.screens.gameplay.gameplayView
 		override protected function init():void
 		{
 			super.init();
-			initMouseListeners();
+			addMouseListeners();
 		}
 		
 		private function initGridSelector():void
 		{
-			gridSelector = new GridSelectorView(gridSize, cellSize);
+			gridSelector = new GridSelectorView(gridSize, cellSize, checkGridPosition);
 			addChildComponent(gridSelector);
 		}
 		
-		private function initMouseListeners():void 
+		private function checkGridPosition(position:Point):Boolean
+		{
+			return gridModel && gridModel.getObjectTypeAt(position.x, position.y) != GameObjectTypes.OBSTACLE;
+		}
+		
+		private function addMouseListeners():void 
 		{
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
@@ -105,7 +129,6 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		override protected function destroy():void
 		{
-			removeMouseListeners();
 			pause();
 			super.destroy();
 		}
@@ -121,6 +144,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		public function showGrid(grid:GridModel, filter:Array = null):void 
 		{
+			gridModel = grid;
 			var currentPosition:Point = new Point();
 			for (var y:int = 0; y < grid.height; y++)
 			{
@@ -163,6 +187,47 @@ package yagerTest.screens.gameplay.gameplayView
 				playerAvatar = avatar;
 				movementComponent = new MovementComponent(playerAvatar, cellSize, GameplayConstants.PLAYER_SPEED);
 			}
+		}
+		
+		public function startTime(timeLimit:Number):void
+		{
+			timeLine.duration = timeLimit;
+			timeLine.onComplete = timeComplete;
+			timeLine.onChange = timeChange;
+			timeLine.gotoAndPlay(0);
+		}
+		
+		
+		public function removeAllCoins():void 
+		{
+			for (var i:int = coins.length - 1; i >= 0; i--)
+			{
+				removeChild(coins[i]);
+			}
+			coins.length = 0;
+		}
+		
+		
+		public function setCoinsRespawnTime(coinsRespawnTime:Number):void 
+		{
+			timeLine.removeCallback(RESPAWN_COINS_TIMELINE_LABEL);
+			timeLine.addLabel(timeLine.position + coinsRespawnTime, RESPAWN_COINS_TIMELINE_LABEL);
+			timeLine.addCallback(RESPAWN_COINS_TIMELINE_LABEL, spawnCoinsCallback);			
+		}
+		
+		private function timeComplete(tween:GTween):void
+		{
+			gameActionRequestSignal.dispatch(GameplayActions.GAME_OVER);
+		}
+		
+		private function spawnCoinsCallback():void
+		{
+			gameActionRequestSignal.dispatch(GameplayActions.SPAWN_COINS);
+		}
+		
+		private function timeChange(tween:GTween):void
+		{
+			//timeLabel.setValue(timeLimit - tween.position);
 		}
 	}
 

@@ -13,11 +13,17 @@ package yagerTest.screens.gameplay.gameplayView
 	public interface IGameplayView extends IViewComponent
 	{
 		function get moveRequestSignal():Signal;
+		function get gameActionRequestSignal():Signal;
 		function movePlayer(path:Vector.<Point>):void;
 		function pause():void;
 		function resume():void;
 	
 		function showGrid(grid:GridModel, filters:Array = null):void;
+		function startTime(timeLimit:Number):void;
+		
+		function removeAllCoins():void;
+		
+		function setCoinsRespawnTime(coinsRespawnTime:Number):void;
 	}
 	
 }
