@@ -24,8 +24,10 @@ package yagerTest.screens.gameplay.gameplayView
 		function startTime(timeLimit:Number):void;
 		
 		function removeAllCoins():void;
+		function removeCoin(gridPosition:Point):void;
 		
 		function setCoinsRespawnTime(coinsRespawnTime:Number):void;
+		
 	}
 	
 }

@@ -55,10 +55,6 @@ package yagerTest.screens
 			{
 				showScreen(screenQueue.shift());
 			}
-			else
-			{
-				
-			}
 		}
 	
 		private function onScreenExit(event:ScreenEvent):void

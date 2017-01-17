@@ -10,9 +10,11 @@ package yagerTest.screens.gameplay.gameplayView
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GridModel;
+	import yagerTest.screens.gameplay.gameplayView.actors.GameObject;
 	import yagerTest.screens.gameplay.gameplayView.actors.MovementComponent;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.screens.gameplay.gameplayView.gridSelection.GridSelectorView;
+	import yagerTest.view.AlignDisplayObject;
 	import yagerTest.view.ViewComponent;
 	
 	/**
@@ -33,11 +35,11 @@ package yagerTest.screens.gameplay.gameplayView
 
 		private var gridSize:Point;
 		
-		private var playerAvatar:Sprite;
+		private var player:GameObject;
 	
 		private var movementComponent:MovementComponent;
 		
-		private var coins:Vector.<Sprite> = new Vector.<Sprite>();
+		private var coins:Vector.<GameObject> = new Vector.<GameObject>();
 		
 		private var gridSelector:GridSelectorView;
 		
@@ -156,27 +158,26 @@ package yagerTest.screens.gameplay.gameplayView
 			if (objectType != GameObjectTypes.EMPTY)
 			{
 				var avatar:Sprite = GameObjectAvatarFactory.createAvatarByType(objectType);
-				var pixelPosition:Point = GridPositionHelper.gridToPixelPosition(gridPosition, cellSize);
-				avatar.x = pixelPosition.x;
-				avatar.y = pixelPosition.y;
+				AlignDisplayObject.customAlign(avatar, GridPositionHelper.gridToPixelPosition, gridPosition, cellSize);
+				var gameObject:GameObject = new GameObject(gridPosition.clone(), avatar);
 				addChild(avatar);
 				if (objectType == GameObjectTypes.COIN)
 				{
-					coins.push(avatar);
+					coins.push(gameObject);
 				}
 				if (objectType == GameObjectTypes.PLAYER)
 				{
-					initPlayer(avatar);
+					initPlayer(gameObject);
 				}
 			}
 		}
 		
-		private function initPlayer(avatar:Sprite):void
+		private function initPlayer(gameObject:GameObject):void
 		{
-			if (!playerAvatar)
+			if (!this.player)
 			{
-				playerAvatar = avatar;
-				movementComponent = new MovementComponent(playerAvatar, cellSize, GameplayConstants.PLAYER_SPEED);
+				this.player = gameObject;
+				movementComponent = new MovementComponent(player.avatar, cellSize, GameplayConstants.PLAYER_SPEED);
 			}
 		}
 		
@@ -193,11 +194,10 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			for (var i:int = coins.length - 1; i >= 0; i--)
 			{
-				removeChild(coins[i]);
+				removeChild(coins[i].avatar);
 			}
 			coins.length = 0;
 		}
-		
 		
 		public function setCoinsRespawnTime(coinsRespawnTime:Number):void 
 		{
@@ -218,13 +218,32 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		public function getPlayerGridPosition():Point
 		{
-			return GridPositionHelper.pixelToGrid(new Point(playerAvatar.x, playerAvatar.y), cellSize);
+			return player.gridPosition;
+		}
+		
+		public function removeCoin(gridPosition:Point):void 
+		{
+			for (var i:int = coins.length - 1; i >= 0; i--)
+			{
+				if (coins[i].gridPosition.equals(gridPosition))
+				{
+					removeChild(coins[i].avatar);
+					coins.splice(i, 1);
+				}
+			}
 		}
 		
 		private function timeChange(tween:GTween):void
 		{
+			updatePlayer();
 			timeUpdatedSignal.dispatch();
 			//timeLabel.setValue(timeLimit - tween.position);
+		}
+		
+		private function updatePlayer():void
+		{
+			var pixelPosition:Point = new Point(player.avatar.x, player.avatar.y)
+			player.gridPosition = GridPositionHelper.pixelToGrid(pixelPosition, cellSize);
 		}
 		
 		public function get moveRequestSignal():Signal 

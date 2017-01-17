@@ -9,6 +9,8 @@ package yagerTest.screens.gameplay.gameplayView
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GameplayModel;
+	import yagerTest.utilities.IPathFinder;
+	import yagerTest.utilities.Pathfinder;
 	import yagerTest.view.IViewComponent;
 	
 	/**
@@ -25,6 +27,9 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		[Inject]
 		public var commandMap:IDirectCommandMap;
+		
+		[Inject]
+		public var pathFinder:IPathFinder;
 		
 		override public function initialize():void
 		{
@@ -48,8 +53,8 @@ package yagerTest.screens.gameplay.gameplayView
 			{
 				view.removeAllCoins();
 				view.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME);
+				view.showGrid(gameplayModel.grid, [objectType]);
 			}
-			view.showGrid(gameplayModel.grid, [objectType]);
 		}
 		
 		private function onTimeUpdate():void
@@ -57,14 +62,10 @@ package yagerTest.screens.gameplay.gameplayView
 			var playerPosition:Point = view.getPlayerGridPosition();
 			if (gameplayModel.grid.getObjectTypeAt(playerPosition.x, playerPosition.y) == GameObjectTypes.COIN)
 			{
+				view.removeCoin(playerPosition);
 				var refreshGrid:Boolean = true;
 			}
 			gameplayModel.setPlayerPosition(view.getPlayerGridPosition());
-			if (refreshGrid)
-			{
-				view.removeAllCoins();
-				view.showGrid(gameplayModel.grid, [GameObjectTypes.COIN]);
-			}
 		}
 		
 		override public function destroy():void
@@ -87,27 +88,11 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function onMoveRequest(destination:Point):void
 		{
-			var start:Point = gameplayModel.playerPosition;
-			var path:Vector.<Point> = new Vector.<Point>();
-			var moveVector:Point = destination.subtract(start);
-			var direction:int = moveVector.x > 0 ? 1 : -1;
-			var wayPoint:Point = start.clone();
-			
-			var lenght:int = Math.abs(moveVector.x);
-			
-			for (var x:int = 1; x <= lenght; x++)
+			if (!destination.equals(gameplayModel.playerPosition))
 			{
-				wayPoint.x = start.x + x * direction;
-				path.push(wayPoint.clone());
+				var waypoints:Vector.<Point> = pathFinder.findPathWaypoints(view.getPlayerGridPosition(), destination);
+				view.movePlayer(waypoints);
 			}
-			lenght = Math.abs(moveVector.y);
-			direction = moveVector.y > 0 ? 1 : -1;
-			for (var y:int = 1; y <= lenght; y++)
-			{
-				wayPoint.y = start.y + direction * y;
-				path.push(wayPoint.clone());
-			}
-			view.movePlayer(path);
 		}
 	}
 

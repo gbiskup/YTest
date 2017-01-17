@@ -6,7 +6,7 @@ package yagerTest.model
 	 * ...
 	 * @author gbiskup
 	 */
-	public class GridModel 
+	public class GridModel
 	{
 		private var _gridUpdatedSignal:Signal = new Signal();
 		
@@ -77,5 +77,4 @@ package yagerTest.model
 		}
 		
 	}
-
 }

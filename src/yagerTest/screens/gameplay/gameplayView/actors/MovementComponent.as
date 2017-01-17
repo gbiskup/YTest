@@ -28,8 +28,11 @@ package yagerTest.screens.gameplay.gameplayView.actors
 		
 		public function followPath(path:Vector.<Point>):void
 		{
-			currentPath = path;
-			moveToNextPoint();
+			if (path)
+			{
+				currentPath = path;
+				moveToNextPoint();
+			}
 		}
 		
 		public function pause():void 

@@ -14,6 +14,7 @@ package yagerTest.commands.gameplay
 		override public function prepare():void
 		{
 			add(DestroyGridCommand);
+			add(DestroyPathFinderCommand);
 			add(ShowScreenCommand).withPayloads(
 				new SubCommandPayload(new MainMenuScreen(), BasicScreen)
 			);

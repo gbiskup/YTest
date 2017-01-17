@@ -4,11 +4,12 @@ package yagerTest.view
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
-	public class AlignDisplayObject 
+	public class AlignDisplayObject
 	{
 		public static function center(displayObject:DisplayObject, bounds:Rectangle):void
 		{
@@ -34,6 +35,18 @@ package yagerTest.view
 		static public function rightTop(displayObject:DisplayObject, bounds:Rectangle, offset:Point = null):void 
 		{
 			align(displayObject, AlignAnchors.RIGHT_TOP, bounds, AlignAnchors.RIGHT_TOP, offset);
+		}
+		
+		static public function alignToGrid(displayObject:DisplayObject, gridSize:Point, cellSize:Point):void
+		{
+			customAlign(displayObject, GridPositionHelper.gridToPixelPosition, gridSize, cellSize);
+		}
+		
+		static public function customAlign(displayObject:DisplayObject, alignFunction:Function, ... args):void
+		{
+			var pixelPosition:Point = alignFunction.apply(null, args);
+			displayObject.x = pixelPosition.x;
+			displayObject.y = pixelPosition.y;
 		}
 	}
 
