@@ -37,6 +37,7 @@ package yagerTest.screens.gameplay.gameplayView
 			view.initializedSignal.remove(onViewInitialized);
 			view.showGrid(gameplayModel.grid);
 			view.moveRequestSignal.add(onMoveRequest);
+			view.timeUpdatedSignal.add(onTimeUpdate);
 			view.gameActionRequestSignal.add(onGameplayActionRequest);
 			gameplayModel.grid.gridUpdatedSignal.add(onGridUpdated);
 		}
@@ -49,6 +50,21 @@ package yagerTest.screens.gameplay.gameplayView
 				view.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME);
 			}
 			view.showGrid(gameplayModel.grid, [objectType]);
+		}
+		
+		private function onTimeUpdate():void
+		{
+			var playerPosition:Point = view.getPlayerGridPosition();
+			if (gameplayModel.grid.getObjectTypeAt(playerPosition.x, playerPosition.y) == GameObjectTypes.COIN)
+			{
+				var refreshGrid:Boolean = true;
+			}
+			gameplayModel.setPlayerPosition(view.getPlayerGridPosition());
+			if (refreshGrid)
+			{
+				view.removeAllCoins();
+				view.showGrid(gameplayModel.grid, [GameObjectTypes.COIN]);
+			}
 		}
 		
 		override public function destroy():void
@@ -69,8 +85,9 @@ package yagerTest.screens.gameplay.gameplayView
 			}
 		}
 		
-		private function onMoveRequest(start:Point, destination:Point):void
+		private function onMoveRequest(destination:Point):void
 		{
+			var start:Point = gameplayModel.playerPosition;
 			var path:Vector.<Point> = new Vector.<Point>();
 			var moveVector:Point = destination.subtract(start);
 			var direction:int = moveVector.x > 0 ? 1 : -1;

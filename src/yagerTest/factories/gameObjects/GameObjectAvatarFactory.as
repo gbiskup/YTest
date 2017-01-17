@@ -26,7 +26,6 @@ package yagerTest.factories.gameObjects
 			sprite.graphics.beginFill(color);
 			sprite.graphics.drawRect( -size / 2, -size / 2, size, size);
 			sprite.graphics.endFill();
-			//sprite.filters = [new GlowFilter(color, 1.0, 8, 8)];
 			return sprite;
 		}
 
@@ -42,7 +41,7 @@ package yagerTest.factories.gameObjects
 					
 				default:
 				case GameObjectTypes.OBSTACLE:
-					avatar = createSquareAvatar(0xffffff, GameplayConstants.GRID_CELL_SIZE.x);
+					avatar = createSquareAvatar(0xcc7777, GameplayConstants.GRID_CELL_SIZE.x);
 					break;
 					
 				case GameObjectTypes.PLAYER:

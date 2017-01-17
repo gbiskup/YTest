@@ -16,7 +16,7 @@ package
 	 * ...
 	 * @author gbiskup
 	 */
-	public class YagerConfig implements IConfig 
+	public class ApplicationConfig implements IConfig 
 	{
 		[Inject]
 		public var mediatorMap:IMediatorMap;

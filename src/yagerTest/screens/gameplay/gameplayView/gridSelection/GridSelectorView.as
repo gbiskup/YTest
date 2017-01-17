@@ -34,7 +34,13 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 		
 		private function initPointer():void
 		{
-			pointer = GameObjectAvatarFactory.createCircleAvatar(0xffffff, cellSize.x / 2);
+			pointer = new Sprite();
+			//pointer.graphics.beginFill(color);
+			pointer.graphics.lineStyle(2, 0xffffff);
+			pointer.graphics.drawRoundRect(-cellSize.x/2, -cellSize.y/2, cellSize.x, cellSize.y, 4, 4);
+			//pointer.graphics.drawCircle( 0, 0, radius);
+			//pointer.graphics.endFill();
+			
 			addChild(pointer);
 		}
 		

@@ -14,6 +14,8 @@ package yagerTest.screens.gameplay.gameplayView
 	{
 		function get moveRequestSignal():Signal;
 		function get gameActionRequestSignal():Signal;
+		function get timeUpdatedSignal():Signal;
+		function getPlayerGridPosition():Point;
 		function movePlayer(path:Vector.<Point>):void;
 		function pause():void;
 		function resume():void;

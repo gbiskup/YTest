@@ -23,7 +23,9 @@ package yagerTest.screens.gameplay.gameplayView
 	{
 		private static const RESPAWN_COINS_TIMELINE_LABEL:String = "respawn_coins";
 		
-		private var _moveRequestSignal:Signal = new Signal(Point, Point);
+		private var _moveRequestSignal:Signal = new Signal(Point);
+		
+		private var _timeUpdatedSignal:Signal = new Signal();
 
 		private var _gameActionRequestSignal:Signal = new Signal(String);
 		
@@ -70,16 +72,6 @@ package yagerTest.screens.gameplay.gameplayView
 			visible = true;
 		}
 		
-		public function get moveRequestSignal():Signal 
-		{
-			return _moveRequestSignal;
-		}
-		
-		public function get gameActionRequestSignal():Signal 
-		{
-			return _gameActionRequestSignal;
-		}
-		
 		override protected function constructChildren():void
 		{
 			super.constructChildren();
@@ -118,8 +110,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function onMouseDown(event:MouseEvent):void 
 		{
-			var start:Point = GridPositionHelper.pixelToGrid(new Point(playerAvatar.x, playerAvatar.y), cellSize);
-			moveRequestSignal.dispatch(start, gridSelector.getSelectedPosition());
+			moveRequestSignal.dispatch(gridSelector.getSelectedPosition());
 		}
 		
 		private function onMouseMove(event:MouseEvent):void
@@ -225,9 +216,30 @@ package yagerTest.screens.gameplay.gameplayView
 			gameActionRequestSignal.dispatch(GameplayActions.SPAWN_COINS);
 		}
 		
+		public function getPlayerGridPosition():Point
+		{
+			return GridPositionHelper.pixelToGrid(new Point(playerAvatar.x, playerAvatar.y), cellSize);
+		}
+		
 		private function timeChange(tween:GTween):void
 		{
+			timeUpdatedSignal.dispatch();
 			//timeLabel.setValue(timeLimit - tween.position);
+		}
+		
+		public function get moveRequestSignal():Signal 
+		{
+			return _moveRequestSignal;
+		}
+		
+		public function get gameActionRequestSignal():Signal 
+		{
+			return _gameActionRequestSignal;
+		}
+		
+		public function get timeUpdatedSignal():Signal 
+		{
+			return _timeUpdatedSignal;
 		}
 	}
 
