@@ -10,7 +10,6 @@ package yagerTest.screens.gameplay.gameplayView
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GameplayModel;
 	import yagerTest.pathFinding.IPathFinder;
-	import yagerTest.pathFinding.Pathfinder;
 	import yagerTest.view.basicViewComponent.IViewComponent;
 	
 	/**
@@ -60,8 +59,10 @@ package yagerTest.screens.gameplay.gameplayView
 		private function onTimeUpdate():void
 		{
 			var playerPosition:Point = view.getPlayerGridPosition();
+			// Check if there is a coin at player's position
 			if (gameplayModel.grid.getObjectTypeAt(playerPosition.x, playerPosition.y) == GameObjectTypes.COIN)
 			{
+				//Pick a coin
 				gameplayModel.setScore(gameplayModel.score + 1);
 				view.removeCoin(playerPosition);
 			}
@@ -82,7 +83,7 @@ package yagerTest.screens.gameplay.gameplayView
 			if (action == GameplayActions.SPAWN_COINS)
 			{
 				gameplayModel.grid.replaceTypes(GameObjectTypes.COIN, GameObjectTypes.EMPTY);
-				var spawnPayload:SpawnObjectsPayload = new SpawnObjectsPayload(GameObjectTypes.COIN, new Vector.<Point>(GameplayConstants.COINS_LIMIT));
+				var spawnPayload:SpawnObjectsPayload = new SpawnObjectsPayload(GameObjectTypes.COIN, GameplayConstants.COINS_LIMIT);
 				commandMap.map(SpawnObjectsCommand).execute(new CommandPayload([spawnPayload], [SpawnObjectsPayload]));
 			}
 		}

@@ -45,6 +45,7 @@ package yagerTest.factories.uiComponents
 			button.filters = [new GlowFilter(0xffaaaa, 0.5, 4, 4, 2, 3, true), new GlowFilter(0xffaaaa, 0.5, 4, 4, 2, 3)];
 			button.useHandCursor = true;
 			button.buttonMode = true;
+			button.tabEnabled = false;
 			return button;
 		}
 	}

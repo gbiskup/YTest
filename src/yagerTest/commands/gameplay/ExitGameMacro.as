@@ -2,6 +2,7 @@ package yagerTest.commands.gameplay
 {
 	import eu.alebianco.robotlegs.utils.impl.SequenceMacro;
 	import eu.alebianco.robotlegs.utils.impl.SubCommandPayload;
+	import yagerTest.commands.ShowScreenCommand;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.screens.mainMenu.MainMenuScreen;
 	
@@ -22,4 +23,4 @@ package yagerTest.commands.gameplay
 	}
 
 }
-import yagerTest.commands.ShowScreenCommand;
+

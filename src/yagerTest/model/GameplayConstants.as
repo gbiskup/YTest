@@ -11,7 +11,7 @@ package yagerTest.model
 		public static const COINS_LIMIT:uint = 3;
 		public static const COINS_RESPAWN_TIME:Number = 12.0;
 		
-		public static const TIME_LIMIT:Number = 120.0;
+		public static const TIME_LIMIT:Number = 3;//120.0;
 		static public const PLAYER_SPEED:Number = 500;;
 		
 		public static const OBSTACLES_LIMIT:uint = 128;

@@ -8,6 +8,7 @@ package yagerTest.view.uiComponents.button
 	public interface IMyButton
 	{
 		function setCallback(callback:Function):void;
+		function set enabled(isEnabled:Boolean):void;
 	}
 	
 }

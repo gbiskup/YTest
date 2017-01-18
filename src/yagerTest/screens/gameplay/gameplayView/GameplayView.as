@@ -11,19 +11,20 @@ package yagerTest.screens.gameplay.gameplayView
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GridModel;
 	import yagerTest.model.Size;
+	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.screens.gameplay.gameplayView.actors.GameObject;
 	import yagerTest.screens.gameplay.gameplayView.actors.MovementComponent;
-	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.screens.gameplay.gameplayView.gridSelection.GridSelectorView;
-	import yagerTest.view.utilities.AlignDisplayObject;
 	import yagerTest.view.basicViewComponent.ViewComponent;
+	import yagerTest.view.utilities.AlignDisplayObject;
 	
 	/**
-	 * ...
+	 * Main gameplay view. Shows output and handles interactions.
 	 * @author gbiskup
 	 */
 	public class GameplayView extends ViewComponent implements IGameplayView
 	{
+		// Used to schedule coin spawns on timeline
 		private static const RESPAWN_COINS_TIMELINE_LABEL:String = "respawn_coins";
 		
 		private var _moveRequestSignal:Signal = new Signal(Point);
@@ -38,14 +39,18 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private var player:GameObject;
 	
+		// Handles player movements
 		private var movementComponent:MovementComponent;
 		
 		private var coins:Vector.<GameObject> = new Vector.<GameObject>();
 		
+		// Converts mouse position to grid position and stores selected tile.
 		private var gridSelector:GridSelectorView;
 		
+		// Handles game time flow
 		private var timeLine:GTweenTimeline = new GTweenTimeline();
 		
+		// Provides level definition
 		private var gridModel:GridModel;
 		
 		public function GameplayView(gridSize:Size, cellSize:Point)
@@ -55,6 +60,9 @@ package yagerTest.screens.gameplay.gameplayView
 			this.cellSize = cellSize.clone();
 		}
 		
+		/**
+		 * Move player through all grid waypoints from the given vector with constant speed.
+		 */
 		public function movePlayer(path:Vector.<Point>):void 
 		{
 			movementComponent.followPath(path);
@@ -70,6 +78,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		public function resume():void 
 		{
+			timeLine.paused = false;
 			movementComponent.resume();
 			addMouseListeners();
 			visible = true;
@@ -90,11 +99,11 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function initGridSelector():void
 		{
-			gridSelector = new GridSelectorView(gridSize, cellSize, checkGridPosition);
+			gridSelector = new GridSelectorView(gridSize, cellSize, isGridPositionWalkable);
 			addChildComponent(gridSelector);
 		}
 		
-		private function checkGridPosition(position:Point):Boolean
+		private function isGridPositionWalkable(position:Point):Boolean
 		{
 			return gridModel && gridModel.getObjectTypeAt(position.x, position.y) != GameObjectTypes.OBSTACLE;
 		}
@@ -118,7 +127,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function onMouseMove(event:MouseEvent):void
 		{
-			gridSelector.selectPixelPosition(mouseX, mouseY);
+			gridSelector.selectTileAtPixelPosition(mouseX, mouseY);
 		}
 		
 		override protected function destroy():void
@@ -136,6 +145,9 @@ package yagerTest.screens.gameplay.gameplayView
 			addChild(background);
 		}
 		
+		/**
+		 * Draws all game objects from the grid. Optionally only draws objects with type present in filter array.
+		 */
 		public function showGrid(grid:GridModel, filter:Array = null):void 
 		{
 			gridModel = grid;
@@ -154,6 +166,9 @@ package yagerTest.screens.gameplay.gameplayView
 			}
 		}
 		
+		/**
+		 * Creates game objects avatars and adds them to the view. Saves references to coins and player.
+		 */
 		private function addGameObject(gridPosition:Point, objectType:int):void
 		{
 			if (objectType != GameObjectTypes.EMPTY)
@@ -190,7 +205,9 @@ package yagerTest.screens.gameplay.gameplayView
 			timeLine.gotoAndPlay(0);
 		}
 		
-		
+		/**
+		 * Draws all game objects from the grid. Optionally only draws objects with type present in filter array.
+		 */
 		public function removeAllCoins():void 
 		{
 			for (var i:int = coins.length - 1; i >= 0; i--)
@@ -200,6 +217,9 @@ package yagerTest.screens.gameplay.gameplayView
 			coins.length = 0;
 		}
 		
+		/**
+		 * Schedules next coins respawn request in coinstRespawnTime seconds.
+		 */
 		public function setCoinsRespawnTime(coinsRespawnTime:Number):void 
 		{
 			timeLine.removeCallback(RESPAWN_COINS_TIMELINE_LABEL);
@@ -222,6 +242,9 @@ package yagerTest.screens.gameplay.gameplayView
 			return player.gridPosition;
 		}
 		
+		/**
+		 * Removes a coin at given grid position.
+		 */
 		public function removeCoin(gridPosition:Point):void 
 		{
 			for (var i:int = coins.length - 1; i >= 0; i--)
@@ -234,7 +257,9 @@ package yagerTest.screens.gameplay.gameplayView
 			}
 		}
 		
-		
+		/**
+		 * Returns seconds of gameplay since the game started.
+		 */
 		public function getElapsedSeconds():Number 
 		{
 			return timeLine.position;
@@ -242,26 +267,35 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private function timeChange(tween:GTween):void
 		{
-			updatePlayer();
+			updatePlayerPosition();
 			timeUpdatedSignal.dispatch();
 		}
 		
-		private function updatePlayer():void
+		private function updatePlayerPosition():void
 		{
 			var pixelPosition:Point = new Point(player.avatar.x, player.avatar.y)
 			player.gridPosition = GridPositionHelper.pixelToGrid(pixelPosition, cellSize);
 		}
 		
+		/**
+		 * Dispatches move requests when user clicks on free tile. Target grid position as a parameter.
+		 */
 		public function get moveRequestSignal():Signal 
 		{
 			return _moveRequestSignal;
 		}
 		
+		/**
+		 * Requests game actions defined in GameplayAction class.
+		 */
 		public function get gameActionRequestSignal():Signal 
 		{
 			return _gameActionRequestSignal;
 		}
 		
+		/**
+		 * Signal dispatched on every time change (every frame). Calls listeners with no parameters.
+		 */
 		public function get timeUpdatedSignal():Signal 
 		{
 			return _timeUpdatedSignal;

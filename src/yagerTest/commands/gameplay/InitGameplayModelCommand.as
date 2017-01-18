@@ -21,6 +21,7 @@ package yagerTest.commands.gameplay
 			if (injector.hasMapping(GameplayModel))
 			{
 				gameplayModel = injector.getInstance(GameplayModel);
+				gameplayModel.reset();
 			}
 			else
 			{

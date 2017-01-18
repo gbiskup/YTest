@@ -16,6 +16,7 @@ package yagerTest.screens
 		public function BasicScreen() 
 		{
 			super();
+			focusRect = false;
 		}
 		
 		override protected function constructChildren():void

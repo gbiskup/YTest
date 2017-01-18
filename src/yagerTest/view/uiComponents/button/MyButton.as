@@ -32,6 +32,12 @@ package yagerTest.view.uiComponents.button
 			}
 		}
 		
+		override public function set enabled(isEnabled:Boolean):void
+		{
+			super.enabled = isEnabled;
+			buttonMode = isEnabled;
+		}
+		
 	}
 
 }

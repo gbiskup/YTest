@@ -1,13 +1,17 @@
 package yagerTest.screens.gameplay.gameplayView 
 {
 	import flash.geom.Point;
+	
 	/**
-	 * ...
+	 * Provides static interface for conversions between pixel and grid coordinates.
 	 * @author gbiskup
 	 */
 	public class GridPositionHelper 
 	{
 		
+		/**
+		 * Returns pixel position snapped to the nearest grid cell center.
+		 */
 		public static function snapPosition(pixelPosition:Point, gridCellWidth:Number, gridCellSize:Point):Point
 		{
 			var gridPosition:Point = pixelToGrid(pixelPosition, gridCellSize);

@@ -9,19 +9,23 @@ package yagerTest.screens.gameplay
 	import yagerTest.model.GameplayModel;
 	import yagerTest.model.Size;
 	import yagerTest.screens.BasicScreen;
+	import yagerTest.screens.gameplay.gameplayView.GameplayActions;
 	import yagerTest.screens.gameplay.gameplayView.GameplayView;
 	import yagerTest.screens.gameplay.hud.HudView;
 	import yagerTest.screens.mainMenu.UserActions;
 	import yagerTest.signals.StringSignal;
+	import yagerTest.view.uiComponents.button.MyButton;
 	import yagerTest.view.uiComponents.menu.MyVerticalMenu;
 	import yagerTest.view.utilities.AlignDisplayObject;
 	
 	/**
-	 * ...
+	 * Main game screen. Holds gameplay view (where the actual game takes place). Handles gameplay menu and creates gameplay UI.
 	 * @author gbiskup
 	 */
 	public class GameplayScreen extends BasicScreen implements IGameplayScreen
 	{
+		private static const RESUME_BUTTON_NAME:String = "resume";
+		
 		private var _userActionSignal:Signal = new StringSignal();
 	
 		private var gameplayView:GameplayView;
@@ -42,14 +46,32 @@ package yagerTest.screens.gameplay
 		override protected function init():void
 		{
 			super.init();
+			stage.focus = this;
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		}
 
+		override protected function destroy():void
+		{
+			gameplayView.gameActionRequestSignal.remove(onGameActionRequest);
+			super.destroy();
+			stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+		}
+		
+		private function onGameActionRequest(actionType:String):void
+		{
+			if (actionType == GameplayActions.GAME_OVER)
+			{
+				var button:MyButton = pauseMenu.getButtonById(RESUME_BUTTON_NAME);
+				button.enabled = false;
+				pause();
+			}
+		}
+		
 		private function initMenu():void
 		{
 			pauseMenu = MenuFactory.craeteVerticalMenu();
 			addChild(pauseMenu);
-			pauseMenu.addButton(ButtonFactory.createTextButton("Resume", onResume));
+			pauseMenu.addButton(ButtonFactory.createTextButton("Resume", onResume), RESUME_BUTTON_NAME);
 			pauseMenu.addButton(ButtonFactory.createTextButton("Restart", onRestart));
 			pauseMenu.addButton(ButtonFactory.createTextButton("Exit", onExit));
 			AlignDisplayObject.center(pauseMenu, getBounds(this));
@@ -65,6 +87,7 @@ package yagerTest.screens.gameplay
 		public function initGameplay(gameplayModel:GameplayModel):void 
 		{
 			initGrid(gameplayModel.grid.size);
+			gameplayView.gameActionRequestSignal.add(onGameActionRequest);
 			gameplayView.startTime(gameplayModel.timeLimit);
 			gameplayView.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME);
 		}
@@ -89,12 +112,6 @@ package yagerTest.screens.gameplay
 		public function onRestart():void
 		{
 			userActionSignal.dispatch(UserActions.RESTART_GAME);
-		}
-		
-		override protected function destroy():void
-		{
-			super.destroy();
-			stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		}
 		
 		private function pause():void

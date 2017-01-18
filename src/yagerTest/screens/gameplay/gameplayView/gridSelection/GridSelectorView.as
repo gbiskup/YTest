@@ -8,7 +8,7 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 	import yagerTest.view.basicViewComponent.ViewComponent;
 	
 	/**
-	 * ...
+	 * Shows selected tile in the grid.
 	 * @author gbiskup
 	 */
 	public class GridSelectorView extends ViewComponent 
@@ -20,6 +20,11 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 		
 		private var checkCellAvailability:Function;
 		
+		/**
+		 * @param gridSize Grid dimmensions
+		 * @param cellSize Size of a single grid cell in pixels
+		 * @param cellAvailabilityFunction Function telling if given tile can be selected. If not given, all tiles are selectable. Expected signature: (gridPosition:Point):Boolean 
+		 */
 		public function GridSelectorView(gridSize:Size, cellSize:Point, cellAvailabilityFunction:Function = null):void
 		{
 			this.gridSize = gridSize.clone();
@@ -31,6 +36,12 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 		{
 			super.init();
 			initPointer();
+		}
+		
+		override protected function destroy():void
+		{
+			checkCellAvailability = null;
+			super.destroy();
 		}
 		
 		private function initPointer():void
@@ -57,7 +68,10 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 			}
 		}
 		
-		public function selectPixelPosition(mouseX:Number, mouseY:Number):void 
+		/**
+		 * Converts given pixel coordinates to grid position and saves selection if that position is selectable.
+		 */
+		public function selectTileAtPixelPosition(mouseX:Number, mouseY:Number):void 
 		{
 			var inBoundPosition:Point = getInboundPosition(mouseX, mouseY);
 			highlightCell(GridPositionHelper.pixelToGrid(inBoundPosition, cellSize));

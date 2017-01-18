@@ -8,7 +8,6 @@ package yagerTest.screens.gameplay.gameplayView
 	{
 		public static const SPAWN_COINS:String = "spawn_coins";
 		public static const GAME_OVER:String = "game_over";
-		
 	}
 
 }

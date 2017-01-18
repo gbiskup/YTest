@@ -26,6 +26,12 @@ package yagerTest.model
 			_grid = grid;
 		}
 		
+		public function reset():void 
+		{
+			playerPosition.setTo( 0, 0);
+		}
+
+		
 		/**
 		 * Sets score and triggers scoreUpdate signal if score value has changed.
 		 */
