@@ -6,7 +6,7 @@
     <movie input="" />
     <movie path="bin\YagerTest.swf" />
     <movie fps="60" />
-    <movie width="1400" />
+    <movie width="1600" />
     <movie height="900" />
     <movie version="21" />
     <movie minorVersion="0" />

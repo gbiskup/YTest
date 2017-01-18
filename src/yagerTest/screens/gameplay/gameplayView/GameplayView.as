@@ -243,7 +243,6 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			updatePlayer();
 			timeUpdatedSignal.dispatch();
-			//timeLabel.setValue(timeLimit - tween.position);
 		}
 		
 		private function updatePlayer():void

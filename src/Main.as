@@ -1,14 +1,14 @@
 package
 {
+	import ApplicationConfig;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import robotlegs.bender.bundles.mvcs.MVCSBundle;
 	import robotlegs.bender.extensions.contextView.ContextView;
 	import robotlegs.bender.extensions.contextView.ContextViewExtension;
 	import robotlegs.bender.extensions.contextView.ContextViewListenerConfig;
 	import robotlegs.bender.extensions.contextView.StageSyncExtension;
 	import robotlegs.bender.extensions.directCommandMap.DirectCommandMapExtension;
+	import robotlegs.bender.extensions.directCommandMap.api.IDirectCommandMap;
 	import robotlegs.bender.extensions.eventCommandMap.EventCommandMapExtension;
 	import robotlegs.bender.extensions.eventDispatcher.EventDispatcherExtension;
 	import robotlegs.bender.extensions.localEventMap.LocalEventMapExtension;
@@ -20,12 +20,9 @@ package
 	import robotlegs.bender.extensions.viewProcessorMap.ViewProcessorMapExtension;
 	import robotlegs.bender.extensions.vigilance.VigilanceExtension;
 	import robotlegs.bender.framework.api.IInjector;
-	import robotlegs.bender.framework.api.LogLevel;
 	import robotlegs.bender.framework.impl.Context;
-	import yagerTest.screens.ScreenManager;
 	import yagerTest.commands.startup.InitGameScreensCommand;
-	import ApplicationConfig;
-	import com.gskinner.motion.GTween;
+	import yagerTest.screens.ScreenManager;
 	
 	/**
 	 * ...
@@ -82,8 +79,8 @@ package
 		private function initGame():void
 		{
 			var injector:IInjector = context.injector;
-			var initGameCommand:InitGameScreensCommand = injector.instantiateUnmapped(InitGameScreensCommand);
-			initGameCommand.execute();
+			var commandMap:IDirectCommandMap = injector.getInstance(IDirectCommandMap);
+			commandMap.map(InitGameScreensCommand).execute();
 		}
 		
 	}
