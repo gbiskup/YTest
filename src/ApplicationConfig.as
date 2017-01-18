@@ -9,6 +9,8 @@ package
 	import yagerTest.screens.gameplay.IGameplayScreen;
 	import yagerTest.screens.gameplay.gameplayView.GameplayViewMediator;
 	import yagerTest.screens.gameplay.gameplayView.IGameplayView;
+	import yagerTest.screens.gameplay.hud.HudMediator;
+	import yagerTest.screens.gameplay.hud.IHudView;
 	import yagerTest.screens.mainMenu.IMainMenuScreen;
 	import yagerTest.screens.mainMenu.MainMenuScreenMediator;
 	
@@ -26,6 +28,7 @@ package
 			mediatorMap.map(IMainMenuScreen).toMediator(MainMenuScreenMediator);
 			mediatorMap.map(IGameplayScreen).toMediator(GameplayScreenMediator);
 			mediatorMap.map(IGameplayView).toMediator(GameplayViewMediator);
+			mediatorMap.map(IHudView).toMediator(HudMediator);
 		}
 	}
 

@@ -62,10 +62,11 @@ package yagerTest.screens.gameplay.gameplayView
 			var playerPosition:Point = view.getPlayerGridPosition();
 			if (gameplayModel.grid.getObjectTypeAt(playerPosition.x, playerPosition.y) == GameObjectTypes.COIN)
 			{
+				gameplayModel.setScore(gameplayModel.score + 1);
 				view.removeCoin(playerPosition);
-				var refreshGrid:Boolean = true;
 			}
 			gameplayModel.setPlayerPosition(view.getPlayerGridPosition());
+			gameplayModel.setTimeLeft(gameplayModel.timeLimit - view.getElapsedSeconds());
 		}
 		
 		override public function destroy():void

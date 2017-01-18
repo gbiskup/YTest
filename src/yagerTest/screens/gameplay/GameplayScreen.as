@@ -17,6 +17,7 @@ package yagerTest.screens.gameplay
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.screens.gameplay.gameplayView.GameplayView;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
+	import yagerTest.screens.gameplay.hud.HudView;
 	import yagerTest.screens.mainMenu.UserActions;
 	import yagerTest.view.AlignAnchors;
 	import yagerTest.view.AlignDisplayObject;
@@ -35,9 +36,7 @@ package yagerTest.screens.gameplay
 		
 		private var pauseMenu:MyVerticalMenu;
 		
-		private var timeLabel:HudLabel;
-		
-		private var scoreLabel:HudLabel;
+		private var hud:HudView;
 		
 		private var isPaused:Boolean;
 		
@@ -67,15 +66,8 @@ package yagerTest.screens.gameplay
 		
 		private function initHud():void
 		{
-			var rightPadding:Point = MenuFactory.defaultPadding.clone();
-			rightPadding.x *=-1;
-			timeLabel = new HudLabel(null, MenuFactory.defaultPadding);
-			timeLabel.setLabel("Time: ");
-			addChildComponent(timeLabel);
-			
-			scoreLabel = new HudLabel(AlignAnchors.RIGHT_TOP, rightPadding);
-			scoreLabel.setLabel("Score: ");
-			addChildComponent(scoreLabel);
+			hud = new HudView();
+			addChild(hud);
 		}
 	
 		public function initGameplay(gameplayModel:GameplayModel):void 

@@ -21,7 +21,7 @@ package yagerTest.view.uiComponents
 		private var parentAnchor:Point;
 		private var offset:Point;
 		
-		public function HudLabel(parentAnchor:Point = null, offset:Point = null) 
+		public function HudLabel(parentAnchor:Point = null, offset:Point = null)
 		{
 			super();
 			this.parentAnchor = parentAnchor ? parentAnchor : new Point();
@@ -59,7 +59,7 @@ package yagerTest.view.uiComponents
 		
 		private function updatePosition():void
 		{
-			AlignDisplayObject.align(this, parentAnchor, parent.getBounds(parent), parentAnchor, offset);
+			AlignDisplayObject.align(this, parentAnchor, stage.getBounds(stage), parentAnchor, offset);
 		}
 		
 		private function updateLabel():void

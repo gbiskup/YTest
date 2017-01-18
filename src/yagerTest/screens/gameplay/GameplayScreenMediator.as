@@ -4,10 +4,7 @@ package yagerTest.screens.gameplay
 	import robotlegs.bender.framework.api.IInjector;
 	import yagerTest.commands.gameplay.ExitGameMacro;
 	import yagerTest.commands.gameplay.StartGameMacro;
-	import yagerTest.model.GameObjectTypes;
-	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GameplayModel;
-	import yagerTest.model.GridModel;
 	import yagerTest.screens.mainMenu.UserActions;
 	import yagerTest.view.IViewComponent;
 	
@@ -59,8 +56,6 @@ package yagerTest.screens.gameplay
 		{
 			viewComponent.initializedSignal.remove(onViewInitialized);
 			view.initGameplay(gameplayModel);
-			//gameplayModel.timeUpdatedSignal;
-			//gameplayModel.scoreUpdatedSignal;
 		}
 	
 	}

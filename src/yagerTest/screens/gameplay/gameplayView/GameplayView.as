@@ -233,6 +233,12 @@ package yagerTest.screens.gameplay.gameplayView
 			}
 		}
 		
+		
+		public function getElapsedSeconds():Number 
+		{
+			return timeLine.position;
+		}
+		
 		private function timeChange(tween:GTween):void
 		{
 			updatePlayer();

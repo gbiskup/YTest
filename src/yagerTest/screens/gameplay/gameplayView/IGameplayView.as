@@ -28,6 +28,8 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		function setCoinsRespawnTime(coinsRespawnTime:Number):void;
 		
+		function getElapsedSeconds():Number;
+		
 	}
 	
 }
