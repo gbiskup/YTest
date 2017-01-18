@@ -89,7 +89,7 @@ package yagerTest.screens.gameplay
 			initGrid(gameplayModel.grid.size);
 			gameplayView.gameActionRequestSignal.add(onGameActionRequest);
 			gameplayView.startTime(gameplayModel.timeLimit);
-			gameplayView.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME);
+			gameplayView.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME, GameplayConstants.COINS_REMOVE_TIME);
 		}
 		
 		private function initGrid(gridSize:Size):void

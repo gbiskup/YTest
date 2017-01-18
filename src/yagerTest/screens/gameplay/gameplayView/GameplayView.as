@@ -24,8 +24,9 @@ package yagerTest.screens.gameplay.gameplayView
 	 */
 	public class GameplayView extends ViewComponent implements IGameplayView
 	{
-		// Used to schedule coin spawns on timeline
+		// Used to schedule coin spawn actions on timeline
 		private static const RESPAWN_COINS_TIMELINE_LABEL:String = "respawn_coins";
+		private static const REMOVE_COINS_TIMELINE_LABEL:String = "remove_coins";
 		
 		private var _moveRequestSignal:Signal = new Signal(Point);
 		
@@ -218,23 +219,22 @@ package yagerTest.screens.gameplay.gameplayView
 		}
 		
 		/**
-		 * Schedules next coins respawn request in coinstRespawnTime seconds.
+		 * Schedules next coins respawn and coins remove actions.
+		 * @param coinsRespawnTime Delay to trigger coins spawn request
+		 * @param removeAfter Delay to trigger coins remove request after their spawn
 		 */
-		public function setCoinsRespawnTime(coinsRespawnTime:Number):void 
+		public function setCoinsRespawnTime(coinsRespawnTime:Number, removeAfter:Number):void 
 		{
-			timeLine.removeCallback(RESPAWN_COINS_TIMELINE_LABEL);
-			timeLine.addLabel(timeLine.position + coinsRespawnTime, RESPAWN_COINS_TIMELINE_LABEL);
-			timeLine.addCallback(RESPAWN_COINS_TIMELINE_LABEL, spawnCoinsCallback);			
+			var callbackTime:Number = timeLine.position + coinsRespawnTime;
+			timeLine.addLabel(callbackTime, RESPAWN_COINS_TIMELINE_LABEL);
+			timeLine.addCallback(RESPAWN_COINS_TIMELINE_LABEL, triggerGameActionSignal, [GameplayActions.SPAWN_COINS]);
+			timeLine.addLabel(callbackTime + removeAfter, REMOVE_COINS_TIMELINE_LABEL);
+			timeLine.addCallback(REMOVE_COINS_TIMELINE_LABEL, triggerGameActionSignal, [GameplayActions.REMOVE_COINS]);
 		}
 		
-		private function timeComplete(tween:GTween):void
+		private function triggerGameActionSignal(type:String):void
 		{
-			gameActionRequestSignal.dispatch(GameplayActions.GAME_OVER);
-		}
-		
-		private function spawnCoinsCallback():void
-		{
-			gameActionRequestSignal.dispatch(GameplayActions.SPAWN_COINS);
+			gameActionRequestSignal.dispatch(type);
 		}
 		
 		public function getPlayerGridPosition():Point
@@ -269,6 +269,11 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			updatePlayerPosition();
 			timeUpdatedSignal.dispatch();
+		}
+		
+		private function timeComplete(tween:GTween):void
+		{
+			gameActionRequestSignal.dispatch(GameplayActions.GAME_OVER);
 		}
 		
 		private function updatePlayerPosition():void

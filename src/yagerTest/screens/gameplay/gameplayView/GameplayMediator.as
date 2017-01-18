@@ -51,8 +51,8 @@ package yagerTest.screens.gameplay.gameplayView
 			if (objectType == GameObjectTypes.COIN)
 			{
 				view.removeAllCoins();
-				view.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME);
-				view.showGrid(gameplayModel.grid, [objectType]);
+				view.showGrid(gameplayModel.grid, [GameObjectTypes.COIN]);
+				view.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME, GameplayConstants.COINS_REMOVE_TIME);
 			}
 		}
 		
@@ -85,6 +85,11 @@ package yagerTest.screens.gameplay.gameplayView
 				gameplayModel.grid.replaceTypes(GameObjectTypes.COIN, GameObjectTypes.EMPTY);
 				var spawnPayload:SpawnObjectsPayload = new SpawnObjectsPayload(GameObjectTypes.COIN, GameplayConstants.COINS_LIMIT);
 				commandMap.map(SpawnObjectsCommand).execute(new CommandPayload([spawnPayload], [SpawnObjectsPayload]));
+			}
+			else if (action == GameplayActions.REMOVE_COINS)
+			{
+				gameplayModel.grid.replaceTypes(GameObjectTypes.COIN, GameObjectTypes.EMPTY);
+				view.removeAllCoins();
 			}
 		}
 		

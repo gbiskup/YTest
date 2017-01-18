@@ -7,6 +7,7 @@ package yagerTest.screens.gameplay.gameplayView
 	public class GameplayActions 
 	{
 		public static const SPAWN_COINS:String = "spawn_coins";
+		public static const REMOVE_COINS:String = "remove_coins";
 		public static const GAME_OVER:String = "game_over";
 	}
 

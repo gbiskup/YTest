@@ -52,13 +52,12 @@ package yagerTest.screens.gameplay.gameplayView
 		/**
 		 * Schedules next coins respawn request in coinstRespawnTime seconds.
 		 */
-		function setCoinsRespawnTime(coinsRespawnTime:Number):void;
+		function setCoinsRespawnTime(coinsRespawnTime:Number, removeAfter:Number):void 
 		
 		/**
 		 * Returns seconds of gameplay since the game started.
 		 */
 		function getElapsedSeconds():Number;
-		
 	}
 	
 }

@@ -19,7 +19,6 @@ package yagerTest.commands.gameplay
 		{
 			add(InitGameplayModelCommand);
 			add(SpawnObjectsCommand).withPayloads(createSpawnCommandPayload(GameObjectTypes.OBSTACLE, GameplayConstants.OBSTACLES_LIMIT));
-			add(SpawnObjectsCommand).withPayloads(createSpawnCommandPayload(GameObjectTypes.COIN, GameplayConstants.COINS_LIMIT));
 			add(InitPathFinderCommand);
 			
 			add(ShowScreenCommand).withPayloads(
