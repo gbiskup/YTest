@@ -3,6 +3,7 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import yagerTest.factories.gameObjects.GameObjectAvatarFactory;
+	import yagerTest.model.Size;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.view.basicViewComponent.ViewComponent;
 	
@@ -14,15 +15,15 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 	{
 		private var pointer:Sprite;
 		private var cellSize:Point;
-		private var gridSize:Point;
+		private var gridSize:Size;
 		private var selectedCell:Point = new Point();
 		
 		private var checkCellAvailability:Function;
 		
-		public function GridSelectorView(gridSize:Point, cellSize:Point, cellAvailabilityFunction:Function = null):void
+		public function GridSelectorView(gridSize:Size, cellSize:Point, cellAvailabilityFunction:Function = null):void
 		{
-			this.gridSize = gridSize;
-			this.cellSize = cellSize;
+			this.gridSize = gridSize.clone();
+			this.cellSize = cellSize.clone();
 			this.checkCellAvailability = cellAvailabilityFunction;
 		}
 		
@@ -35,19 +36,16 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 		private function initPointer():void
 		{
 			pointer = new Sprite();
-			//pointer.graphics.beginFill(color);
 			pointer.graphics.lineStyle(2, 0xffffff);
 			pointer.graphics.drawRoundRect(-cellSize.x/2, -cellSize.y/2, cellSize.x, cellSize.y, 4, 4);
-			//pointer.graphics.drawCircle( 0, 0, radius);
-			//pointer.graphics.endFill();
 			
 			addChild(pointer);
 		}
 		
 		private function highlightCell(gridPosition:Point):void
 		{
-			gridPosition.x = Math.min(Math.max(gridPosition.x, 0), gridSize.x - 1);
-			gridPosition.y = Math.min(Math.max(gridPosition.y, 0), gridSize.y - 1);
+			gridPosition.x = Math.min(Math.max(gridPosition.x, 0), gridSize.width - 1);
+			gridPosition.y = Math.min(Math.max(gridPosition.y, 0), gridSize.height - 1);
 			
 			if (checkCellAvailability == null || checkCellAvailability(gridPosition))
 			{

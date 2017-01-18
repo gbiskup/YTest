@@ -1,4 +1,4 @@
-package yagerTest.utilities 
+package yagerTest.pathFinding 
 {
 	import flash.geom.Point;
 	

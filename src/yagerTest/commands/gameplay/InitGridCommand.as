@@ -32,7 +32,7 @@ package yagerTest.commands.gameplay
 			gameplayModel.setScore(0);
 			gameplayModel.setTimeLimit(GameplayConstants.TIME_LIMIT);
 			gameplayModel.setGrid(new GridModel(GameplayConstants.GRID_SIZE));
-			gameplayModel.setPlayerPosition(new Point(GameplayConstants.GRID_SIZE.x / 2, GameplayConstants.GRID_SIZE.y / 2));
+			gameplayModel.setPlayerPosition(new Point(GameplayConstants.GRID_SIZE.width / 2, GameplayConstants.GRID_SIZE.height / 2));
 		}
 		
 	}

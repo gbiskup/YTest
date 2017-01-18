@@ -10,6 +10,7 @@ package yagerTest.screens.gameplay.gameplayView
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GridModel;
+	import yagerTest.model.Size;
 	import yagerTest.screens.gameplay.gameplayView.actors.GameObject;
 	import yagerTest.screens.gameplay.gameplayView.actors.MovementComponent;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
@@ -33,7 +34,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private var cellSize:Point;
 
-		private var gridSize:Point;
+		private var gridSize:Size;
 		
 		private var player:GameObject;
 	
@@ -47,11 +48,11 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		private var gridModel:GridModel;
 		
-		public function GameplayView(gridSize:Point, cellSize:Point)
+		public function GameplayView(gridSize:Size, cellSize:Point)
 		{
 			super();
-			this.gridSize = gridSize;
-			this.cellSize = cellSize;
+			this.gridSize = gridSize.clone();
+			this.cellSize = cellSize.clone();
 		}
 		
 		public function movePlayer(path:Vector.<Point>):void 
@@ -130,7 +131,7 @@ package yagerTest.screens.gameplay.gameplayView
 		{
 			var background:Sprite = new Sprite();
 			background.graphics.beginFill(0xffaaaa);
-			background.graphics.drawRoundRect(0, 0, gridSize.x * cellSize.x, gridSize.y * cellSize.y, 20, 20);
+			background.graphics.drawRoundRect(0, 0, gridSize.width * cellSize.x, gridSize.height * cellSize.y, 20, 20);
 			background.graphics.endFill();
 			addChild(background);
 		}

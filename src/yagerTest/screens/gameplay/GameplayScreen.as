@@ -14,6 +14,7 @@ package yagerTest.screens.gameplay
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GameplayModel;
 	import yagerTest.model.GridModel;
+	import yagerTest.model.Size;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.screens.gameplay.gameplayView.GameplayView;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
@@ -77,7 +78,7 @@ package yagerTest.screens.gameplay
 			gameplayView.setCoinsRespawnTime(GameplayConstants.COINS_RESPAWN_TIME);
 		}
 		
-		private function initGrid(gridSize:Point):void
+		private function initGrid(gridSize:Size):void
 		{
 			gameplayView = new GameplayView(gridSize, GameplayConstants.GRID_CELL_SIZE);
 			addChild(gameplayView);

@@ -3,8 +3,8 @@ package yagerTest.commands.gameplay
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.framework.api.IInjector;
 	import yagerTest.model.GameplayModel;
-	import yagerTest.utilities.IPathFinder;
-	import yagerTest.utilities.Pathfinder;
+	import yagerTest.pathFinding.IPathFinder;
+	import yagerTest.pathFinding.Pathfinder;
 	/**
 	 * ...
 	 * @author gbiskup

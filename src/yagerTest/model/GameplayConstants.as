@@ -15,7 +15,7 @@ package yagerTest.model
 		
 		public static const OBSTACLES_LIMIT:uint = 128;
 		public static const GRID_CELL_SIZE:Point = new Point(25, 25);
-		public static const GRID_SIZE:Point = new Point(32, 32);
+		public static const GRID_SIZE:Size = new Size(32, 32);
 	}
 
 }

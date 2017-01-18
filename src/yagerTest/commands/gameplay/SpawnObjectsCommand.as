@@ -31,7 +31,7 @@ package yagerTest.commands.gameplay
 				}
 				gridModel.setObjectTypeAt(objectPosition.x, objectPosition.y, spawnObject.type);
 			}
-			gridModel.gridUpdatedSignal.dispatch(spawnObject.type);
+			gameplayModel.gridUpdatedSignal.dispatch(spawnObject.type);
 		}
 		
 		private function findRandomEmptyPosition(gridModel:GridModel):Point

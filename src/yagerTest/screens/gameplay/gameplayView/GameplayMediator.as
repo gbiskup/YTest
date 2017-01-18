@@ -9,8 +9,8 @@ package yagerTest.screens.gameplay.gameplayView
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GameplayModel;
-	import yagerTest.utilities.IPathFinder;
-	import yagerTest.utilities.Pathfinder;
+	import yagerTest.pathFinding.IPathFinder;
+	import yagerTest.pathFinding.Pathfinder;
 	import yagerTest.view.basicViewComponent.IViewComponent;
 	
 	/**
@@ -44,7 +44,7 @@ package yagerTest.screens.gameplay.gameplayView
 			view.moveRequestSignal.add(onMoveRequest);
 			view.timeUpdatedSignal.add(onTimeUpdate);
 			view.gameActionRequestSignal.add(onGameplayActionRequest);
-			gameplayModel.grid.gridUpdatedSignal.add(onGridUpdated);
+			gameplayModel.gridUpdatedSignal.add(onGridUpdated);
 		}
 		
 		private function onGridUpdated(objectType:int):void
@@ -71,7 +71,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		override public function destroy():void
 		{
-			gameplayModel.grid.gridUpdatedSignal.remove(onGridUpdated);
+			gameplayModel.gridUpdatedSignal.remove(onGridUpdated);
 			view.moveRequestSignal.remove(onMoveRequest);
 			view.gameActionRequestSignal.remove(onGameplayActionRequest);
 			super.destroy();

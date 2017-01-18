@@ -8,6 +8,7 @@ package yagerTest.model
 	 */
 	public class GameplayModel 
 	{
+		private var _gridUpdatedSignal:Signal = new Signal(int);
 		private var _timeUpdated:Signal = new Signal(uint);
 		private var _scoreUpdated:Signal = new Signal(uint);
 		private var _playerPositionUpdated:Signal = new Signal();
@@ -47,6 +48,12 @@ package yagerTest.model
 				playerPositionUpdated.dispatch();
 			}
 		}
+		
+		public function get gridUpdatedSignal():Signal 
+		{
+			return _gridUpdatedSignal;
+		}
+		
 		
 		public function setTimeLeft(time:uint):void 
 		{
