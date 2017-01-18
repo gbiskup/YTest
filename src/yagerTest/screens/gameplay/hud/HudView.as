@@ -2,8 +2,8 @@ package yagerTest.screens.gameplay.hud
 {
 	import flash.geom.Point;
 	import yagerTest.factories.uiComponents.MenuFactory;
-	import yagerTest.view.AlignAnchors;
-	import yagerTest.view.ViewComponent;
+	import yagerTest.view.utilities.AlignAnchors;
+	import yagerTest.view.basicViewComponent.ViewComponent;
 	import yagerTest.view.uiComponents.HudLabel;
 	/**
 	 * ...

@@ -1,6 +1,6 @@
 package yagerTest.screens.gameplay.hud 
 {
-	import yagerTest.view.IViewComponent;
+	import yagerTest.view.basicViewComponent.IViewComponent;
 	
 	/**
 	 * ...

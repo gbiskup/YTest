@@ -4,7 +4,7 @@ package yagerTest.screens.gameplay.gameplayView
 	import flash.geom.Point;
 	import org.osflash.signals.Signal;
 	import yagerTest.model.GridModel;
-	import yagerTest.view.IViewComponent;
+	import yagerTest.view.basicViewComponent.IViewComponent;
 	
 	/**
 	 * ...

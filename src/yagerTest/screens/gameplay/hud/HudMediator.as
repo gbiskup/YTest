@@ -2,7 +2,7 @@ package yagerTest.screens.gameplay.hud
 {
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	import yagerTest.model.GameplayModel;
-	import yagerTest.view.IViewComponent;
+	import yagerTest.view.basicViewComponent.IViewComponent;
 	/**
 	 * ...
 	 * @author gbiskup

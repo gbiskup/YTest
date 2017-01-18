@@ -6,8 +6,8 @@ package yagerTest.screens.mainMenu
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.factories.uiComponents.ButtonFactory;
 	import yagerTest.signals.StringSignal;
-	import yagerTest.view.AlignDisplayObject;
-	import yagerTest.view.uiComponents.MyVerticalMenu;
+	import yagerTest.view.utilities.AlignDisplayObject;
+	import yagerTest.view.uiComponents.menu.MyVerticalMenu;
 	import yagerTest.factories.uiComponents.MenuFactory;
 	
 	/**

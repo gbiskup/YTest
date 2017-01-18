@@ -4,7 +4,7 @@ package yagerTest.factories.uiComponents
 	import com.sibirjak.asdpc.button.skins.ButtonSkin;
 	import com.sibirjak.asdpc.textfield.Label;
 	import flash.filters.GlowFilter;
-	import yagerTest.view.uiComponents.MyButton;
+	import yagerTest.view.uiComponents.button.MyButton;
 	/**
 	 * ...
 	 * @author gbiskup

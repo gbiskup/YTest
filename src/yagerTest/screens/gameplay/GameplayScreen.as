@@ -19,10 +19,10 @@ package yagerTest.screens.gameplay
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.screens.gameplay.hud.HudView;
 	import yagerTest.screens.mainMenu.UserActions;
-	import yagerTest.view.AlignAnchors;
-	import yagerTest.view.AlignDisplayObject;
+	import yagerTest.view.utilities.AlignAnchors;
+	import yagerTest.view.utilities.AlignDisplayObject;
 	import yagerTest.view.uiComponents.HudLabel;
-	import yagerTest.view.uiComponents.MyVerticalMenu;
+	import yagerTest.view.uiComponents.menu.MyVerticalMenu;
 	
 	/**
 	 * ...

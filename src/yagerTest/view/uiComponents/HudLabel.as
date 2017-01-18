@@ -3,28 +3,27 @@ package yagerTest.view.uiComponents
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
-	import yagerTest.view.AlignDisplayObject;
-	import yagerTest.view.ViewComponent;
+	import yagerTest.view.basicViewComponent.ViewComponent;
+	import yagerTest.view.utilities.AlignDisplayObject;
 	
 	/**
-	 * ...
+	 * Displays a text label and a value. After adding to stage it will align it's anchor point in relation to stage and apply offset if given.
 	 * @author gbiskup
 	 */
 	public class HudLabel extends ViewComponent 
 	{
-		
 		private var label:TextField;
 		
 		private var text:String = "DefaultText";
 		private var value:int;
 		
-		private var parentAnchor:Point;
+		private var alignAnchor:Point;
 		private var offset:Point;
 		
-		public function HudLabel(parentAnchor:Point = null, offset:Point = null)
+		public function HudLabel(alignAnchor:Point = null, offset:Point = null)
 		{
 			super();
-			this.parentAnchor = parentAnchor ? parentAnchor : new Point();
+			this.alignAnchor = alignAnchor ? alignAnchor : new Point();
 			this.offset = offset ? offset : new Point();
 		}
 		
@@ -59,7 +58,7 @@ package yagerTest.view.uiComponents
 		
 		private function updatePosition():void
 		{
-			AlignDisplayObject.align(this, parentAnchor, stage.getBounds(stage), parentAnchor, offset);
+			AlignDisplayObject.align(this, alignAnchor, stage.getBounds(stage), alignAnchor, offset);				
 		}
 		
 		private function updateLabel():void

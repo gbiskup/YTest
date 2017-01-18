@@ -11,8 +11,8 @@ package yagerTest.screens.intro
 	import flash.text.AntiAliasType;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
 	import yagerTest.screens.BasicScreen;
-	import yagerTest.view.AlignDisplayObject;
-	import yagerTest.view.ViewComponent;
+	import yagerTest.view.utilities.AlignDisplayObject;
+	import yagerTest.view.basicViewComponent.ViewComponent;
 	import yagerTest.factories.animations.AnimationFactory;
 	import flash.events.MouseEvent;
 	

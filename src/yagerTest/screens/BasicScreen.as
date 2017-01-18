@@ -3,7 +3,7 @@ package yagerTest.screens
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import yagerTest.view.ViewComponent;
+	import yagerTest.view.basicViewComponent.ViewComponent;
 	
 	/**
 	 * ...

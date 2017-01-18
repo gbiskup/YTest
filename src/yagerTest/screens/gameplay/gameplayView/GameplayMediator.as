@@ -11,13 +11,13 @@ package yagerTest.screens.gameplay.gameplayView
 	import yagerTest.model.GameplayModel;
 	import yagerTest.utilities.IPathFinder;
 	import yagerTest.utilities.Pathfinder;
-	import yagerTest.view.IViewComponent;
+	import yagerTest.view.basicViewComponent.IViewComponent;
 	
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
-	public class GameplayViewMediator extends Mediator 
+	public class GameplayMediator extends Mediator 
 	{
 		[Inject]
 		public var view:IGameplayView;

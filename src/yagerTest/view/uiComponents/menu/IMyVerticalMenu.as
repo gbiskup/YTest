@@ -1,5 +1,6 @@
-package yagerTest.view.uiComponents 
+package yagerTest.view.uiComponents.menu 
 {
+	import yagerTest.view.uiComponents.button.MyButton;
 	
 	/**
 	 * ...

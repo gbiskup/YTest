@@ -7,8 +7,8 @@ package yagerTest.screens.credits
 	import yagerTest.factories.uiComponents.MenuFactory;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
 	import yagerTest.screens.BasicScreen;
-	import yagerTest.view.AlignDisplayObject;
-	import yagerTest.view.uiComponents.MyButton;
+	import yagerTest.view.utilities.AlignDisplayObject;
+	import yagerTest.view.uiComponents.button.MyButton;
 	
 	/**
 	 * ...

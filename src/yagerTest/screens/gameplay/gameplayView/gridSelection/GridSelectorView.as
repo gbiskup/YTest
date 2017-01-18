@@ -4,7 +4,7 @@ package yagerTest.screens.gameplay.gameplayView.gridSelection
 	import flash.geom.Point;
 	import yagerTest.factories.gameObjects.GameObjectAvatarFactory;
 	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
-	import yagerTest.view.ViewComponent;
+	import yagerTest.view.basicViewComponent.ViewComponent;
 	
 	/**
 	 * ...

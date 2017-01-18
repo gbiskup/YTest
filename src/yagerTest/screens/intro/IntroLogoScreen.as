@@ -11,7 +11,7 @@ package yagerTest.screens.intro
 	import com.gskinner.motion.GTween;
 	import flash.filters.GlowFilter;
 	import flash.events.MouseEvent;
-	import yagerTest.view.AlignDisplayObject;
+	import yagerTest.view.utilities.AlignDisplayObject;
 	
 	/**
 	 * ...

@@ -1,7 +1,7 @@
 package yagerTest.factories.uiComponents 
 {
 	import flash.geom.Point;
-	import yagerTest.view.uiComponents.MyVerticalMenu;
+	import yagerTest.view.uiComponents.menu.MyVerticalMenu;
 	import com.sibirjak.asdpcbeta.layout.VLayout;
 	import com.sibirjak.asdpc.core.constants.Position;
 	/**

@@ -6,7 +6,7 @@ package yagerTest.screens.gameplay
 	import yagerTest.commands.gameplay.StartGameMacro;
 	import yagerTest.model.GameplayModel;
 	import yagerTest.screens.mainMenu.UserActions;
-	import yagerTest.view.IViewComponent;
+	import yagerTest.view.basicViewComponent.IViewComponent;
 	
 	/**
 	 * ...
