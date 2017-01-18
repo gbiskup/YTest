@@ -1,10 +1,8 @@
-package yagerTest.commands.gameplay 
+package yagerTest.commands 
 {
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.screens.ScreenManager;
-	import yagerTest.screens.gameplay.GameplayScreen;
-	import yagerTest.screens.mainMenu.MainMenuScreen;
 	
 	/**
 	 * ...

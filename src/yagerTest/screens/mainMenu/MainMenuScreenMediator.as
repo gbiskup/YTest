@@ -3,12 +3,8 @@ package yagerTest.screens.mainMenu
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
 	import robotlegs.bender.extensions.directCommandMap.api.IDirectCommandMap;
-	import robotlegs.bender.framework.api.IInjector;
 	import yagerTest.commands.ShowCreditsCommand;
 	import yagerTest.commands.gameplay.StartGameMacro;
-	import yagerTest.screens.ScreenManager;
-	import yagerTest.commands.gameplay.ShowScreenCommand;
-	import yagerTest.screens.credits.CreditsScreen;
 	
 	/**
 	 * ...
@@ -21,12 +17,6 @@ package yagerTest.screens.mainMenu
 		
 		[Inject]
 		public var commandMap:IDirectCommandMap;
-		
-		public function MainMenuScreenMediator() 
-		{
-			super();
-			
-		}
 		
 		override public function initialize():void
 		{

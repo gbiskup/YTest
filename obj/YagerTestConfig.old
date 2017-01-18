@@ -39,8 +39,8 @@
       <path-element>D:\git projects\YagerTest\libraries\robotlegs-framework-v2.2.1.swc</path-element>
       <path-element>D:\git projects\YagerTest\libraries\robotlegs-utilities-macrobot.swc</path-element>
       <path-element>D:\git projects\YagerTest\libraries\GTween_V2_01.swc</path-element>
-      <path-element>D:\git projects\YagerTest\libraries\asdpc-0.4.1-snapshot.swc</path-element>
       <path-element>D:\git projects\YagerTest\libraries\as3commons-collections-1.3.2.swc</path-element>
+      <path-element>D:\git projects\YagerTest\libraries\asdpc-0.4.1-snapshot.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>

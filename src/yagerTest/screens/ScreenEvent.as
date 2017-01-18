@@ -1,7 +1,7 @@
 package yagerTest.screens 
 {
 	import flash.events.Event;
-	import flash.events.EventDispatcher;
+	
 	/**
 	 * ...
 	 * @author gbiskup

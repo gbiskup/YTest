@@ -1,14 +1,12 @@
 package yagerTest.screens.mainMenu 
 {
-	import com.sibirjak.asdpc.button.Button;
-	import com.sibirjak.asdpc.core.constants.Position;
 	import flash.geom.Point;
-	import yagerTest.screens.BasicScreen;
 	import yagerTest.factories.uiComponents.ButtonFactory;
-	import yagerTest.signals.StringSignal;
-	import yagerTest.view.utilities.AlignDisplayObject;
-	import yagerTest.view.uiComponents.menu.MyVerticalMenu;
 	import yagerTest.factories.uiComponents.MenuFactory;
+	import yagerTest.screens.BasicScreen;
+	import yagerTest.signals.StringSignal;
+	import yagerTest.view.uiComponents.menu.MyVerticalMenu;
+	import yagerTest.view.utilities.AlignDisplayObject;
 	
 	/**
 	 * ...

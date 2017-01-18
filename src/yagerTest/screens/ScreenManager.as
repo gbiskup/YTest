@@ -1,9 +1,9 @@
 package yagerTest.screens 
 {
-	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
+	
 	/**
-	 * ...
+	 * Handles screen flow and queue. Holds current screen.
 	 * @author gbiskup
 	 */
 	public class ScreenManager 
@@ -19,6 +19,9 @@ package yagerTest.screens
 			screenQueue = new Vector.<Sprite>();
 		}
 		
+		/**
+		 * Add screen to the queue. It will be shown after current screen is over.
+		 */
 		public function addScreen(screen:Sprite):void
 		{
 			if (screenQueue.indexOf(screen) < 0)
@@ -49,6 +52,9 @@ package yagerTest.screens
 			}
 		}
 		
+		/**
+		 * Shows next screen added to the queue with addScreen method or does nothing if the queue is empty.
+		 */
 		public function showNextScreen():void
 		{
 			if (screenQueue.length > 0)

@@ -22,13 +22,9 @@ package yagerTest.commands.gameplay
 		{
 			var objectPosition:Point;
 			var gridModel:GridModel = gameplayModel.grid;
-			for (var i:int = 0; i < spawnObject.positions.length; i++)
+			for (var i:int = 0; i < spawnObject.number; i++)
 			{
-				objectPosition = spawnObject.positions[i];
-				if (!objectPosition)
-				{
-					objectPosition = findRandomEmptyPosition(gameplayModel.grid);
-				}
+				objectPosition = findRandomEmptyPosition(gameplayModel.grid);
 				gridModel.setObjectTypeAt(objectPosition.x, objectPosition.y, spawnObject.type);
 			}
 			gameplayModel.objectsSpawnedSignal.dispatch(spawnObject.type);

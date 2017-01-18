@@ -1,29 +1,20 @@
 package yagerTest.screens.gameplay 
 {
-	import com.gskinner.motion.GTween;
-	import com.gskinner.motion.GTweenTimeline;
-	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
-	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import org.osflash.signals.Signal;
-	import yagerTest.factories.gameObjects.GameObjectAvatarFactory;
 	import yagerTest.factories.uiComponents.ButtonFactory;
 	import yagerTest.factories.uiComponents.MenuFactory;
-	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GameplayModel;
-	import yagerTest.model.GridModel;
 	import yagerTest.model.Size;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.screens.gameplay.gameplayView.GameplayView;
-	import yagerTest.screens.gameplay.gameplayView.GridPositionHelper;
 	import yagerTest.screens.gameplay.hud.HudView;
 	import yagerTest.screens.mainMenu.UserActions;
-	import yagerTest.view.utilities.AlignAnchors;
-	import yagerTest.view.utilities.AlignDisplayObject;
-	import yagerTest.view.uiComponents.HudLabel;
+	import yagerTest.signals.StringSignal;
 	import yagerTest.view.uiComponents.menu.MyVerticalMenu;
+	import yagerTest.view.utilities.AlignDisplayObject;
 	
 	/**
 	 * ...
@@ -31,7 +22,7 @@ package yagerTest.screens.gameplay
 	 */
 	public class GameplayScreen extends BasicScreen implements IGameplayScreen
 	{
-		private var _userActionSignal:Signal = new Signal(String);
+		private var _userActionSignal:Signal = new StringSignal();
 	
 		private var gameplayView:GameplayView;
 		

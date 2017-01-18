@@ -1,8 +1,6 @@
-package yagerTest.commands.startup 
+package yagerTest.commands 
 {
-	import robotlegs.bender.bundles.mvcs.Command;
 	import robotlegs.bender.extensions.commandCenter.api.ICommand;
-	import robotlegs.bender.framework.api.IContext;
 	import yagerTest.screens.ScreenManager;
 	import yagerTest.screens.intro.IntroAuthorScreen;
 	import yagerTest.screens.intro.IntroLogoScreen;

@@ -5,8 +5,9 @@ package yagerTest.factories.uiComponents
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+	
 	/**
-	 * ...
+	 * Creates default textfields
 	 * @author gbiskup
 	 */
 	public class TextFieldFactory 

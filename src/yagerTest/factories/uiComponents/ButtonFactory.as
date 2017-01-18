@@ -5,12 +5,16 @@ package yagerTest.factories.uiComponents
 	import com.sibirjak.asdpc.textfield.Label;
 	import flash.filters.GlowFilter;
 	import yagerTest.view.uiComponents.button.MyButton;
+	
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
 	public class ButtonFactory
 	{
+		/**
+		 * Creates standard text button.
+		 */
 		public static function createTextButton(text:String, callback:Function):MyButton
 		{
 			var button:MyButton = new MyButton(callback);
@@ -39,6 +43,8 @@ package yagerTest.factories.uiComponents
 				Label.style.size, 30
 			]);
 			button.filters = [new GlowFilter(0xffaaaa, 0.5, 4, 4, 2, 3, true), new GlowFilter(0xffaaaa, 0.5, 4, 4, 2, 3)];
+			button.useHandCursor = true;
+			button.buttonMode = true;
 			return button;
 		}
 	}

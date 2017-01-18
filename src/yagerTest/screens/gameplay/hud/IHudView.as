@@ -8,7 +8,7 @@ package yagerTest.screens.gameplay.hud
 	 */
 	public interface IHudView extends IViewComponent
 	{
-		function showTime(time:Number):void;
+		function showTime(time:uint):void;
 		function showScore(score:int):void;
 	}
 	

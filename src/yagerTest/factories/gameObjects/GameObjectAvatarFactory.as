@@ -1,10 +1,9 @@
 package yagerTest.factories.gameObjects 
 {
 	import flash.display.Sprite;
-	import flash.filters.GlowFilter;
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GameplayConstants;
-	import yagerTest.screens.gameplay.GameplayScreen;
+	
 	/**
 	 * ...
 	 * @author gbiskup
@@ -28,8 +27,10 @@ package yagerTest.factories.gameObjects
 			sprite.graphics.endFill();
 			return sprite;
 		}
-
 		
+		/**
+		 * Creates game object's avatar for given constant from GameObjectTypes
+		 */
 		static public function createAvatarByType(type:int):Sprite
 		{
 			var avatar:Sprite;

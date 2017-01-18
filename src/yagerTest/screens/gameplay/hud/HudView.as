@@ -2,9 +2,10 @@ package yagerTest.screens.gameplay.hud
 {
 	import flash.geom.Point;
 	import yagerTest.factories.uiComponents.MenuFactory;
-	import yagerTest.view.utilities.AlignAnchors;
 	import yagerTest.view.basicViewComponent.ViewComponent;
 	import yagerTest.view.uiComponents.HudLabel;
+	import yagerTest.view.utilities.AlignAnchors;
+	
 	/**
 	 * ...
 	 * @author gbiskup
@@ -30,7 +31,7 @@ package yagerTest.screens.gameplay.hud
 			addChildComponent(scoreLabel);
 		}
 		
-		public function showTime(time:Number):void 
+		public function showTime(time:uint):void 
 		{
 			timeLabel.setValue(time);
 		}

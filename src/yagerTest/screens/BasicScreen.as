@@ -1,16 +1,16 @@
 package yagerTest.screens 
 {
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import yagerTest.view.basicViewComponent.ViewComponent;
 	
 	/**
-	 * ...
+	 * Parent class for all the screens.
 	 * @author gbiskup
 	 */
 	public class BasicScreen extends ViewComponent 
 	{
+		// Invisible sprite of stage's size
 		private var mouseMask:Sprite = new Sprite();
 		
 		public function BasicScreen() 
@@ -65,9 +65,12 @@ package yagerTest.screens
 		
 		protected function onClick(event:MouseEvent):void
 		{
-			
+			// Override me.
 		}
 		
+		/**
+		 * Triggers screen manager to remove this screen and show next one from the queue.
+		 */
 		protected function exitScreen():void
 		{
 			dispatchEvent(new ScreenEvent(ScreenEvent.EXIT_SCREEN));

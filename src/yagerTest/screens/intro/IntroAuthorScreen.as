@@ -2,19 +2,12 @@ package yagerTest.screens.intro
 {
 	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.GTweenTimeline;
-	import flash.filters.DropShadowFilter;
-	import flash.filters.GlowFilter;
-	import flash.text.TextFormat;
-	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.AntiAliasType;
+	import yagerTest.factories.animations.AnimationFactory;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
 	import yagerTest.screens.BasicScreen;
 	import yagerTest.view.utilities.AlignDisplayObject;
-	import yagerTest.view.basicViewComponent.ViewComponent;
-	import yagerTest.factories.animations.AnimationFactory;
-	import flash.events.MouseEvent;
 	
 	/**
 	 * ...
@@ -27,11 +20,6 @@ package yagerTest.screens.intro
 		
 		private var animationTimeLine:GTweenTimeline;
 		
-		public function IntroAuthorScreen() 
-		{
-			super();
-		}
-		
 		override protected function init():void
 		{
 			super.init();
@@ -39,13 +27,17 @@ package yagerTest.screens.intro
 			playAnimation();
 		}
 		
+		override protected function destroy():void
+		{
+			animationTimeLine.paused = true;
+			super.destroy();
+		}
+		
 		private function playAnimation():void
 		{
-			mainTitle.alpha = 0.0;
-			subTitle.alpha = 0.0;
 			animationTimeLine = new GTweenTimeline(this);
-			animationTimeLine.addTween(0.5, AnimationFactory.CreateShowThenHideAnimation(mainTitle, 0.5, 2.0, 0.5));
-			animationTimeLine.addTween(0.75, AnimationFactory.CreateShowThenHideAnimation(subTitle, 0.5, 2.0, 0.5));
+			animationTimeLine.addTween(0.5, AnimationFactory.createShowThenHideAnimation(mainTitle, 0.5, 2.0, 0.5));
+			animationTimeLine.addTween(0.75, AnimationFactory.createShowThenHideAnimation(subTitle, 0.5, 2.0, 0.5));
 			animationTimeLine.calculateDuration();
 			animationTimeLine.delay = 0.5;
 			animationTimeLine.onComplete = onAnimationComplete;

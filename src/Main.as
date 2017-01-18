@@ -21,7 +21,7 @@ package
 	import robotlegs.bender.extensions.vigilance.VigilanceExtension;
 	import robotlegs.bender.framework.api.IInjector;
 	import robotlegs.bender.framework.impl.Context;
-	import yagerTest.commands.startup.InitGameScreensCommand;
+	import yagerTest.commands.InitGameScreensCommand;
 	import yagerTest.screens.ScreenManager;
 	
 	/**

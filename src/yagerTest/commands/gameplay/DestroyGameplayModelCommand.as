@@ -8,7 +8,7 @@ package yagerTest.commands.gameplay
 	 * ...
 	 * @author gbiskup
 	 */
-	public class DestroyGridCommand implements ICommand 
+	public class DestroyGameplayModelCommand implements ICommand 
 	{
 		[Inject]
 		public var injector:IInjector;

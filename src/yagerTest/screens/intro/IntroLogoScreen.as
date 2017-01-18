@@ -1,16 +1,12 @@
 package yagerTest.screens.intro 
 {
+	import com.gskinner.motion.GTween;
+	import com.gskinner.motion.GTweenTimeline;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
+	import yagerTest.factories.animations.AnimationFactory;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
 	import yagerTest.screens.BasicScreen;
-	import flash.text.TextField;
-	import flash.text.TextFormat;
-	import flash.text.TextFieldAutoSize;
-	import yagerTest.factories.animations.AnimationFactory;
-	import com.gskinner.motion.GTweenTimeline
-	import com.gskinner.motion.GTween;
-	import flash.filters.GlowFilter;
-	import flash.events.MouseEvent;
 	import yagerTest.view.utilities.AlignDisplayObject;
 	
 	/**
@@ -29,6 +25,12 @@ package yagerTest.screens.intro
 			playAnimation();
 		}
 		
+		override protected function destroy():void
+		{
+			animationTimeLine.paused = true;
+			super.destroy();
+		}
+		
 		override protected function onClick(event:MouseEvent):void
 		{
 			exitScreen();
@@ -36,9 +38,8 @@ package yagerTest.screens.intro
 		
 		private function playAnimation():void
 		{
-			gameTitle.alpha = 0.0;
 			animationTimeLine = new GTweenTimeline(this);
-			animationTimeLine.addTween(0.5, AnimationFactory.CreateShowThenHideAnimation(gameTitle, 0.5, 2.0, 0.5));
+			animationTimeLine.addTween(0.5, AnimationFactory.createShowThenHideAnimation(gameTitle, 0.5, 2.0, 0.5));
 			animationTimeLine.calculateDuration();
 			animationTimeLine.delay = 0.5;
 			animationTimeLine.onComplete = onAnimationComplete;
@@ -51,7 +52,6 @@ package yagerTest.screens.intro
 		
 		private function initTextFields():void
 		{
-			// Main title
 			gameTitle = TextFieldFactory.createTextField(60);
 			gameTitle.text = "YagerTest";
 			addChild(gameTitle);

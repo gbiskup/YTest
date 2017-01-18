@@ -1,11 +1,12 @@
 package yagerTest.factories.uiComponents 
 {
+	import com.sibirjak.asdpc.core.constants.Position;
+	import com.sibirjak.asdpcbeta.layout.VLayout;
 	import flash.geom.Point;
 	import yagerTest.view.uiComponents.menu.MyVerticalMenu;
-	import com.sibirjak.asdpcbeta.layout.VLayout;
-	import com.sibirjak.asdpc.core.constants.Position;
+	
 	/**
-	 * ...
+	 * Creates default menus
 	 * @author gbiskup
 	 */
 	public class MenuFactory 

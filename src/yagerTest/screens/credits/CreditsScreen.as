@@ -1,5 +1,6 @@
 package yagerTest.screens.credits 
 {
+	import com.gskinner.motion.GTween;
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import yagerTest.factories.animations.AnimationFactory;
@@ -7,8 +8,8 @@ package yagerTest.screens.credits
 	import yagerTest.factories.uiComponents.MenuFactory;
 	import yagerTest.factories.uiComponents.TextFieldFactory;
 	import yagerTest.screens.BasicScreen;
-	import yagerTest.view.utilities.AlignDisplayObject;
 	import yagerTest.view.uiComponents.button.MyButton;
+	import yagerTest.view.utilities.AlignDisplayObject;
 	
 	/**
 	 * ...
@@ -16,6 +17,10 @@ package yagerTest.screens.credits
 	 */
 	public class CreditsScreen extends BasicScreen
 	{
+		private var buttonAnimation:GTween;
+		
+		private var labelAnimation:GTween;
+		
 		override protected function init():void
 		{
 			super.init();
@@ -23,12 +28,19 @@ package yagerTest.screens.credits
 			initBackButton();
 		}
 		
+		override protected function destroy():void
+		{
+			buttonAnimation.paused = true;
+			labelAnimation.paused = true;
+			super.destroy();
+		}
+		
 		private function initNameTextField():void
 		{
 			var nameTextField:TextField = TextFieldFactory.createTextField(40);
 			nameTextField.text = "Programmed by Grzegorz Biskup";
 			addChild(nameTextField);
-			AnimationFactory.createShowAnimation(nameTextField);
+			labelAnimation = AnimationFactory.createShowAnimation(nameTextField);
 			AlignDisplayObject.center(nameTextField, getBounds(this));
 		}
 		
@@ -36,7 +48,7 @@ package yagerTest.screens.credits
 		{
 			var backButton:MyButton = ButtonFactory.createTextButton("Back", exitScreen);
 			addChild(backButton);
-			AnimationFactory.createShowAnimation(backButton);
+			buttonAnimation = AnimationFactory.createShowAnimation(backButton);
 			AlignDisplayObject.rightBottom(
 				backButton, 
 				getBounds(this),

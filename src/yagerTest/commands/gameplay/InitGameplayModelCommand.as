@@ -6,13 +6,12 @@ package yagerTest.commands.gameplay
 	import yagerTest.model.GameplayConstants;
 	import yagerTest.model.GameplayModel;
 	import yagerTest.model.GridModel;
-	import yagerTest.model.GameObjectTypes;
 	
 	/**
 	 * ...
 	 * @author gbiskup
 	 */
-	public class InitGridCommand implements ICommand 
+	public class InitGameplayModelCommand implements ICommand 
 	{
 		[Inject]
 		public var injector:IInjector;
