@@ -1,7 +1,6 @@
 package yagerTest.model 
 {
 	import flash.geom.Point;
-	import org.osflash.signals.Signal;
 	
 	/**
 	 * Two dimmensional container for integer types.
@@ -48,6 +47,9 @@ package yagerTest.model
 			return size.height;
 		}
 		
+		/**
+		 * Returns a new random point withing grid or updates given point reference if provided.
+		 */
 		public function getRandomCooridnates(targetPoint:Point = null):Point
 		{
 			if (!targetPoint)
@@ -59,6 +61,9 @@ package yagerTest.model
 			return targetPoint;
 		}
 		
+		/**
+		 * Replaces all cells of given type with another type.
+		 */
 		public function replaceTypes(typeToReplace:int, replaceWith:int):void
 		{
 			for (var i:int = 0; i < objectTypes.length; i++)

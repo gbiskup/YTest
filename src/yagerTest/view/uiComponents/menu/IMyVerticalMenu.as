@@ -8,7 +8,7 @@ package yagerTest.view.uiComponents.menu
 	 */
 	public interface IMyVerticalMenu 
 	{
-		function addButton(button:MyButton):void;
+		function addButton(button:MyButton, id:String = null):void;
 	}
 	
 }

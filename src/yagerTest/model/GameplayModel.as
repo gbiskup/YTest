@@ -2,16 +2,18 @@ package yagerTest.model
 {
 	import flash.geom.Point;
 	import org.osflash.signals.Signal;
+	
 	/**
-	 * ...
+	 * Stores gameplay properties and grid. Provides signals for time, score, player position and grid updates.
 	 * @author gbiskup
 	 */
 	public class GameplayModel 
 	{
-		private var _gridUpdatedSignal:Signal = new Signal(int);
+		private var _objectsSpawnedSignal:Signal = new Signal(int);
 		private var _timeUpdated:Signal = new Signal(uint);
 		private var _scoreUpdated:Signal = new Signal(uint);
 		private var _playerPositionUpdated:Signal = new Signal();
+		
 		private var _score:uint;
 		private var _timeLimit:uint;
 		private var _timeLeft:uint;
@@ -24,6 +26,9 @@ package yagerTest.model
 			_grid = grid;
 		}
 		
+		/**
+		 * Sets score and triggers scoreUpdate signal if score value has changed.
+		 */
 		public function setScore(newScore:uint):void
 		{
 			if (newScore != _score)
@@ -33,11 +38,26 @@ package yagerTest.model
 			}
 		}
 		
+		/**
+		 * Sets time left and triggers timeChanged signal on time change.
+		 */
+		public function setTimeLeft(time:uint):void 
+		{
+			if (_timeLeft != time)
+			{
+				_timeLeft = time;
+				timeUpdated.dispatch(_timeLeft);
+			}
+		}
+		
 		public function setTimeLimit(timeLimit:uint):void
 		{
 			_timeLimit = timeLimit;
 		}
 		
+		/**
+		 * Updates player position in the grid and notifies with signal if the new position differs from the old one.
+		 */
 		public function setPlayerPosition(playerGridPosition:Point):void 
 		{
 			if (!playerGridPosition.equals(playerPosition))
@@ -49,19 +69,36 @@ package yagerTest.model
 			}
 		}
 		
-		public function get gridUpdatedSignal():Signal 
+		/**
+		 * Notifies listeners that objects where spawned. Passes objects type as listeners' parameter.
+		 */
+		public function get objectsSpawnedSignal():Signal 
 		{
-			return _gridUpdatedSignal;
+			return _objectsSpawnedSignal;
+		}
+
+		/**
+		 * Triggers listeners with no parameters when player position changes.
+		 */
+		public function get playerPositionUpdated():Signal 
+		{
+			return _playerPositionUpdated;
 		}
 		
-		
-		public function setTimeLeft(time:uint):void 
+		/**
+		 * Triggers timeUpdate listeners when time changes. Passes uint time left as parameter.
+		 */
+		public function get timeUpdated():Signal 
 		{
-			if (_timeLeft != time)
-			{
-				_timeLeft = time;
-				timeUpdated.dispatch(_timeLeft);
-			}
+			return _timeUpdated;
+		}
+	
+		/**
+		 * Triggers scoreUpdate listeners when score changes. Passes current score (uint) as parameter.
+		 */
+		public function get scoreUpdated():Signal 
+		{
+			return _scoreUpdated;
 		}
 		
 		public function get grid():GridModel
@@ -79,16 +116,6 @@ package yagerTest.model
 			return _score;
 		}
 		
-		public function get playerPositionUpdated():Signal 
-		{
-			return _playerPositionUpdated;
-		}
-
-		public function get timeUpdated():Signal 
-		{
-			return _timeUpdated;
-		}
-		
 		public function get playerPosition():Point 
 		{
 			return _playerPosition;
@@ -98,12 +125,6 @@ package yagerTest.model
 		{
 			return _timeLeft;
 		}
-		
-		public function get scoreUpdated():Signal 
-		{
-			return _scoreUpdated;
-		}
-		
 	}
 
 }

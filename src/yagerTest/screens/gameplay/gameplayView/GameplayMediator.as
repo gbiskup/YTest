@@ -44,10 +44,10 @@ package yagerTest.screens.gameplay.gameplayView
 			view.moveRequestSignal.add(onMoveRequest);
 			view.timeUpdatedSignal.add(onTimeUpdate);
 			view.gameActionRequestSignal.add(onGameplayActionRequest);
-			gameplayModel.gridUpdatedSignal.add(onGridUpdated);
+			gameplayModel.objectsSpawnedSignal.add(onObjectsSpawned);
 		}
 		
-		private function onGridUpdated(objectType:int):void
+		private function onObjectsSpawned(objectType:int):void
 		{
 			if (objectType == GameObjectTypes.COIN)
 			{
@@ -71,7 +71,7 @@ package yagerTest.screens.gameplay.gameplayView
 		
 		override public function destroy():void
 		{
-			gameplayModel.gridUpdatedSignal.remove(onGridUpdated);
+			gameplayModel.objectsSpawnedSignal.remove(onObjectsSpawned);
 			view.moveRequestSignal.remove(onMoveRequest);
 			view.gameActionRequestSignal.remove(onGameplayActionRequest);
 			super.destroy();
