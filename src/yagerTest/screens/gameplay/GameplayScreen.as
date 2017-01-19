@@ -46,15 +46,17 @@ package yagerTest.screens.gameplay
 		override protected function init():void
 		{
 			super.init();
-			stage.focus = this;
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		}
 
 		override protected function destroy():void
 		{
-			gameplayView.gameActionRequestSignal.remove(onGameActionRequest);
-			super.destroy();
+			if (gameplayView)
+			{
+				gameplayView.gameActionRequestSignal.remove(onGameActionRequest);
+			}
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			super.destroy();
 		}
 		
 		private function onGameActionRequest(actionType:String):void

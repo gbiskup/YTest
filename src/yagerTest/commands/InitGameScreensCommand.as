@@ -17,9 +17,9 @@ package yagerTest.commands
 		
 		public function execute():void
 		{
-			screenManager.addScreen(new IntroAuthorScreen());
-			screenManager.addScreen(new IntroLogoScreen());
-			screenManager.addScreen(new MainMenuScreen());
+			screenManager.addScreen(IntroAuthorScreen);
+			screenManager.addScreen(IntroLogoScreen);
+			screenManager.addScreen(MainMenuScreen);
 			screenManager.showNextScreen();
 		}
 	}

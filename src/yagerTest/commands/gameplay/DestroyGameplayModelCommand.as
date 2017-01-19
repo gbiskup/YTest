@@ -15,6 +15,7 @@ package yagerTest.commands.gameplay
 		
 		public function execute():void 
 		{
+			injector.destroyInstance(injector.getInstance(GameplayModel));
 			injector.unmap(GameplayModel);
 		}
 		

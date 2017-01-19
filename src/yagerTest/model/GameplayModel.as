@@ -131,6 +131,12 @@ package yagerTest.model
 		{
 			return _timeLeft;
 		}
+		
+		[PreDestroy]
+		public function dest():void
+		{
+			trace("I'm destroyed");
+		}
 	}
 
 }

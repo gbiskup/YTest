@@ -2,11 +2,9 @@ package yagerTest.commands.gameplay
 {
 	import eu.alebianco.robotlegs.utils.impl.SequenceMacro;
 	import eu.alebianco.robotlegs.utils.impl.SubCommandPayload;
-	import flash.geom.Point;
 	import yagerTest.commands.ShowScreenCommand;
 	import yagerTest.model.GameObjectTypes;
 	import yagerTest.model.GameplayConstants;
-	import yagerTest.screens.BasicScreen;
 	import yagerTest.screens.gameplay.GameplayScreen;
 	
 	/**
@@ -22,7 +20,7 @@ package yagerTest.commands.gameplay
 			add(InitPathFinderCommand);
 			
 			add(ShowScreenCommand).withPayloads(
-				new SubCommandPayload(new GameplayScreen(), BasicScreen)
+				new SubCommandPayload(GameplayScreen, Class)
 			);
 		}
 		

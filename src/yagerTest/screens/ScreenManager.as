@@ -11,22 +11,22 @@ package yagerTest.screens
 		private var screenContainer:Sprite;
 		
 		private var currentScreen:Sprite;
-		private var screenQueue:Vector.<Sprite>;
+		private var screenQueue:Vector.<Class>;
 		
 		public function ScreenManager(container:Sprite) 
 		{
 			screenContainer = container;
-			screenQueue = new Vector.<Sprite>();
+			screenQueue = new Vector.<Class>();
 		}
 		
 		/**
 		 * Add screen to the queue. It will be shown after current screen is over.
 		 */
-		public function addScreen(screen:Sprite):void
+		public function addScreen(screenClass:Class):void
 		{
-			if (screenQueue.indexOf(screen) < 0)
+			if (screenQueue.indexOf(screenClass) < 0)
 			{
-				screenQueue.push(screen);	
+				screenQueue.push(screenClass);	
 			}
 			else
 			{
@@ -59,7 +59,8 @@ package yagerTest.screens
 		{
 			if (screenQueue.length > 0)
 			{
-				showScreen(screenQueue.shift());
+				var nextScreenClass:Class = screenQueue.shift();
+				showScreen(new nextScreenClass());
 			}
 		}
 	

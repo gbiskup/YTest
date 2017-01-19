@@ -25,7 +25,7 @@ package yagerTest.commands.gameplay
 			}
 			else
 			{
-				var gameplayModel:GameplayModel = new GameplayModel();
+				var gameplayModel:GameplayModel = injector.instantiateUnmapped(GameplayModel);
 				injector.map(GameplayModel).toValue(gameplayModel);
 			}
 			

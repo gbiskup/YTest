@@ -14,11 +14,11 @@ package yagerTest.commands
 		public var screenManager:ScreenManager;
 		
 		[Inject]
-		public var screen:BasicScreen;
+		public var screenClass:Class;
 		
 		public function execute():void 
 		{
-			screenManager.addScreen(screen);
+			screenManager.addScreen(screenClass);
 			screenManager.showNextScreen();
 		}
 		

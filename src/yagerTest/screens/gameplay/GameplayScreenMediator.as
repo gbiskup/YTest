@@ -1,6 +1,7 @@
 package yagerTest.screens.gameplay 
 {
 	import robotlegs.bender.bundles.mvcs.Mediator;
+	import robotlegs.bender.extensions.directCommandMap.api.IDirectCommandMap;
 	import robotlegs.bender.framework.api.IInjector;
 	import yagerTest.commands.gameplay.ExitGameMacro;
 	import yagerTest.commands.gameplay.StartGameMacro;
@@ -23,6 +24,9 @@ package yagerTest.screens.gameplay
 		[Inject]
 		public var injector:IInjector;
 		
+		[Inject]
+		public var commandMap:IDirectCommandMap;
+		
 		override public function initialize():void
 		{
 			super.initialize();
@@ -41,13 +45,11 @@ package yagerTest.screens.gameplay
 			switch(actionType)
 			{
 				case UserActions.EXIT_GAME:
-					var exitGameMacro:ExitGameMacro = injector.instantiateUnmapped(ExitGameMacro);
-					exitGameMacro.execute();
+					commandMap.map(ExitGameMacro).execute();
 					break;
 					
 				case UserActions.RESTART_GAME:
-					var startGameMacro:StartGameMacro = injector.instantiateUnmapped(StartGameMacro);
-					startGameMacro.execute();
+					commandMap.map(StartGameMacro).execute();
 					break;
 			}
 		}
